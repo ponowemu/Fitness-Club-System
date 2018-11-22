@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TrimFitAPI.Models;
+using Swashbuckle.AspNetCore.Swagger;
+
 
 namespace TrimFitAPI
 {
@@ -31,6 +33,27 @@ namespace TrimFitAPI
                .AddDbContext<ClassContext>()
                .BuildServiceProvider();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "TrimFit API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = "None",
+                    Contact = new Contact
+                    {
+                        Name = "TrimFIT Company",
+                        Email = string.Empty,
+                    },
+                    
+                    License = new License
+                    {
+                        Name = "Use under LICX",
+                        Url = "https://example.com/license"
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +69,13 @@ namespace TrimFitAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrimFit API V1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseMvc();
         }
     }

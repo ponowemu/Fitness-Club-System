@@ -35,14 +35,19 @@ namespace TrimFitAPI.Controllers
         [HttpGet("{id}", Name = "GetClass")]
         public ActionResult<Class> GetById(long id)
         {
-            //_context.Classes.Add(new Class { Class_name = "AA", Class_active = true});
-            //_context.SaveChanges();
+        
             var item = _context.Classes.Find(id);
             if (item == null)
             {
                 return NotFound();
             }
             return item;
+        }
+        [HttpPost]
+        public void AddClass()
+        {
+            _context.Classes.Add(new Class { Class_name = "AA", Class_active = true});
+            _context.SaveChanges();
         }
 
     }
