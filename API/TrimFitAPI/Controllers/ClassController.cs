@@ -20,6 +20,7 @@ namespace TrimFitAPI.Controllers
                 // Create a new TodoItem if collection is empty,
                 // which means you can't delete all TodoItems.
                 _context.Classes.Add(new Class { Class_description ="Opis", Class_id = 1, Class_name = "Tytuł", Class_active = true });
+                _context.Classes.Add(new Class { Class_description = "Opis", Class_id = 2, Class_name = "Tytuł 2", Class_active = true });
                 _context.SaveChanges();
             }
         }
