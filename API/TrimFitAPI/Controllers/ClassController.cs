@@ -30,7 +30,7 @@ namespace TrimFitAPI.Controllers
             return _context.Classes.ToList();
         }
 
-        [HttpGet("{id}", Name = "GetTodo")]
+        [HttpGet("{id}", Name = "GetClass")]
         public ActionResult<Class> GetById(long id)
         {
             var item = _context.Classes.Find(id);
