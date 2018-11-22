@@ -11799,11 +11799,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\STUDIA\\[PI]\\API\\TrimFitAPI\\TrimFitAPI\\TrimFitAPI.csproj",
+      "projectUniqueName": "D:\\STUDIA\\[PI]\\Fitness Club Management System\\Fitness-Club-System\\API\\TrimFitAPI\\TrimFitAPI.csproj",
       "projectName": "TrimFitAPI",
-      "projectPath": "D:\\STUDIA\\[PI]\\API\\TrimFitAPI\\TrimFitAPI\\TrimFitAPI.csproj",
+      "projectPath": "D:\\STUDIA\\[PI]\\Fitness Club Management System\\Fitness-Club-System\\API\\TrimFitAPI\\TrimFitAPI.csproj",
       "packagesPath": "C:\\Users\\Mikołaj Ferfet\\.nuget\\packages\\",
-      "outputPath": "D:\\STUDIA\\[PI]\\API\\TrimFitAPI\\TrimFitAPI\\obj\\",
+      "outputPath": "D:\\STUDIA\\[PI]\\Fitness Club Management System\\Fitness-Club-System\\API\\TrimFitAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
