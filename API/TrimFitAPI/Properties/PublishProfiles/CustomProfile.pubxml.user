@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ten plik jest wykorzystywany przez proces publikowania/pakowania projektu sieci Web. Możesz dostosować zachowanie tego procesu
+ poprzez edycję tego pliku MSBuild. Aby dowiedzieć się więcej o tym działaniu, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAS6zZMypruU2sg1Q/UewluQAAAAACAAAAAAAQZgAAAAEAACAAAAAV0vv/XNw4+uXbS3V02d3Wl8s6iUrgF2digXhO4wFazwAAAAAOgAAAAAIAACAAAAA2M1nOMCYRBkr80taf/9iT8HnTtpGLM/QDbdZ3L3ju0CAAAAAAM42Gdg1bS9/YdHclItSMKyUB+RKivAaiO+Ee9ObWwkAAAAC6lncjGnc/IDvVsTzqgU27TXbW1fJR+LRJqYJcJ1myiNwGZOyMGOvgFcawtjfFGPeDe479lmSGiRPMDhzax1BG</EncryptedPassword>
+    <_PublishTargetUrl>ftp://185.243.55.195/../../srv/trimfit/api</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>11/22/2018 20:40:06</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>11/22/2018 20:40:06</publishTime>
+    </File>
+    <File Include="dotnet-aspnet-codegenerator-design.dll">
+      <publishTime>06/07/2018 00:27:02</publishTime>
+    </File>
+    <File Include="Microsoft.CodeAnalysis.CSharp.Workspaces.dll">
+      <publishTime>11/22/2018 19:52:19</publishTime>
+    </File>
+    <File Include="Microsoft.CodeAnalysis.Workspaces.dll">
+      <publishTime>11/22/2018 19:52:21</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>07/26/2018 18:17:04</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>07/26/2018 18:17:06</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>07/26/2018 18:17:00</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll">
+      <publishTime>06/07/2018 00:27:00</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll">
+      <publishTime>06/07/2018 00:26:58</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.dll">
+      <publishTime>06/07/2018 00:26:54</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll">
+      <publishTime>06/07/2018 00:26:56</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll">
+      <publishTime>06/07/2018 00:27:02</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll">
+      <publishTime>06/07/2018 00:27:02</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll">
+      <publishTime>06/07/2018 00:26:58</publishTime>
+    </File>
+    <File Include="Npgsql.dll">
+      <publishTime>09/08/2018 15:28:52</publishTime>
+    </File>
+    <File Include="Npgsql.EntityFrameworkCore.PostgreSQL.dll">
+      <publishTime>09/08/2018 23:41:16</publishTime>
+    </File>
+    <File Include="NuGet.Frameworks.dll">
+      <publishTime>11/22/2018 19:52:23</publishTime>
+    </File>
+    <File Include="Remotion.Linq.dll">
+      <publishTime>11/22/2018 19:52:23</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.dll">
+      <publishTime>11/07/2018 10:25:10</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>11/07/2018 10:25:06</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>11/07/2018 10:25:08</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>11/07/2018 10:25:06</publishTime>
+    </File>
+    <File Include="System.Composition.AttributedModel.dll">
+      <publishTime>11/22/2018 19:53:12</publishTime>
+    </File>
+    <File Include="System.Composition.Convention.dll">
+      <publishTime>11/22/2018 19:53:12</publishTime>
+    </File>
+    <File Include="System.Composition.Hosting.dll">
+      <publishTime>11/22/2018 19:53:12</publishTime>
+    </File>
+    <File Include="System.Composition.Runtime.dll">
+      <publishTime>11/22/2018 19:53:12</publishTime>
+    </File>
+    <File Include="System.Composition.TypedParts.dll">
+      <publishTime>11/22/2018 19:53:12</publishTime>
+    </File>
+    <File Include="System.Interactive.Async.dll">
+      <publishTime>11/22/2018 19:53:09</publishTime>
+    </File>
+    <File Include="TrimFitAPI.deps.json">
+      <publishTime>11/28/2018 23:41:05</publishTime>
+    </File>
+    <File Include="TrimFitAPI.dll">
+      <publishTime>11/28/2018 23:31:42</publishTime>
+    </File>
+    <File Include="TrimFitAPI.pdb">
+      <publishTime>11/28/2018 23:31:42</publishTime>
+    </File>
+    <File Include="TrimFitAPI.runtimeconfig.json">
+      <publishTime>11/28/2018 23:41:05</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>11/28/2018 23:41:05</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
