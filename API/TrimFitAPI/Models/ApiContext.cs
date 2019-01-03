@@ -28,7 +28,7 @@ namespace TrimFitAPI.Models
         public DbSet<VoucherType> Voucher_type { get; set;}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Database=trimfit;Username=trimfit;Password=Fit123!@#");
+            optionsBuilder.UseNpgsql("Host=185.243.55.195;Database=trimfit;Username=trimfit;Password=Fit123!@#");
         }
     }
 }
