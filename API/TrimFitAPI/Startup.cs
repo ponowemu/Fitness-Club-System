@@ -30,7 +30,7 @@ namespace TrimFitAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkNpgsql()
-               .AddDbContext<ClassContext>()
+               .AddDbContext<ApiContext>()
                .BuildServiceProvider();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c =>
