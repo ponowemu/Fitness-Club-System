@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/class",
+      "launchUrl": "api/activity",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "TrimFitAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "/api/class",
+      "launchUrl": "/api/activity",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       },

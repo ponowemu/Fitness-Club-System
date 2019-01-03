@@ -11,3 +11,4 @@ D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI
 D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.RazorTargetAssemblyInfo.cache
 D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.dll
 D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.pdb
+D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.csprojAssemblyReference.cache

@@ -7,14 +7,15 @@ namespace TrimFitAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassController : ControllerBase
+    public class ActivityController : ControllerBase
     {
-        private readonly ClassContext _context;
+        private readonly ApiContext _context;
 
-        public ClassController(ClassContext context)
+        public ActivityController(ApiContext context)
         {
             _context = context;
 
+            /*
             if (_context.Classes.Count() == 0)
             {
                 // Create a new TodoItem if collection is empty,
@@ -24,19 +25,20 @@ namespace TrimFitAPI.Controllers
                 _context.Classes.Add(new Class { Class_description = "Opis", Class_name = "Tytuł 2", Class_active = true });
                 _context.SaveChanges();
             }
+            */
         }
 
         [HttpGet]
-        public ActionResult<List<Class>> GetAll()
+        public ActionResult<List<Activity>> GetAll()
         {
-            return _context.Classes.ToList();
+            return _context.Activity.ToList();
         }
 
         [HttpGet("{id}", Name = "GetClass")]
-        public ActionResult<Class> GetById(long id)
+        public ActionResult<Activity> GetById(long id)
         {
         
-            var item = _context.Classes.Find(id);
+            var item = _context.Activity.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -46,7 +48,7 @@ namespace TrimFitAPI.Controllers
         [HttpPost]
         public void AddClass()
         {
-            _context.Classes.Add(new Class { Class_name = "AA", Class_active = true});
+            _context.Activity.Add(new Activity { Activity_Name = "aa", Activity_Status = 1});
             _context.SaveChanges();
         }
 

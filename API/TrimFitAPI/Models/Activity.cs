@@ -12,12 +12,12 @@ namespace TrimFitAPI.Models
     {
         [Key]
         [Column("activity_id")]
-        private int Activity_Id { get; set; }
+        public int Activity_Id { get; set; }
         [Column("activity_name")]
-        private string Activity_Name { get; set; }
+        public string Activity_Name { get; set; }
         [Column("activity_description")]
-        private string Activity_Description { get; set; }
+        public string Activity_Description { get; set; }
         [Column("activity_status")]
-        private int Activity_Status { get; set; }
+        public int Activity_Status { get; set; }
     }
 }
