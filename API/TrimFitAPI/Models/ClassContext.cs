@@ -26,9 +26,9 @@ namespace TrimFitAPI.Models
         public DbSet<Timetable> {get; set;}
         public DbSet<Voucher> {get; set;}
         public DbSet<Voucher_type> {get; set;}
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=23202.p.tld.pl;Database=pg23202_trimfit;Username=pg23202_trimfit;Password=Bazatf8!");
+            optionsBuilder.UseNpgsql("Host=localhost;Database=trimfit;Username=trimfit;Password=Fit123!@#");
         }
     }
 }
