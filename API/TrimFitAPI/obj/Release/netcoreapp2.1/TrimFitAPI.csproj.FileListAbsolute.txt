@@ -12,3 +12,18 @@ D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI
 D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.dll
 D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.pdb
 D:\STUDIA\[PI]\Fitness Club Management System\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.csprojAssemblyReference.cache
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\bin\Release\netcoreapp2.1\TrimFitAPI.exe
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\bin\Release\netcoreapp2.1\TrimFitAPI.deps.json
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\bin\Release\netcoreapp2.1\TrimFitAPI.runtimeconfig.json
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\bin\Release\netcoreapp2.1\TrimFitAPI.runtimeconfig.dev.json
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\bin\Release\netcoreapp2.1\TrimFitAPI.dll
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\bin\Release\netcoreapp2.1\TrimFitAPI.pdb
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.csprojAssemblyReference.cache
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.csproj.CoreCompileInputs.cache
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.RazorAssemblyInfo.cache
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.RazorAssemblyInfo.cs
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.AssemblyInfoInputs.cache
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.AssemblyInfo.cs
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.RazorTargetAssemblyInfo.cache
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.dll
+C:\Users\Ukulele\Documents\Github\Fitness-Club-System\API\TrimFitAPI\obj\Release\netcoreapp2.1\TrimFitAPI.pdb
