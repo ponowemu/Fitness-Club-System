@@ -9,7 +9,7 @@ project.lock.json
 *.user
 *.userosscache
 *.sln.docstates
-
+CustomProfile.*
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
