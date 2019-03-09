@@ -19,6 +19,7 @@ namespace Trimfit
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://*:9000;http://localhost:9001")
                 .UseStartup<Startup>();
     }
 }
