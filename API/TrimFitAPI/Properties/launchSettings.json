@@ -20,7 +20,7 @@
     "TrimFitAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "/api/activity",
+      "launchUrl": "api/activity",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
