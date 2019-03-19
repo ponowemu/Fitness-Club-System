@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <item android:title="@string/navigation_drawer_dashboard">
+        <menu>
+            <item
+                    android:id="@+id/navigation_drawer_dashboard"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/navigation_drawer_dashboard"/>
+        </menu>
+    </item>
+    <item android:title="@string/navigation_drawer_activities">
+        <menu>
+            <item
+                    android:id="@+id/navigation_drawer_calendar"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/navigation_drawer_calendar"/>
+            <item
+                    android:id="@+id/navigation_drawer_activities"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/navigation_drawer_activities"/>
+        </menu>
+    </item>
+    <item android:title="@string/navigation_drawer_shopping">
+        <menu>
+            <item
+                android:id="@+id/navigation_drawer_tickets"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/navigation_drawer_tickets"/>
+            <item
+                    android:id="@+id/navigation_drawer_services"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/navigation_drawer_services"/>
+            <item
+                    android:id="@+id/navigation_drawer_products"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/navigation_drawer_products"/>
+        </menu>
+    </item>
+
+</menu>
