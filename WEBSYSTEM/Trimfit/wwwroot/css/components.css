@@ -361,7 +361,7 @@
 
             .chat-box .chat-content .chat-item.chat-right .chat-details .chat-text {
                 text-align: left;
-                background-color: #6777ef;
+                background-color: #d9b310;
                 color: #fff;
             }
 
@@ -513,20 +513,20 @@ div.dataTables_wrapper div.dataTables_processing {
 }
 
 .ranges li {
-    color: #6777ef;
+    color: #d9b310;
 }
 
     .ranges li:hover, .ranges li.active {
-        background-color: #6777ef;
+        background-color: #d9b310;
     }
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
-    background-color: #6777ef;
+    background-color: #d9b310;
 }
 
 /* 1.10 Dropzone */
 .dropzone {
-    border: 2px dashed #6777ef;
+    border: 2px dashed #d9b310;
     min-height: 240px;
     text-align: center;
 }
@@ -650,7 +650,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 
     .fc button.fc-state-active {
-        background-color: #6777ef;
+        background-color: #d9b310;
         color: #fff;
     }
 
@@ -826,7 +826,7 @@ tr:first-child > td > .fc-day-grid-event {
     width: 13px;
     height: 13px;
     background-color: #fff;
-    border: 3px solid #6777ef;
+    border: 3px solid #d9b310;
     border-radius: 50%;
 }
 
@@ -1005,7 +1005,7 @@ tr:first-child > td > .fc-day-grid-event {
 .select2-container--default .select2-selection--multiple .select2-selection__choice,
 .select2-container--default .select2-results__option[aria-selected=true],
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #6777ef;
+    background-color: #d9b310;
     color: #fff;
 }
 
@@ -1047,7 +1047,7 @@ tr:first-child > td > .fc-day-grid-event {
     }
 
 .selectric-open .selectric {
-    border-color: #6777ef;
+    border-color: #d9b310;
 }
 
 .selectric-above .selectric-items, .selectric-below .selectric-items {
@@ -1071,7 +1071,7 @@ tr:first-child > td > .fc-day-grid-event {
         }
 
         .selectric-items li.selected, .selectric-items li.highlighted {
-            background-color: #6777ef;
+            background-color: #d9b310;
             color: #fff;
         }
 
@@ -1245,7 +1245,7 @@ tr:first-child > td > .fc-day-grid-event {
 
     .swal-button.swal-button--confirm {
         box-shadow: 0 2px 6px #acb5f6;
-        background-color: #6777ef;
+        background-color: #d9b310;
     }
 
         .swal-button.swal-button--confirm:focus {
@@ -1278,7 +1278,7 @@ tr:first-child > td > .fc-day-grid-event {
     }
 
     .bootstrap-tagsinput .tag {
-        background-color: #6777ef;
+        background-color: #d9b310;
         border-radius: 3px;
         padding: 5px 10px;
     }
@@ -1475,10 +1475,10 @@ tr:first-child > td > .fc-day-grid-event {
     padding: 10px;
     line-height: 1;
     border-radius: 3px;
-    border: 2px solid #6777ef;
+    border: 2px solid #d9b310;
     font-size: 10px;
     font-weight: 500;
-    color: #6777ef;
+    color: #d9b310;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 10px;
@@ -1688,13 +1688,13 @@ tr:first-child > td > .fc-day-grid-event {
             }
 
                 .tickets .ticket-items .ticket-item:hover .ticket-title {
-                    color: #6777ef;
+                    color: #d9b310;
                 }
 
             .tickets .ticket-items .ticket-item.active {
                 box-shadow: 0 2px 6px #acb5f6;
                 border-radius: 3px;
-                background-color: #6777ef;
+                background-color: #d9b310;
                 border-bottom: none;
             }
 
@@ -1847,7 +1847,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 
     .owl-theme .owl-dots .owl-dot.active span {
-        background-color: #6777ef;
+        background-color: #d9b310;
     }
 
 /* 1.36 Activities */
@@ -1869,7 +1869,7 @@ tr:first-child > td > .fc-day-grid-event {
             top: 0;
             width: 2px;
             height: 100%;
-            background-color: #6777ef;
+            background-color: #d9b310;
         }
 
         .activities .activity:last-child:before {
@@ -1982,7 +1982,7 @@ tr:first-child > td > .fc-day-grid-event {
 
     .empty-state .empty-state-icon {
         position: relative;
-        background-color: #6777ef;
+        background-color: #d9b310;
         width: 80px;
         height: 80px;
         line-height: 100px;
@@ -2017,12 +2017,12 @@ tr:first-child > td > .fc-day-grid-event {
 }
 
     .pricing.pricing-highlight .pricing-title {
-        background-color: #6777ef;
+        background-color: #d9b310;
         color: #fff;
     }
 
     .pricing.pricing-highlight .pricing-cta a {
-        background-color: #6777ef;
+        background-color: #d9b310;
         color: #fff;
     }
 
@@ -2040,7 +2040,7 @@ tr:first-child > td > .fc-day-grid-event {
         text-transform: uppercase;
         letter-spacing: 2.5px;
         background-color: #f3f6f8;
-        color: #6777ef;
+        color: #d9b310;
         border-radius: 0 0 3px 3px;
         display: inline-block;
         padding: 5px 15px;
@@ -2155,7 +2155,7 @@ tr:first-child > td > .fc-day-grid-event {
  * Thanks to Spectre.css
  */
 .avatar {
-    background: #6777ef;
+    background: #d9b310;
     border-radius: 50%;
     color: #e3eaef;
     display: inline-block;
@@ -2297,12 +2297,12 @@ tr:first-child > td > .fc-day-grid-event {
 
         .wizard-steps .wizard-step.wizard-step-active {
             box-shadow: 0 2px 6px #acb5f6;
-            background-color: #6777ef;
+            background-color: #d9b310;
             color: #fff;
         }
 
             .wizard-steps .wizard-step.wizard-step-active:before {
-                background-color: #6777ef;
+                background-color: #d9b310;
                 color: #fff;
             }
 
