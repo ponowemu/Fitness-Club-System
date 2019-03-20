@@ -11,11 +11,18 @@
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/components.css">
 
+    <!-- Datatable -->
+    <link rel="stylesheet" href="~/css/modules/datatable/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/css/modules/datatable/datatables.min.css" />
+    <link rel="stylesheet" href="~/css/modules/datatable/select.bootstrap4.min.css" />
+    <!-- Datatable -->
     <!-- Calender -->
     <link href="~/packages/core/main.css" rel="stylesheet" />
     <link href="~/packages/daygrid/main.css" rel="stylesheet" />
     <link href="~/packages/timegrid/main.css" rel="stylesheet" />
     <link href="~/packages/list/main.css" rel="stylesheet" />
+
+
 
     <script src="~/packages/core/main.js" type="text/javascript"></script>
     <script src="~/packages/interaction/main.js" type="text/javascript"></script>
@@ -40,20 +47,6 @@
                     }
                 }
             });
-
-            //// the individual way to do it
-            // var containerEl = document.getElementById('external-events-list');
-            // var eventEls = Array.prototype.slice.call(
-            //   containerEl.querySelectorAll('.fc-event')
-            // );
-            // eventEls.forEach(function(eventEl) {
-            //   new Draggable(eventEl, {
-            //     eventData: {
-            //       title: eventEl.innerText.trim(),
-            //     }
-            //   });
-            // });
-
             /* initialize the calendar
             -----------------------------------------------------------------*/
 
@@ -66,14 +59,18 @@
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 editable: true,
-                droppable: true, // this allows things to be dropped onto the calendar
-                drop: function (arg) {
-                    // is the "remove after drop" checkbox checked?
-                    if (document.getElementById('drop-remove').checked) {
-                        // if so, remove the element from the "Draggable Events" list
-                        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                droppable: true,
+                eventReceive: function (info) { // first drop event onto time table
+                    alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                },
+                eventDrop: function (info) { // re drop event from time table
+                    alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+
+                    if (!confirm("Are you sure about this change?")) {
+                        info.revert();
                     }
                 }
+
             });
             calendar.render();
 
@@ -271,7 +268,9 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Grafik</span></a>
                             <ul class="dropdown-menu">
-                                <li><a asp-controller="Timetable" asp-action="Edit" class="nav-link">Zarządzaj grafikiem</a></li>
+                                <li><a asp-controller="Timetable" asp-action="List" class="nav-link">Przegląd</a></li>
+                                <li><a asp-controller="Timetable" asp-action="Edit" class="nav-link">Zarządzaj grafikami</a></li>
+                                <li><a asp-controller="Timetable" asp-action="Add" class="nav-link">Dodaj nowy grafik</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -338,6 +337,11 @@
             <partial name="_CookieConsentPartial" />
 
             <div class="main-content">
+                <div id="loader-wrapper">
+                    <div class="load">
+                        <hr /><hr /><hr /><hr />
+                    </div>
+                </div>
                 @RenderBody()
 
             </div>
@@ -359,9 +363,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="~/js/stisla.js"></script>
 
+    <!-- DataTable -->
+    <!-- JS Libraies -->
+    <script src="~/js/modules/datatable/datatables.min.js"></script>
+    <script src="~/js/modules/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/modules/datatable/dataTables.select.min.js"></script>
+    <!-- Page Specific JS File -->
+    <script src="~/js/pages/timetable.js"></script>
+    <!-- Data Table -->
+
     <script src="~/js/scripts.js"></script>
     <script src="~/js/custom.js"></script>
+    <script>
 
+        $(document).ready(function () {
+            $("#loader-wrapper").fadeOut();
+        });
+
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

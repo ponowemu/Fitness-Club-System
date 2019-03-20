@@ -12,9 +12,24 @@ namespace Trimfit.Controllers
         {
             return View();
         }
+        [HttpGet("[controller]/[action]/")]
         public IActionResult Edit()
         {
-            ViewData["Header"] = "Zarządzaj grafikiem";
+            ViewData["Header"] = "Zarządzaj grafikami";
+            return View();
+        }
+        [HttpGet("[controller]/Edit/{id}")]
+        public IActionResult EditTimetable()
+        {
+            ViewData["Header"] = "Edytuj grafik";
+            return View();
+        }
+        public IActionResult List()
+        {
+            return View();
+        }
+        public IActionResult Add()
+        {
             return View();
         }
     }

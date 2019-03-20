@@ -1791,6 +1791,16 @@ h6 .badge {
     border-color: #ffa426;
     color: #fff;
 }
+.btn-edit, .btn-edit.disabled {
+    background-color: #d9b310;
+    border-color: #d9b310;
+    box-shadow: 0 2px 6px #f8db5a;
+    color: #fff;
+}
+    .btn-edit:hover, .btn-edit:active, .btn-edit:focus, .btn-edit:active:focus {
+        background-color: #c29f0c !important;
+        color: #fff !important;
+    }
 
     .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active {
         background-color: #ff990d !important;
@@ -2105,7 +2115,7 @@ h6 .badge {
     left: 250px;
     right: 5px;
     position: absolute;
-    z-index: 890;
+    z-index: 878;
     background-color: transparent;
 }
 
@@ -3319,7 +3329,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu > li {
         }
 
     body.sidebar-mini .main-sidebar .sidebar-menu > li.active > a {
-        box-shadow: 0 4px 8px #acb5f6;
+        box-shadow: 0 4px 8px #0b3c5d;
         background-color: #328cc1;
         color: #fff;
     }
@@ -3916,5 +3926,73 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     100% {
         -webkit-transform: scale(1.2, 1.2);
         opacity: 0.0;
+    }
+}
+
+/* Preloader 21.03.2019 */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 879;
+    background: #ECF0F1;
+    /* display: none; */
+}
+.load {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    /* display: none; */
+}
+
+    .load hr {
+        border: 0;
+        margin: 0;
+        width: 40%;
+        height: 40%;
+        position: absolute;
+        border-radius: 50%;
+        animation: spin 2s ease infinite;
+    }
+
+    .load :first-child {
+        background: #0b3c5d;
+        animation-delay: -1.5s;
+    }
+
+    .load :nth-child(2) {
+        background: #328cc1;
+        animation-delay: -1s;
+    }
+
+    .load :nth-child(3) {
+        background: #d9b310;
+        animation-delay: -0.5s;
+    }
+
+    .load :last-child {
+        background: #1d2731;
+    }
+
+@keyframes spin {
+    0%, 100% {
+        transform: translate(0)
+    }
+
+    25% {
+        transform: translate(160%)
+    }
+
+    50% {
+        transform: translate(160%, 160%)
+    }
+
+    75% {
+        transform: translate(0, 160%)
     }
 }

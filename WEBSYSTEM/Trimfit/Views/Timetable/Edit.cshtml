@@ -4,26 +4,72 @@
     </div>
     <div class="section-body">
         <div class="row">
-            <div class="col-md-10">
-                <div id="calendar"></div>
-                <div style="clear:both"></div>
-            </div>
-            <div class="col-md-2">
-                <div id="external-events">
-                    <h4>Draggable Events</h4>
-                    <div id="external-events-list">
-                        <div class="fc-event list-group-item">AKROBATYKA 1 </div>
-                        <div class="fc-event list-group-item">BALET </div>
-                        <div class="fc-event list-group-item">ĆWICZENIA KOREKCYJNE DLA DZIECI </div>
-                        <div class="fc-event list-group-item">PILATES</div>
-                        <div class="fc-event list-group-item">ZUMBA FITNESS</div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Basic DataTables</h4>
                     </div>
-                    <p>
-                        <input type="checkbox" id="drop-remove" />
-                        <label for="drop-remove">usuń</label>
-                    </p>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table-1">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Lp.
+                                        </th>
+                                        <th>Nazwa grafiku</th>
+                                        <th>Utworzono</th>
+                                        <th>Ostatnia edycja</th>
+                                        <th>Status</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>Grafik testowy</td>
+                                        <td>2018-01-20</td>
+                                        <td>2018-01-21</td>
+                                        <td><div class="badge badge-danger">Nieaktywny</div></td>
+                                        <td><a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="1" class="btn btn-edit">Edytuj</a>
+                                            <a href="#" class="btn btn-danger">Usuń</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2
+                                        </td>
+                                        <td>Grafik oficjalny</td>
+                                        <td>2018-01-20</td>
+                                        <td>2018-01-21</td>
+                                        <td><div class="badge badge-success">Aktywny</div></td>
+                                        <td>
+                                            <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="2" class="btn btn-edit">Edytuj</a>
+                                            <a href="#" class="btn btn-danger">Usuń</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3
+                                        </td>
+                                        <td>Grafik inny</td>
+                                        <td>2018-01-20</td>
+                                        <td>2018-01-21</td>
+                                        <td><div class="badge badge-success">Aktywny</div></td>
+                                        <td>
+                                            <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="3" class="btn btn-edit">Edytuj</a>
+                                            <a href="#" class="btn btn-danger">Usuń</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
 
 

@@ -11,13 +11,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\modules\" />
-    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\css\modules\datatable\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="Views\Timetable\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Timetable\EditTimeTable.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Timetable\Add.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Timetable\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
