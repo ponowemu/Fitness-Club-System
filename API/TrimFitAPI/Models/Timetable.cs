@@ -14,7 +14,7 @@ namespace TrimFitAPI.Models
         [Column("timetable_id")]
         public int Timetable_Id { get; set; }
         [Column("timetable_name")]
-        public int Timetable_Name { get; set; }
+        public string Timetable_Name { get; set; }
         [Column("timetable_status")]
         public int Timetable_Status { get; set; }
         [Column("timetable_created")]
