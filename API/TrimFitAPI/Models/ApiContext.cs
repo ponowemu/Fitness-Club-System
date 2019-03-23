@@ -23,9 +23,10 @@ namespace TrimFitAPI.Models
         public DbSet<Registration> Registration { get; set;}
         public DbSet<Room> Room { get; set;}
         public DbSet<RoomClub> Room_club { get; set;}
-        public DbSet<Timetable> Timetable { get; set;}
+        public DbSet<TimetableActivity> Timetable_activity { get; set;}
         public DbSet<Voucher> Voucher { get; set;}
         public DbSet<VoucherType> Voucher_type { get; set;}
+        public DbSet<Timetable> Timetable { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(SecData.ConnectionString);
