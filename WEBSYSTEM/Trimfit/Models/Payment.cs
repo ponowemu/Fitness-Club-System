@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TrimFitAPI.Models
+namespace Trimfit.Models
 {
     public class Payment
     {

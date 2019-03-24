@@ -193,7 +193,7 @@ p, ul:not(.list-unstyled), ol {
     .custom-select:focus,
     .custom-file-label:focus {
         background-color: #fefeff;
-        border-color: #95a0f4;
+        border-color: #2C3E50;
     }
 
     .input-group-text,
@@ -1520,6 +1520,18 @@ table tr:hover .table-links {
     .badge.badge-danger {
         background-color: #fc544b;
     }
+    .badge.badge-inactive {
+        background-color: #bcbcbc;
+        color:#f7f7f7;
+    }
+    .badge.badge-draft {
+        background-color: #2C3E50;
+        color:#fff;
+    }
+    .badge.badge-active {
+        background-color: #328cc1;
+        color: #fff;
+    }
 
     .badge.badge-light {
         background-color: #e3eaef;
@@ -1835,15 +1847,15 @@ h6 .badge {
 }
 
     .btn-primary:focus, .btn-primary.disabled:focus {
-        background-color: #394eea !important;
+        background-color: #2C3E50 !important;
     }
 
         .btn-primary:focus:active, .btn-primary.disabled:focus:active {
-            background-color: #394eea !important;
+            background-color: #2C3E50 !important;
         }
 
     .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
-        background-color: #394eea !important;
+        background-color: #2C3E50 !important;
     }
 
 .btn-outline-primary, .btn-outline-primary.disabled {

@@ -1,13 +1,21 @@
-﻿<section class="section">
+﻿@model IEnumerable<Trimfit.Models.Timetable>
+@{
+    int counter = 1;
+}
+
+<section class="section">
     <div class="section-header">
         <h1>@ViewData["Header"]</h1>
     </div>
     <div class="section-body">
         <div class="row">
             <div class="col-md-12">
+                <a href="#" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-timetable"><i class="far fa-edit"></i> Dodaj nowy</a>
+            </div>
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Basic DataTables</h4>
+                        <h4>Lista grafików</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -25,44 +33,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>Grafik testowy</td>
-                                        <td>2018-01-20</td>
-                                        <td>2018-01-21</td>
-                                        <td><div class="badge badge-danger">Nieaktywny</div></td>
-                                        <td><a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="1" class="btn btn-edit">Edytuj</a>
-                                            <a href="#" class="btn btn-danger">Usuń</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>Grafik oficjalny</td>
-                                        <td>2018-01-20</td>
-                                        <td>2018-01-21</td>
-                                        <td><div class="badge badge-success">Aktywny</div></td>
-                                        <td>
-                                            <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="2" class="btn btn-edit">Edytuj</a>
-                                            <a href="#" class="btn btn-danger">Usuń</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>Grafik inny</td>
-                                        <td>2018-01-20</td>
-                                        <td>2018-01-21</td>
-                                        <td><div class="badge badge-success">Aktywny</div></td>
-                                        <td>
-                                            <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="3" class="btn btn-edit">Edytuj</a>
-                                            <a href="#" class="btn btn-danger">Usuń</a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @counter
+                                            </td>
+                                            <td>@item.Timetable_Name</td>
+                                            <td>@item.Timetable_Created</td>
+                                            <td>@item.Timetable_Edited</td>
+                                            @if (item.Timetable_Status == 0)
+                                            {
+                                                <td><div class="badge badge-inactive">Nieaktywny</div></td>
+                                            }
+                                            @if (item.Timetable_Status == 1)
+                                            {
+                                                <td><div class="badge badge-active">Aktywny</div></td>
+                                            }
+                                            @if (item.Timetable_Status == 2)
+                                            {
+                                                <td><div class="badge badge-draft">Szkic</div></td>
+                                            }
+
+                                            <td>
+                                                <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="1" class="btn btn-edit">Edytuj</a>
+                                                <a href="#" class="btn btn-danger">Usuń</a>
+                                            </td>
+                                        </tr>
+                                        counter++;
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
@@ -73,8 +73,37 @@
 
 
 
-        </div>
     </div>
+
 </section>
 
+<form class="modal-part" id="modal-login-part">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+    <div class="form-group">
+        <label>Nazwa</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-ad"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nazwa" name="timetable_name" id="timetable_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Status</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <select class="form-control select2" name="timetable_status" id="timetable_status">
+                <option value="2">Szkic</option>
+                <option value="1">Aktywny</option>
+                <option value="0">Nieaktywny</option>
+            </select>
+        </div>
+    </div>
 
+</form>
