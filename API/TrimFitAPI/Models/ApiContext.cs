@@ -31,5 +31,6 @@ namespace TrimFitAPI.Models
         {
             optionsBuilder.UseNpgsql(SecData.ConnectionString);
         }
+    public DbSet<TrimFitAPI.Models.User> User { get; set; }
     }
 }
