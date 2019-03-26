@@ -51,17 +51,17 @@ namespace TrimFitAPI.Controllers
         }
 
         // proste logowanie na szybko
-        [HttpGet("{login}/{password}")]
-        public async Task<IActionResult> Login(string login, string password)
+        [HttpPost]
+        public async Task<IActionResult> Login(User temp_user)
         {
            
-            var hash_password = SHA1HashStringForUTF8String(password);
-            var user = await _context.User.Where(u => u.User_login == login && u.User_password == hash_password.ToString()).SingleOrDefaultAsync();
+            var hash_password = SHA1HashStringForUTF8String(temp_user.User_password);
+            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password == hash_password.ToString()).SingleOrDefaultAsync();
 
             if (user != null)
                 return Ok();
             else
-                return BadRequest();
+                return BadRequest("User doesn't exist.");
         }
         // logowanie 
 
