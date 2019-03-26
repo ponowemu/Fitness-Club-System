@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Trimfit.Data;
@@ -9,6 +10,7 @@ using Trimfit.Models;
 
 namespace Trimfit.Controllers
 {
+    [Authorize]
     public class TimetableController : Controller
     {
         public IActionResult Index()

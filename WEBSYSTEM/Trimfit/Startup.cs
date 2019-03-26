@@ -31,6 +31,12 @@ namespace Trimfit
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddAuthentication("APIauth")
+                   .AddCookie("APIauth", options =>
+                   {
+                       options.AccessDeniedPath = new PathString("/User/Login");
+                       options.LoginPath = new PathString("/User/Login");
+                   });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -50,10 +56,10 @@ namespace Trimfit
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
 
-            //app.UseAuthentication();
-
+            app.UseAuthentication();
+         
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -27,8 +27,10 @@ namespace Trimfit.Data
             {
                 using (var r = await client.GetAsync(url))
                 {
-                    if (r.StatusCode.Equals(200))
+                    if (r.IsSuccessStatusCode)
+                    {
                         result = await r.Content.ReadAsStringAsync();
+                    }
                     else
                         result = r.Content.ReadAsStringAsync().Result;
                     // powyższe odpowiedź i status cody do dopracowania
@@ -56,7 +58,15 @@ namespace Trimfit.Data
             {
                 using (var r = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(model, Formatting.Indented), Encoding.UTF8, "application/json")))
                 {
-                    result = r.StatusCode.ToString();
+                    if(r.IsSuccessStatusCode)
+                    {
+                        result = "200";
+                    }
+                    else
+                    {
+                        result = r.Content.ReadAsStringAsync().Result;
+                    }
+                    
                 }
             }
 
