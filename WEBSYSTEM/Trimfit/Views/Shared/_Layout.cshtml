@@ -273,13 +273,13 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-running"></i> <span>Zajęcia</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link">Lista kategorii</a></li>
-                                <li><a class="nav-link">Lista zajęć</a></li>
+                                <li><a asp-controller="Category" asp-action="List" class="nav-link">Lista kategorii</a></li>
+                                <li><a asp-controller="Activity" asp-action="List" class="nav-link">Lista zajęć</a></li>
                             </ul>
                         </li>
                         <li class="menu-header">Zakupy</li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Karnety</span></a>
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-ticket-alt"></i> <span>Karnety</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link">Test</a></li>
                             </ul>
@@ -291,7 +291,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Produkty</span></a>
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-shopping-basket"></i> <span>Produkty</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link">Test</a></li>
                             </ul>
@@ -299,19 +299,20 @@
 
                         <li class="menu-header">Klub</li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Pracownicy</span></a>
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-lock"></i> <span>Pracownicy</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link">Test</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Klienci</span></a>
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>Klienci</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link">Test</a></li>
+                                <li><a asp-controller="Customer" asp-action="List" class="nav-link">Lista klientów</a></li>
+                                <li><a class="nav-link">Potencjalni klienci</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Marketing</span></a>
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-clipboard-check"></i> <span>Marketing</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link">Test</a></li>
                             </ul>
@@ -368,6 +369,7 @@
     <script src="~/js/modules/datatable/dataTables.select.min.js"></script>
     <!-- Page Specific JS File -->
     <script src="~/js/pages/timetable.js"></script>
+    <script src="~/js/pages/customer.js"></script>
     <!-- Data Table -->
     <!-- Modals-->
     <script type="text/javascript" src="~/js/modules/modals/modal.js"></script>

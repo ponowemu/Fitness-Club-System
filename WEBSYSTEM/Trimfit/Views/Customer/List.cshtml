@@ -1,0 +1,85 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-customer"><i class="far fa-edit"></i> Dodaj klienta</a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wszyscy klubowicze</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="category_list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Lp.
+                                        </th>
+                                        <th>Imię i nazwisko</th>
+                                        <th>Status</th>
+                                        <th>Ostatnie wejście</th>
+                                        <th>Karnet</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<form class="modal-part" id="modal-new-customer">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowego klienta!</p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_gender">Zwrot grzecznościowy</label>
+            <select class="form-control select2" name="customer_gender" id="customer_gender">
+                <option value="1">Pan</option>
+                <option value="2">Pani</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_name">Imię</label>
+            <input type="text" class="form-control" id="customer_name" placeholder="Imię">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_surname">Nazwisko</label>
+            <input type="text" class="form-control" id="customer_surname" placeholder="Nazwisko">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Status</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <select class="form-control select2" name="timetable_status" id="timetable_status">
+                <option value="2">Szkic</option>
+                <option value="1">Aktywny</option>
+                <option value="0">Nieaktywny</option>
+            </select>
+        </div>
+    </div>
+
+</form>
