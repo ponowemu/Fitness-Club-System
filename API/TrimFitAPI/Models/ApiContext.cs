@@ -27,6 +27,8 @@ namespace TrimFitAPI.Models
         public DbSet<Voucher> Voucher { get; set;}
         public DbSet<VoucherType> Voucher_type { get; set;}
         public DbSet<Timetable> Timetable { get; set; }
+        public DbSet<Category> Category { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(SecData.ConnectionString);
