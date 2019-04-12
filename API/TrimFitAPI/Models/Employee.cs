@@ -19,16 +19,6 @@ namespace TrimFitAPI.Models
         public string Employee_Lastname { get; set; }
         [Column("employee_birthdate")]
         public DateTime Employee_Birthdate { get; set; }
-        [Column("employee_address1")]
-        public string Employee_Address1 { get; set; }
-        [Column("employee_address2")]
-        public string Employee_Address2 { get; set; }
-        [Column("employee_postcode")]
-        public string Employee_Postcode { get; set; }
-        [Column("employee_email")]
-        public string Employee_Email { get; set; }
-        [Column("employee_phone")]
-        public string Employee_Phone { get; set; }
         [Column("employee_gender")]
         public int Employee_Gender { get; set; }
         [Column("employee_added")]
@@ -37,5 +27,11 @@ namespace TrimFitAPI.Models
         public int Employee_Position_Id { get; set; }
         [Column("employee_status")]
         public int Employee_Status { get; set; }
+        [Column("address_id")]
+        public int Address_Id { get; set; }
+        [Column("employee_display_name")]
+        public string Employee_Display_Name { get; set; }
+        [Column("employee_photo_url")]
+        public string Employee_Photo_Url { get; set; }
     }
 }
