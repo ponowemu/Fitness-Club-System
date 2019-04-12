@@ -15,17 +15,9 @@ namespace TrimFitAPI.Models
         public int Club_Id { get; set; }
         [Column("club_name")]
         public string Club_Name { get; set; }
-        [Column("club_address1")]
-        public string Club_Address1 { get; set; }
-        [Column("club_address2")]
-        public string Club_Address2 { get; set; }
-        [Column("club_postcode")]
-        public string Club_Postcode { get; set; }
-        [Column("club_email")]
-        public string Club_Email { get; set; }
-        [Column("club_phone")]
-        public string Club_Phone {get;set;}
         [Column("club_status")]
         public int Club_Status { get; set; }
+        [Column("address_id")]
+        public int Address_Id { get; set; }
     }
 }

@@ -19,22 +19,20 @@ namespace TrimFitAPI.Models
         public string Customer_Lastname { get; set; }
         [Column("customer_birthdate")]
         public DateTime Customer_Birthdate { get; set; }
-        [Column("customer_address1")]
-        public string Customer_Address1 { get; set; }
-        [Column("customer_address2")]
-        public string Customer_Address2 { get; set; }
-        [Column("customer_postcode")]
-        public string Customer_Postcode { get; set; }
-        [Column("customer_email")]
-        public string Customer_Email { get; set; }
-        [Column("customer_phone")]
-        public string Customer_Phone { get; set; }
         [Column("customer_gender")]
         public int Customer_Gender { get; set; }
         [Column("customer_added")]
         public DateTime Customer_Added { get; set; }
         [Column("customer_status")]
         public int Customer_Status { get; set; }
+        [Column("customer_isconfirmed")]
+        public bool Customer_Isconfirmed { get; set; }
+        [Column("address_id")]
+        public int Address_Id { get; set; }
+        [Column("customer_display_name")]
+        public string Customer_Display_Name { get; set; }
+        [Column("customer_photo_url")]
+        public string Customer_Photo_Url { get; set; }
 
     }
 }
