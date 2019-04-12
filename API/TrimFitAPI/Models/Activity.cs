@@ -24,6 +24,6 @@ namespace TrimFitAPI.Models
         [Column("activity_color")]
         public string Activity_Color { get; set; }
         [Column("employee_id")]
-        public int Employee_Id { get; set; }
+        public List<int> Employee_Id { get; set; }
     }
 }
