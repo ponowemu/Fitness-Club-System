@@ -28,6 +28,7 @@ namespace TrimFitAPI.Models
         public DbSet<VoucherType> Voucher_type { get; set;}
         public DbSet<Timetable> Timetable { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Service> Service { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

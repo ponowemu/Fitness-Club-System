@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace TrimFitAPI.Models
     [Table("service")]
     public class Service
     {
+        [Key]
         [Column("service_id")]
         public int Service_Id { get; set; }
         [Column("service_name")]
@@ -25,18 +27,18 @@ namespace TrimFitAPI.Models
         [Column("service_description")]
         public string Service_Description { get; set; }
         [Column("service_timelimit_mon")]
-        public List<Daterange> Service_Timelimit_Mod { get; set; }
+        public List<DateTime> Service_Timelimit_Mon { get; set; }
         [Column("service_timelimit_tue")]
-        public List<Daterange> Service_Timelimit_Tue { get; set; }
+        public List<DateTime> Service_Timelimit_Tue { get; set; }
         [Column("service_timelimit_wed")]
-        public List<Daterange> Service_Timelimit_Wed { get; set; }
+        public List<DateTime> Service_Timelimit_Wed { get; set; }
         [Column("service_timelimit_thu")]
-        public List<Daterange> Service_Timelimit_Thu { get; set; }
+        public List<DateTime> Service_Timelimit_Thu { get; set; }
         [Column("service_timelimit_fri")]
-        public List<Daterange> Service_Timelimit_Fri { get; set; }
+        public List<DateTime> Service_Timelimit_Fri { get; set; }
         [Column("service_timelimit_sat")]
-        public List<Daterange> Service_Timelimit_Sat { get; set; }
+        public List<DateTime> Service_Timelimit_Sat { get; set; }
         [Column("service_timelimit_sun")]
-        public List<Daterange> Service_Timelimit_Sun { get; set; }
+        public List<DateTime> Service_Timelimit_Sun { get; set; }
     }
 }
