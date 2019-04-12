@@ -11,56 +11,56 @@ namespace TrimFitAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VoucherTypesController : ControllerBase
+    public class AddressesController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public VoucherTypesController(ApiContext context)
+        public AddressesController(ApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/VoucherTypes
+        // GET: api/Addresses
         [HttpGet]
-        public IEnumerable<VoucherType> GetVoucher_type()
+        public IEnumerable<Address> GetAddress()
         {
-            return _context.Voucher_type;
+            return _context.Address;
         }
 
-        // GET: api/VoucherTypes/5
+        // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetVoucherType([FromRoute] int id)
+        public async Task<IActionResult> GetAddress([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var voucherType = await _context.Voucher_type.FindAsync(id);
+            var address = await _context.Address.FindAsync(id);
 
-            if (voucherType == null)
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return Ok(voucherType);
+            return Ok(address);
         }
 
-        // PUT: api/VoucherTypes/5
+        // PUT: api/Addresses/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVoucherType([FromRoute] int id, [FromBody] VoucherType voucherType)
+        public async Task<IActionResult> PutAddress([FromRoute] int id, [FromBody] Address address)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != voucherType.Voucher_Type_Id)
+            if (id != address.Address_Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(voucherType).State = EntityState.Modified;
+            _context.Entry(address).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace TrimFitAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VoucherTypeExists(id))
+                if (!AddressExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace TrimFitAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/VoucherTypes
+        // POST: api/Addresses
         [HttpPost]
-        public async Task<IActionResult> PostVoucherType([FromBody] VoucherType voucherType)
+        public async Task<IActionResult> PostAddress([FromBody] Address address)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Voucher_type.Add(voucherType);
+            _context.Address.Add(address);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVoucherType", new { id = voucherType.Voucher_Type_Id }, voucherType);
+            return CreatedAtAction("GetAddress", new { id = address.Address_Id }, address);
         }
 
-        // DELETE: api/VoucherTypes/5
+        // DELETE: api/Addresses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVoucherType([FromRoute] int id)
+        public async Task<IActionResult> DeleteAddress([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var voucherType = await _context.Voucher_type.FindAsync(id);
-            if (voucherType == null)
+            var address = await _context.Address.FindAsync(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            _context.Voucher_type.Remove(voucherType);
+            _context.Address.Remove(address);
             await _context.SaveChangesAsync();
 
-            return Ok(voucherType);
+            return Ok(address);
         }
 
-        private bool VoucherTypeExists(int id)
+        private bool AddressExists(int id)
         {
-            return _context.Voucher_type.Any(e => e.Voucher_Type_Id == id);
+            return _context.Address.Any(e => e.Address_Id == id);
         }
     }
 }

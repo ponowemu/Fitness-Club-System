@@ -11,56 +11,56 @@ namespace TrimFitAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VoucherTypesController : ControllerBase
+    public class VoucherCustomersController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public VoucherTypesController(ApiContext context)
+        public VoucherCustomersController(ApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/VoucherTypes
+        // GET: api/VoucherCustomers
         [HttpGet]
-        public IEnumerable<VoucherType> GetVoucher_type()
+        public IEnumerable<VoucherCustomer> GetVoucherCustomer()
         {
-            return _context.Voucher_type;
+            return _context.VoucherCustomer;
         }
 
-        // GET: api/VoucherTypes/5
+        // GET: api/VoucherCustomers/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetVoucherType([FromRoute] int id)
+        public async Task<IActionResult> GetVoucherCustomer([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var voucherType = await _context.Voucher_type.FindAsync(id);
+            var voucherCustomer = await _context.VoucherCustomer.FindAsync(id);
 
-            if (voucherType == null)
+            if (voucherCustomer == null)
             {
                 return NotFound();
             }
 
-            return Ok(voucherType);
+            return Ok(voucherCustomer);
         }
 
-        // PUT: api/VoucherTypes/5
+        // PUT: api/VoucherCustomers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVoucherType([FromRoute] int id, [FromBody] VoucherType voucherType)
+        public async Task<IActionResult> PutVoucherCustomer([FromRoute] int id, [FromBody] VoucherCustomer voucherCustomer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != voucherType.Voucher_Type_Id)
+            if (id != voucherCustomer.Voucher_Customer_Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(voucherType).State = EntityState.Modified;
+            _context.Entry(voucherCustomer).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace TrimFitAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VoucherTypeExists(id))
+                if (!VoucherCustomerExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace TrimFitAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/VoucherTypes
+        // POST: api/VoucherCustomers
         [HttpPost]
-        public async Task<IActionResult> PostVoucherType([FromBody] VoucherType voucherType)
+        public async Task<IActionResult> PostVoucherCustomer([FromBody] VoucherCustomer voucherCustomer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Voucher_type.Add(voucherType);
+            _context.VoucherCustomer.Add(voucherCustomer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVoucherType", new { id = voucherType.Voucher_Type_Id }, voucherType);
+            return CreatedAtAction("GetVoucherCustomer", new { id = voucherCustomer.Voucher_Customer_Id }, voucherCustomer);
         }
 
-        // DELETE: api/VoucherTypes/5
+        // DELETE: api/VoucherCustomers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVoucherType([FromRoute] int id)
+        public async Task<IActionResult> DeleteVoucherCustomer([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var voucherType = await _context.Voucher_type.FindAsync(id);
-            if (voucherType == null)
+            var voucherCustomer = await _context.VoucherCustomer.FindAsync(id);
+            if (voucherCustomer == null)
             {
                 return NotFound();
             }
 
-            _context.Voucher_type.Remove(voucherType);
+            _context.VoucherCustomer.Remove(voucherCustomer);
             await _context.SaveChangesAsync();
 
-            return Ok(voucherType);
+            return Ok(voucherCustomer);
         }
 
-        private bool VoucherTypeExists(int id)
+        private bool VoucherCustomerExists(int id)
         {
-            return _context.Voucher_type.Any(e => e.Voucher_Type_Id == id);
+            return _context.VoucherCustomer.Any(e => e.Voucher_Customer_Id == id);
         }
     }
 }

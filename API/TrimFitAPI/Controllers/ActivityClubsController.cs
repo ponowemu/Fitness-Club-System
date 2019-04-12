@@ -11,56 +11,56 @@ namespace TrimFitAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VoucherTypesController : ControllerBase
+    public class ActivityClubsController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public VoucherTypesController(ApiContext context)
+        public ActivityClubsController(ApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/VoucherTypes
+        // GET: api/ActivityClubs
         [HttpGet]
-        public IEnumerable<VoucherType> GetVoucher_type()
+        public IEnumerable<ActivityClub> GetActivity_club()
         {
-            return _context.Voucher_type;
+            return _context.Activity_club;
         }
 
-        // GET: api/VoucherTypes/5
+        // GET: api/ActivityClubs/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetVoucherType([FromRoute] int id)
+        public async Task<IActionResult> GetActivityClub([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var voucherType = await _context.Voucher_type.FindAsync(id);
+            var activityClub = await _context.Activity_club.FindAsync(id);
 
-            if (voucherType == null)
+            if (activityClub == null)
             {
                 return NotFound();
             }
 
-            return Ok(voucherType);
+            return Ok(activityClub);
         }
 
-        // PUT: api/VoucherTypes/5
+        // PUT: api/ActivityClubs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVoucherType([FromRoute] int id, [FromBody] VoucherType voucherType)
+        public async Task<IActionResult> PutActivityClub([FromRoute] int id, [FromBody] ActivityClub activityClub)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != voucherType.Voucher_Type_Id)
+            if (id != activityClub.Activity_Club_Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(voucherType).State = EntityState.Modified;
+            _context.Entry(activityClub).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace TrimFitAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VoucherTypeExists(id))
+                if (!ActivityClubExists(id))
                 {
                     return NotFound();
                 }
@@ -81,45 +81,45 @@ namespace TrimFitAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/VoucherTypes
+        // POST: api/ActivityClubs
         [HttpPost]
-        public async Task<IActionResult> PostVoucherType([FromBody] VoucherType voucherType)
+        public async Task<IActionResult> PostActivityClub([FromBody] ActivityClub activityClub)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Voucher_type.Add(voucherType);
+            _context.Activity_club.Add(activityClub);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVoucherType", new { id = voucherType.Voucher_Type_Id }, voucherType);
+            return CreatedAtAction("GetActivityClub", new { id = activityClub.Activity_Club_Id }, activityClub);
         }
 
-        // DELETE: api/VoucherTypes/5
+        // DELETE: api/ActivityClubs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVoucherType([FromRoute] int id)
+        public async Task<IActionResult> DeleteActivityClub([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var voucherType = await _context.Voucher_type.FindAsync(id);
-            if (voucherType == null)
+            var activityClub = await _context.Activity_club.FindAsync(id);
+            if (activityClub == null)
             {
                 return NotFound();
             }
 
-            _context.Voucher_type.Remove(voucherType);
+            _context.Activity_club.Remove(activityClub);
             await _context.SaveChangesAsync();
 
-            return Ok(voucherType);
+            return Ok(activityClub);
         }
 
-        private bool VoucherTypeExists(int id)
+        private bool ActivityClubExists(int id)
         {
-            return _context.Voucher_type.Any(e => e.Voucher_Type_Id == id);
+            return _context.Activity_club.Any(e => e.Activity_Club_Id == id);
         }
     }
 }

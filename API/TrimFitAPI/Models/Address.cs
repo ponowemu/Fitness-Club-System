@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace TrimFitAPI.Models
     [Table("address")]
     public class Address
     {
+        [Key]
         [Column("address_id")]
         public int Address_Id { get; set; }
         [Column("address_1")]

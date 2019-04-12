@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using TrimFitAPI.Models.CustomModels;
 
 namespace TrimFitAPI.Models
 {
@@ -37,21 +36,21 @@ namespace TrimFitAPI.Models
         [Column("voucher_gross_price")]
         public double Voucher_Gross_Price { get; set; }
         [Column("activity_id")]
-        public int Activitiy_Id { get; set; }
+        public List<int> Activitiy_Id { get; set; }
         [Column("voucher_timelimit_mon")]
-        public List<Daterange> Voucher_Timelimit_Mon { get; set; }
+        public List<DateTime> Voucher_Timelimit_Mon { get; set; }
         [Column("voucher_timelimit_tue")]
-        public List<Daterange> Voucher_Timelimit_Tue { get; set; }
+        public List<DateTime> Voucher_Timelimit_Tue { get; set; }
         [Column("voucher_timelimit_wed")]
-        public List<Daterange> Voucher_Timelimit_Wed { get; set; }
+        public List<DateTime> Voucher_Timelimit_Wed { get; set; }
         [Column("voucher_timelimit_thu")]
-        public List<Daterange> Voucher_Timelimit_Thu { get; set; }
+        public List<DateTime> Voucher_Timelimit_Thu { get; set; }
         [Column("voucher_timelimit_fri")]
-        public List<Daterange> Voucher_Timelimit_Fri { get; set; }
+        public List<DateTime> Voucher_Timelimit_Fri { get; set; }
         [Column("voucher_timelimit_sat")]
-        public List<Daterange> Voucher_Timelimit_Sat { get; set; }
+        public List<DateTime> Voucher_Timelimit_Sat { get; set; }
         [Column("voucher_timelimit_sun")]
-        public List<Daterange> Voucher_Timelimit_Sun { get; set; }
+        public List<DateTime> Voucher_Timelimit_Sun { get; set; }
 
     }
 }

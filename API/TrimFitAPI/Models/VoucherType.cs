@@ -11,8 +11,8 @@ namespace TrimFitAPI.Models
     public class VoucherType
     {
         [Key]
-        [Column("voucher_id")]
-        public int Voucher_Id { get; set; }
+        [Column("voucher_type_id")]
+        public int Voucher_Type_Id { get; set; }
         [Column("voucher_type_name")]
         public string Voucher_Type_Name { get; set; }
         [Column("voucher_type_description")]
