@@ -19,5 +19,7 @@ namespace TrimFitAPI.Models
         public string Voucher_Type_Description { get; set; }
         [Column("voucher_type_parameters")]
         public string Voucher_Type_Parameters { get; set; }
+        [Column("voucher_type_parameters2")]
+        public string Voucher_Type_Parameters2 { get; set; }
     }
 }
