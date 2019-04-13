@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Service>
+﻿@model IEnumerable<ServiceView>
 
 <section class="section">
     <div class="section-header">
@@ -6,60 +6,40 @@
     </div>
     <div class="section-body">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                <article class="article service">
-                    <div class="article-header">
-                        <div class="article-badge">
-                            <span class="badge badge-danger">Masaż</span>
-                            <span class="badge badge-primary">Kosmetologia</span>
-                        </div>
-                        <div class="article-image" data-background="/images/stisla/news/img08.jpg">
-                        </div>
 
-                        <div class="article-title">
-                            <h2><a href="#">Masaż erotyczny</a></h2>
-                        </div>
-                    </div>
-                    <div class="article-details">
-                        <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur.
-                        </p>
-                        <div class="section-title service-price">180 PLN</div>
-                        <div class="article-cta">
-                            <a href="#" class="btn btn-primary "> Czytaj więcej</a>
-                            <a href="#" class="btn btn-busket "><i class="fas fa-shopping-cart"></i> Rezerwuj</a>
-                        </div>
-                    </div>
-                </article>
+            @foreach (var service in Model)
+            {
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                    <article class="article service">
+                        <div class="article-header">
+                            <div class="article-badge">
+                                @foreach (var tag in service.Category)
+                                {
+                                    <span class="badge badge-danger">@tag.Category_Name</span>
+                                }
+                            </div>
+                            <div class="article-image" data-background="/images/stisla/news/img08.jpg">
+                            </div>
 
-
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-                <article class="article service">
-                    <div class="article-header">
-                        <div class="article-image" data-background="/images/stisla/news/img08.jpg">
+                            <div class="article-title">
+                                <h2>@service.Service_Name</h2>
+                            </div>
                         </div>
-                        <div class="article-title">
-                            <h2><a href="#">Masaż erotyczny</a></h2>
+                        <div class="article-details">
+                            <p>
+                                @service.Service_Description
+                            </p>
+                            <div class="section-title service-price">@service.Service_Gross_Price</div>
+                            <div class="article-cta">
+                                <a href="#" class="btn btn-primary "> Czytaj więcej</a>
+                                <a href="#" class="btn btn-busket "><i class="fas fa-shopping-cart"></i> Rezerwuj</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="article-details">
-                        <p>
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur.
-                        </p>
-                        <div class="section-title service-price">180 PLN</div>
-                        <div class="article-cta">
-                            <a href="#" class="btn btn-primary "> Czytaj więcej</a>
-                            <a href="#" class="btn btn-busket "><i class="fas fa-shopping-cart"></i> Rezerwuj</a>
-                        </div>
-                    </div>
-                </article>
+                    </article>
 
 
-            </div>
+                </div>
+            }
         </div>
     </div>
 

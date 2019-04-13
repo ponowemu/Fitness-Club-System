@@ -20,6 +20,8 @@ namespace Trimfit.Controllers
         [HttpGet("[controller]/[action]/")]
         public async Task<IActionResult> Edit()
         {
+            // Lista wszystkich utworzonych grafików;
+
             ApiContext _context = new ApiContext();
             List<Timetable> timetables = new List<Timetable>();
             timetables.Clear();

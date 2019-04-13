@@ -22,8 +22,8 @@ namespace Trimfit.Models
         public int Employee_Gender { get; set; }
         [JsonProperty(PropertyName ="employee_added")]
         public DateTime Employee_Added { get; set; }
-        [JsonProperty(PropertyName ="employee_position_id")]
-        public List<int> Employee_Position_Id { get; set; }
+        [JsonProperty(PropertyName ="position_id")]
+        public List<int> Position_Id { get; set; }
         [JsonProperty(PropertyName ="employee_status")]
         public int Employee_Status { get; set; }
         [JsonProperty(PropertyName ="address_id")]

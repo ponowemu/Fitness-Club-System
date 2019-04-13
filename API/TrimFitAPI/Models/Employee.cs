@@ -23,8 +23,8 @@ namespace TrimFitAPI.Models
         public int Employee_Gender { get; set; }
         [Column("employee_added")]
         public DateTime Employee_Added { get; set; }
-        [Column("employee_position_id")]
-        public List<int> Employee_Position_Id { get; set; }
+        [Column("position_id")]
+        public List<int> Position_Id { get; set; }
         [Column("employee_status")]
         public int Employee_Status { get; set; }
         [Column("address_id")]
