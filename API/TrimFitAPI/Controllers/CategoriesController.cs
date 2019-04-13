@@ -55,7 +55,7 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != category.Category_id)
+            if (id != category.Category_Id)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace TrimFitAPI.Controllers
             _context.Category.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Category_id }, category);
+            return CreatedAtAction("GetCategory", new { id = category.Category_Id }, category);
         }
 
         // DELETE: api/Categories/5
@@ -119,7 +119,7 @@ namespace TrimFitAPI.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Category.Any(e => e.Category_id == id);
+            return _context.Category.Any(e => e.Category_Id == id);
         }
     }
 }
