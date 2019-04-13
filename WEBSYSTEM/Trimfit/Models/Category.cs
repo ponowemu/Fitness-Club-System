@@ -11,8 +11,10 @@ namespace Trimfit.Models
     public class Category
     {
         [JsonProperty(PropertyName ="category_id")]
-        public int Category_id { get; set; }
+        public int Category_Id { get; set; }
         [JsonProperty(PropertyName ="category_name")]
-        public string Category_name { get; set; }
+        public string Category_Name { get; set; }
+        [JsonProperty(PropertyName = "category_color")]
+        public string Category_Color { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Trimfit.Models
         [JsonProperty(PropertyName ="activity_status")]
         public int Activity_Status { get; set; }
         [JsonProperty(PropertyName ="category_id")]
-        public int Category_Id { get; set; }
+        public List<int> Category_Id { get; set; }
         [JsonProperty(PropertyName ="activity_color")]
         public string Activity_Color { get; set; }
         [JsonProperty(PropertyName ="employee_id")]

@@ -1845,7 +1845,7 @@ h6 .badge {
     background-color: #d9b310;
     border-color: #d9b310;
 }
-
+    
     .btn-primary:focus, .btn-primary.disabled:focus {
         background-color: #2C3E50 !important;
     }
@@ -1856,6 +1856,25 @@ h6 .badge {
 
     .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
         background-color: #2C3E50 !important;
+    }
+
+.btn-busket, .btn-busket.disabled {
+    box-shadow: 0 2px 6px #fff;
+    background-color: #328cc1;
+    border-color: #328cc1;
+    color:#fff;
+}
+    .btn-busket:focus, .btn-busket.disabled:focus {
+        background-color: #0b3c5d !important;
+    }
+
+        .btn-busket:focus:active, .btn-busket.disabled:focus:active {
+            background-color: #0b3c5d !important;
+        }
+
+    .btn-busket:active, .btn-busket:hover, .btn-busket.disabled:active, .btn-busket.disabled:hover {
+        background-color: #0b3c5d !important;
+        color:#fff;
     }
 
 .btn-outline-primary, .btn-outline-primary.disabled {
