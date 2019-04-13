@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,13 +10,13 @@ namespace Trimfit.Models
 {
     public class Club
     {
+        [JsonProperty(PropertyName ="club_id")]
         public int Club_Id { get; set; }
+        [JsonProperty(PropertyName ="club_name")]
         public string Club_Name { get; set; }
-        public string Club_Address1 { get; set; }
-        public string Club_Address2 { get; set; }
-        public string Club_Postcode { get; set; }
-        public string Club_Email { get; set; }
-        public string Club_Phone {get;set;}
+        [JsonProperty(PropertyName ="club_status")]
         public int Club_Status { get; set; }
+        [JsonProperty(PropertyName ="address_id")]
+        public int Address_Id { get; set; }
     }
 }

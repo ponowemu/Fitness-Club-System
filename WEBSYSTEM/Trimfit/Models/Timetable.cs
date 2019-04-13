@@ -10,18 +10,17 @@ namespace Trimfit.Models
 {
     public class Timetable
     {
-        [Key]
-        [JsonProperty("timetable_Id")]
+        [JsonProperty(PropertyName ="timetable_id")]
         public int Timetable_Id { get; set; }
-        [JsonProperty("timetable_Name")]
+        [JsonProperty(PropertyName ="timetable_name")]
         public string Timetable_Name { get; set; }
-        [JsonProperty("timetable_Status")]
-        public int? Timetable_Status { get; set; }
-        [JsonProperty("timetable_Created")]
+        [JsonProperty(PropertyName ="timetable_status")]
+        public int Timetable_Status { get; set; }
+        [JsonProperty(PropertyName ="timetable_created")]
         public DateTime Timetable_Created { get; set; }
-        [JsonProperty("timetable_Edited")]
+        [JsonProperty(PropertyName ="timetable_edited")]
         public DateTime Timetable_Edited { get; set; }
-        [JsonProperty("club_Id")]
-        public int? Club_Id { get; set; }
+        [JsonProperty(PropertyName ="club_id")]
+        public int Club_Id { get; set; }
     }
 }

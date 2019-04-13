@@ -13,8 +13,8 @@ namespace TrimFitAPI.Models
         [Key]
         [Column("registration_id")]
         public int Registration_Id { get; set; }
-        [Column("timetable_id")]
-        public int Timetable_Id { get; set; }
+        [Column("timetable_activity_id")]
+        public int Timetable_Activity_Id { get; set; }
         [Column("customer_id")]
         public int Customer_Id { get; set; }
         [Column("registration_created")]

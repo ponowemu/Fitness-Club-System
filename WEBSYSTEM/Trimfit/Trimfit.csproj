@@ -22,6 +22,12 @@
     <Content Update="Views\Customer\List.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Service\Manage.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Service\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Timetable\Edit.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
