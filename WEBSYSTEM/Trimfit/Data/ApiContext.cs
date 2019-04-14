@@ -56,9 +56,9 @@ namespace Trimfit.Data
             string result = "";
             using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(model, Formatting.Indented), Encoding.UTF8, "application/json")))
                 {
-                    client.BaseAddress = new Uri(BaseUrl);
                     if (r.IsSuccessStatusCode)
                     {
                         result = "200";

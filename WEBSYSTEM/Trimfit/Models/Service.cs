@@ -40,5 +40,7 @@ namespace Trimfit.Models
         public List<DateTime> Service_Timelimit_Sun { get; set; }
         [JsonProperty(PropertyName = "category_id")]
         public List<int> Category_Id { get; set; }
+        [JsonProperty(PropertyName ="service_duration")]
+        public int Service_Duration { get; set; }
     }
 }

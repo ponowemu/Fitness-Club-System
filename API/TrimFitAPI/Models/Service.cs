@@ -41,5 +41,7 @@ namespace TrimFitAPI.Models
         public List<DateTime> Service_Timelimit_Sun { get; set; }
         [Column("category_id")]
         public List<int> Category_Id { get; set; }
+        [Column("service_duration")]
+        public int Service_Duration { get; set; }
     }
 }

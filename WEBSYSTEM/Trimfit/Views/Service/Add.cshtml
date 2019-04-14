@@ -9,7 +9,7 @@
     </div>
     <div class="section-body">
         <h2 class="section-title">Nowa usługa</h2>
-        <p class="section-lead">Wypełnij wszystkie pola formularza i dodaj nową usługę. </p>
+        <p class="section-lead">Wypełnij wszystkie pola formularza i dodaj nową usługę. <br /> Dzięki <b>ograniczeniom czasowym</b> jesteś w stanie w łatwy sposób ustawić dostępność dodawanej usługi. </p>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
@@ -17,75 +17,109 @@
                         <h4>Podstawowe informacje</h4>
                     </div>
                     <div class="card-body">
-                        <form class="modal-part-add" id="modal-add-new-service" style="max-width:800px;">
-                            <div class="form-group col-md-12">
-                                <label>Nazwa</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-ad"></i>
+                        <form class="modal-part-add service-needs-validation" method="post" id="modal-add-new-service" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Nazwa</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-ad"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nazwa" name="service-name" id="service_name" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź nazwę usługi.
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Nazwa" name="service-name" id="service-name">
+                                </div>
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Przypisane kategorie</label>
+                                    <select class="form-control select2" multiple="" id="categories_list">
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                        <option value="5">Option 5</option>
+                                        <option value="6">Option 6</option>
+                                    </select>
+
                                 </div>
                             </div>
-
+                            
                             <div class="form-group col-md-12">
                                 <label>Opis</label>
-                                <textarea id="summernote-new-service" name="summernote-new-service"></textarea>
-                            </div>
-
-                            <div class="form-group col-md-6 float-left">
-                                <label>Cena brutto</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            $
-                                        </div>
-                                    </div>
-                                    <input type="text" class="form-control service-gross-price">
+                                <textarea id="summernote-new-service" name="summernote-new-service" required=""></textarea>
+                                <div class="invalid-feedback">
+                                    Uzupełnij opis usługi.
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6 float-left">
-                                <label>Cena netto</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            $
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena brutto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                $
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control service-gross-price" id="service_gross_price" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź cenę brutto usługi.
                                         </div>
                                     </div>
-                                    <input type="text" readonly="readonly" class="form-control service-net-price">
                                 </div>
 
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena netto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                $
+                                            </div>
+                                        </div>
+                                        <input type="text" readonly="readonly" class="form-control service-net-price" id="service_net_price">
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div class="form-group col-md-6 float-left">
-                                <label>Przypisani pracownicy</label>
-                                <select class="form-control select2" multiple="">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                    <option>Option 5</option>
-                                    <option>Option 6</option>
-                                </select>
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Przypisani pracownicy</label>
+                                    <select class="form-control select2" multiple="" id="employees_list">
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                        <option value="5">Option 5</option>
+                                        <option value="6">Option 6</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Klub</label>
+                                    <select class="form-group select2" multiple="" id="clubs_list">
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                        <option>Option 6</option>
+                                    </select>
+
+                                </div>
                             </div>
 
-                            <div class="form-group col-md-6 float-left">
-                                <label>Klub</label>
-                                <select class="form-group select2" multiple="">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
-                                    <option>Option 5</option>
-                                    <option>Option 6</option>
-                                </select>
+                            <div class="col-md-12">
+                                <input class="btn btn-icon btn-primary" type="submit" value="Dodaj">
                             </div>
 
                         </form>
-
                     </div>
 
                 </div>
@@ -108,7 +142,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" id="mon_from" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -116,7 +150,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" id="mon_to" class="form-control timepicker">
                             </div>
                         </div>
 
@@ -131,7 +165,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -139,7 +173,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" class="form-control timepicker">
                             </div>
                         </div>
 
@@ -154,7 +188,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -162,7 +196,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" class="form-control timepicker">
                             </div>
                         </div>
 
@@ -177,7 +211,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -185,7 +219,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" class="form-control timepicker">
                             </div>
                         </div>
 
@@ -200,7 +234,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -208,7 +242,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" class="form-control timepicker">
                             </div>
                         </div>
 
@@ -223,7 +257,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -231,7 +265,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" class="form-control timepicker">
                             </div>
                         </div>
 
@@ -246,7 +280,7 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="00:00" class="form-control timepicker">
                             </div>
                             <div class="input-group col-md-6 float-left">
                                 <div class="input-group-prepend">
@@ -254,13 +288,15 @@
                                         <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control timepicker">
+                                <input type="text" value="23:59" class="form-control timepicker">
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
+
+
         </div>
 
 

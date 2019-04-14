@@ -63,10 +63,30 @@ namespace Trimfit.Controllers
 
             return services_view;
         }
-        public async Task<JsonResult> PostService(Service service)
+        [HttpPost]
+        public async Task<JsonResult> PostService(List<int> category_id, string service_name, string service_description, double service_gross_price, double service_net_price, List<int> service_employees_list, List<int> service_clubs_list, string mon_from, string mon_to, string tue_from, string tue_to, string wen_from, string wen_to, string thu_from, string thu_to, string fri_from, string fri_to, string sat_from, string sat_to, string sun_from, string sun_to)
         {
             ApiContext _context = new ApiContext();
             string result = "";
+
+            var service = new Service()
+            {
+                Club_Id = service_clubs_list,
+                Employee_Id = service_employees_list,
+                Service_Description = service_description,
+                Service_Gross_Price = service_gross_price,
+                Service_Net_Price = service_net_price,
+                Service_Name = service_name,
+                Category_Id = category_id,
+                Service_Timelimit_Mon = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+                Service_Timelimit_Tue = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+                Service_Timelimit_Wed = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+                Service_Timelimit_Thu = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+                Service_Timelimit_Fri = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+                Service_Timelimit_Sat = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+                Service_Timelimit_Sun = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
+               
+            };
 
             try
             {
@@ -83,7 +103,7 @@ namespace Trimfit.Controllers
         }
         public async Task<IActionResult> List()
         {
-            
+
             ViewData["header"] = "Przeglądaj usługi";
             return View(await this.GetServicesList());
         }
