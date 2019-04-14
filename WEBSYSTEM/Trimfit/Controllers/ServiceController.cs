@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -56,7 +57,8 @@ namespace Trimfit.Controllers
                     Service_Timelimit_Sun = service.Service_Timelimit_Sun,
                     Service_Timelimit_Thu = service.Service_Timelimit_Thu,
                     Service_Timelimit_Tue = service.Service_Timelimit_Tue,
-                    Service_Timelimit_Wed = service.Service_Timelimit_Wed
+                    Service_Timelimit_Wed = service.Service_Timelimit_Wed,
+                    Service_Duration = service.Service_Duration
                 });
 
             }
@@ -64,7 +66,7 @@ namespace Trimfit.Controllers
             return services_view;
         }
         [HttpPost]
-        public async Task<JsonResult> PostService(List<int> category_id, string service_name, string service_description, double service_gross_price, double service_net_price, List<int> service_employees_list, List<int> service_clubs_list, string mon_from, string mon_to, string tue_from, string tue_to, string wen_from, string wen_to, string thu_from, string thu_to, string fri_from, string fri_to, string sat_from, string sat_to, string sun_from, string sun_to)
+        public async Task<JsonResult> PostService(List<int> category_id, string service_name, string service_description, double service_gross_price, double service_net_price, List<int> service_employees_list, List<int> service_clubs_list, string mon_from, string mon_to, string tue_from, string tue_to, string wen_from, string wen_to, string thu_from, string thu_to, string fri_from, string fri_to, string sat_from, string sat_to, string sun_from, string sun_to, int service_duration)
         {
             ApiContext _context = new ApiContext();
             string result = "";
@@ -74,18 +76,18 @@ namespace Trimfit.Controllers
                 Club_Id = service_clubs_list,
                 Employee_Id = service_employees_list,
                 Service_Description = service_description,
-                Service_Gross_Price = service_gross_price,
-                Service_Net_Price = service_net_price,
+                Service_Gross_Price = Convert.ToDouble(service_gross_price, new CultureInfo("en-US")),
+                Service_Net_Price = Convert.ToDouble(service_net_price, new CultureInfo("en-US")),
                 Service_Name = service_name,
                 Category_Id = category_id,
-                Service_Timelimit_Mon = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-                Service_Timelimit_Tue = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-                Service_Timelimit_Wed = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-                Service_Timelimit_Thu = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-                Service_Timelimit_Fri = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-                Service_Timelimit_Sat = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-                Service_Timelimit_Sun = new List<DateTime>() { DateTime.Parse("1990-10-20 " + mon_from), DateTime.Parse("1990-10-20 " + mon_to) },
-               
+                Service_Timelimit_Mon = new List<TimeSpan>() { TimeSpan.Parse(mon_from + ":00"), TimeSpan.Parse(mon_to + ":00") },
+                Service_Timelimit_Tue = new List<TimeSpan>() { TimeSpan.Parse(tue_from + ":00"), TimeSpan.Parse(tue_to + ":00") },
+                Service_Timelimit_Wed = new List<TimeSpan>() { TimeSpan.Parse(wen_from + ":00"), TimeSpan.Parse(wen_to + ":00") },
+                Service_Timelimit_Thu = new List<TimeSpan>() { TimeSpan.Parse(thu_from + ":00"), TimeSpan.Parse(thu_to + ":00") },
+                Service_Timelimit_Fri = new List<TimeSpan>() { TimeSpan.Parse(fri_from + ":00"), TimeSpan.Parse(fri_to + ":00") },
+                Service_Timelimit_Sat = new List<TimeSpan>() { TimeSpan.Parse(sat_from + ":00"), TimeSpan.Parse(sat_to + ":00") },
+                Service_Timelimit_Sun = new List<TimeSpan>() { TimeSpan.Parse(sun_from + ":00"), TimeSpan.Parse(sun_to + ":00") },
+                Service_Duration = service_duration
             };
 
             try

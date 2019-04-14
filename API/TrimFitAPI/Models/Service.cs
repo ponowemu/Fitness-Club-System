@@ -26,19 +26,19 @@ namespace TrimFitAPI.Models
         [Column("service_description")]
         public string Service_Description { get; set; }
         [Column("service_timelimit_mon")]
-        public List<DateTime> Service_Timelimit_Mon { get; set; }
+        public List<TimeSpan> Service_Timelimit_Mon { get; set; }
         [Column("service_timelimit_tue")]
-        public List<DateTime> Service_Timelimit_Tue { get; set; }
+        public List<TimeSpan> Service_Timelimit_Tue { get; set; }
         [Column("service_timelimit_wed")]
-        public List<DateTime> Service_Timelimit_Wed { get; set; }
+        public List<TimeSpan> Service_Timelimit_Wed { get; set; }
         [Column("service_timelimit_thu")]
-        public List<DateTime> Service_Timelimit_Thu { get; set; }
+        public List<TimeSpan> Service_Timelimit_Thu { get; set; }
         [Column("service_timelimit_fri")]
-        public List<DateTime> Service_Timelimit_Fri { get; set; }
+        public List<TimeSpan> Service_Timelimit_Fri { get; set; }
         [Column("service_timelimit_sat")]
-        public List<DateTime> Service_Timelimit_Sat { get; set; }
+        public List<TimeSpan> Service_Timelimit_Sat { get; set; }
         [Column("service_timelimit_sun")]
-        public List<DateTime> Service_Timelimit_Sun { get; set; }
+        public List<TimeSpan> Service_Timelimit_Sun { get; set; }
         [Column("category_id")]
         public List<int> Category_Id { get; set; }
         [Column("service_duration")]
