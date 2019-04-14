@@ -1,0 +1,268 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">Nowa usługa</h2>
+        <p class="section-lead">Wypełnij wszystkie pola formularza i dodaj nową usługę. </p>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Podstawowe informacje</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="modal-part-add" id="modal-add-new-service" style="max-width:800px;">
+                            <div class="form-group col-md-12">
+                                <label>Nazwa</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-ad"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Nazwa" name="service-name" id="service-name">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Opis</label>
+                                <textarea id="summernote-new-service" name="summernote-new-service"></textarea>
+                            </div>
+
+                            <div class="form-group col-md-6 float-left">
+                                <label>Cena brutto</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            $
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control service-gross-price">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 float-left">
+                                <label>Cena netto</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            $
+                                        </div>
+                                    </div>
+                                    <input type="text" readonly="readonly" class="form-control service-net-price">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6 float-left">
+                                <label>Przypisani pracownicy</label>
+                                <select class="form-control select2" multiple="">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Option 5</option>
+                                    <option>Option 6</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6 float-left">
+                                <label>Klub</label>
+                                <select class="form-group select2" multiple="">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                    <option>Option 4</option>
+                                    <option>Option 5</option>
+                                    <option>Option 6</option>
+                                </select>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ograniczenia czasowe</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group col-md-12 float-left">
+                            <div class="col-md-12">
+                                <label>Poniedziałek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Wtorek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Środa</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Czwartek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Piątek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Sobota</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left " style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Niedziela</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>

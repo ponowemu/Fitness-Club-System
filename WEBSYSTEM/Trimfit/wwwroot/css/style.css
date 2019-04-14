@@ -1396,7 +1396,10 @@ table tr:hover .table-links {
 .modal-part {
     display: none;
 }
-
+.modal-dialog
+{
+    max-width:900px !important;
+}
 /* 3.9 Nav */
 .nav-tabs .nav-item .nav-link {
     color: #328cc1;

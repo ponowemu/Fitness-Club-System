@@ -68,8 +68,6 @@ namespace Trimfit.Controllers
                 timetable.Timetable_Edited = DateTime.Now;
                 timetable.Club_Id = 1;
 
-
-
                 JsonResult response = await _context.PostRequest("Timetables/", timetable);
                 result = response.Value.ToString();
                 // zastanowić się w jaki sposób czytać i przekazywać responsy!!!

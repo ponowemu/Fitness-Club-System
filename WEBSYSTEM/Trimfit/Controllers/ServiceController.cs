@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Trimfit.Data;
 using Trimfit.Models;
@@ -15,7 +16,7 @@ namespace Trimfit.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> List()
+        public async Task<List<ServiceView>> GetServicesList()
         {
             List<ServiceView> services_view = new List<ServiceView>();
 
@@ -30,13 +31,18 @@ namespace Trimfit.Controllers
             var services_response = await _context.GetRequest("Services/");
             var services_list = JsonConvert.DeserializeObject<List<Service>>(services_response.Value.ToString());
 
+            var club = await _context.GetRequest("Clubs/");
+            var clubs_list = JsonConvert.DeserializeObject<List<Club>>(club.Value.ToString());
+
             foreach (var service in services_list)
             {
                 var categories = categories_list.Where(c => service.Category_Id.Contains(c.Category_Id)).ToList();
                 var employees = employees_list.Where(e => service.Employee_Id.Contains(e.Employee_Id)).ToList();
+                var clubs = clubs_list.Where(c => service.Club_Id.Contains(c.Club_Id)).ToList();
 
                 services_view.Add(new ServiceView()
                 {
+                    Club = clubs,
                     Category = categories,
                     Employee = employees,
                     Service_Description = service.Service_Description,
@@ -55,12 +61,42 @@ namespace Trimfit.Controllers
 
             }
 
-            ViewData["header"] = "Przeglądaj usługi";
-            return View(services_view);
+            return services_view;
         }
-        public IActionResult Manage()
+        public async Task<JsonResult> PostService(Service service)
         {
+            ApiContext _context = new ApiContext();
+            string result = "";
+
+            try
+            {
+                JsonResult response = await _context.PostRequest("Services/", service);
+                result = response.Value.ToString();
+                // zastanowić się w jaki sposób czytać i przekazywać responsy!!!
+            }
+            catch (HttpRequestException e)
+            {
+                result = e.Message;
+            }
+
+            return new JsonResult(result);
+        }
+        public async Task<IActionResult> List()
+        {
+            
+            ViewData["header"] = "Przeglądaj usługi";
+            return View(await this.GetServicesList());
+        }
+        public async Task<IActionResult> Manage()
+        {
+            var services_list = await this.GetServicesList();
+
             ViewData["header"] = "Zarządzaj usługami";
+            return View(services_list);
+        }
+        public IActionResult Add()
+        {
+            ViewData["header"] = "Dodaj nową usługę";
             return View();
         }
     }

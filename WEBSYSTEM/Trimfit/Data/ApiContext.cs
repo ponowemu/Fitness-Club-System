@@ -12,19 +12,18 @@ namespace Trimfit.Data
 {
     public class ApiContext
     {
-        public HttpClient Client { get; private set; }
         private static string BaseUrl = "http://api.trimfit.pl/api/";
 
         public ApiContext()
         {
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri(BaseUrl);
+
         }
         public async Task<JsonResult> GetRequest(string url)
         {
             string result = "";
-            using (var client = Client)
+            using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.GetAsync(url))
                 {
                     if (r.IsSuccessStatusCode)
@@ -41,8 +40,9 @@ namespace Trimfit.Data
         public async Task<JsonResult> PutRequest(string url, object model)
         {
             string result = "";
-            using (var client = Client)
+            using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.PutAsJsonAsync(url, JsonConvert.SerializeObject(model)))
                 {
                     result = r.StatusCode.ToString();
@@ -54,11 +54,12 @@ namespace Trimfit.Data
         public async Task<JsonResult> PostRequest(string url, object model)
         {
             string result = "";
-            using (var client = Client)
+            using (var client = new HttpClient())
             {
                 using (var r = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(model, Formatting.Indented), Encoding.UTF8, "application/json")))
                 {
-                    if(r.IsSuccessStatusCode)
+                    client.BaseAddress = new Uri(BaseUrl);
+                    if (r.IsSuccessStatusCode)
                     {
                         result = "200";
                     }
@@ -66,15 +67,18 @@ namespace Trimfit.Data
                     {
                         result = r.Content.ReadAsStringAsync().Result;
                     }
-                    
+
                 }
             }
 
             return new JsonResult(result);
         }
-        public HttpResponseMessage DeleteRequest(string url)
+        public async Task<JsonResult> DeleteRequest(string url)
         {
-            return Client.DeleteAsync(url).Result;
+            using (var client = new HttpClient())
+            {
+            }
+            return new JsonResult("");
         }
 
     }
