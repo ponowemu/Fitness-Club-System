@@ -12,7 +12,7 @@ namespace Trimfit.Controllers
 {
     public class ProductController : Controller
     {
-        public async Task<ProductView> GetProductsList()
+        public async Task<List<ProductView>> GetProductsList()
         {
             List<ProductView> products_view = new List<ProductView>();
 
