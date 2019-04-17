@@ -9,7 +9,7 @@
     <div class="section-body">
         <div class="row">
             <div class="col-md-12">
-                <a asp-controller="Service" asp-action="Add" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-service"><i class="far fa-edit"></i> Nowa usługa</a>
+                <a asp-controller="Service" asp-action="Add" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-service"><i class="far fa-edit"></i> Nowy produkt</a>
             </div>
             <div class="col-md-12">
                 <div class="card">
@@ -24,7 +24,7 @@
                                         <th class="text-center">
                                             Lp.
                                         </th>
-                                        <th>Nazwa usługi</th>
+                                        <th>Nazwa produktu</th>
                                         <th>Cena brutto</th>
                                         <th>Przypisane tagi</th>
                                         <th>Klub</th>
@@ -34,33 +34,33 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
-                                        <td>
-                                            @counter
-                                        </td>
-                                        <td>
-                                            @item.Product_Name
-                                        </td>
-                                        <td>@item.Product_Gross_Price</td>
-                                        
-                                        <td>
-                                            <ul>
-                                                @foreach (var tag in item.Category)
+                                        <tr>
+                                            <td>
+                                                @counter
+                                            </td>
+                                            <td>
+                                                @item.Product_Name
+                                            </td>
+                                            <td>@item.Product_Gross_Price</td>
+
+                                            <td>
+                                                <ul>
+                                                    @foreach (var tag in item.Category)
                                                     {
-                                                <li><span class="badge badge-danger">@tag.Category_Name</span></li>
+                                                        <li><span class="badge badge-danger">@tag.Category_Name</span></li>
                                                     }
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <ul>
-                                                @foreach (var club in item.Club)
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    @foreach (var club in item.Club)
                                                     {
-                                                <li>@club.Club_Name ( @club.Club_Id )</li>
+                                                        <li>@club.Club_Name ( @club.Club_Id )</li>
                                                     }
-                                            </ul>
-                                        </td>
-                                        <td>akcje</td>
-                                    </tr>
+                                                </ul>
+                                            </td>
+                                            <td>akcje</td>
+                                        </tr>
                                         counter++;
                                     }
 

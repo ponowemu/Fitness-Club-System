@@ -43,5 +43,7 @@ namespace TrimFitAPI.Models
         public List<int> Category_Id { get; set; }
         [Column("service_duration")]
         public int Service_Duration { get; set; }
+        [Column("service_photo_url")]
+        public string Service_Photo_Url { get; set; }
     }
 }

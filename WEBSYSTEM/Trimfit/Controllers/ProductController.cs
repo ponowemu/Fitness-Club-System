@@ -47,7 +47,20 @@ namespace Trimfit.Controllers
         }
         public IActionResult Index()
         {
+            // TODO: coś z tym zrobić
             return View();
+        }
+        public IActionResult List()
+        {
+            // TODO: implement
+            return View();
+        }
+        public async Task<IActionResult> Manage()
+        {
+            var products_list = await this.GetProductsList();
+
+            ViewData["header"] = "Zarządzaj produktami";
+            return View(products_list);
         }
     }
 }

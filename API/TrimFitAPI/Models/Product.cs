@@ -27,5 +27,7 @@ namespace TrimFitAPI.Models
         public int Product_Status { get; set; }
         [Column("category_id")]
         public List<int> Category_Id { get; set; }
+        [Column("product_icon")]
+        public string Product_Icon { get; set; }
     }
 }
