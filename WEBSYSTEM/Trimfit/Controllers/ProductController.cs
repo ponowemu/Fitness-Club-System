@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Trimfit.Data;
 using Trimfit.Models;
-using Trimfit.Models.ModelView;
 
 namespace Trimfit.Controllers
 {

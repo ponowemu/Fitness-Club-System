@@ -25,12 +25,9 @@
                                             Lp.
                                         </th>
                                         <th>Nazwa usługi</th>
-                                        <th>Opis</th>
                                         <th>Cena brutto</th>
-                                        <th>Przypisani pracownicy</th>
                                         <th>Przypisane tagi</th>
                                         <th>Klub</th>
-                                        <th>Ograniczenia czasowe</th>
                                         <th>Akcje</th>
                                     </tr>
                                 </thead>
@@ -42,18 +39,10 @@
                                             @counter
                                         </td>
                                         <td>
-                                            @item.Service_Name
+                                            @item.Product_Name
                                         </td>
-                                        <td>@Html.Raw(item.Service_Description)</td>
-                                        <td>@item.Service_Gross_Price</td>
-                                        <td>
-                                            <ul>
-                                                @foreach (var employee in item.Employee)
-                                                    {
-                                                <li>@employee.Employee_Firstname @employee.Employee_Lastname</li>
-                                                    }
-                                            </ul>
-                                        </td>
+                                        <td>@item.Product_Gross_Price</td>
+                                        
                                         <td>
                                             <ul>
                                                 @foreach (var tag in item.Category)
@@ -70,7 +59,6 @@
                                                     }
                                             </ul>
                                         </td>
-                                        <td>Ograniczenia czasowe</td>
                                         <td>akcje</td>
                                     </tr>
                                         counter++;
