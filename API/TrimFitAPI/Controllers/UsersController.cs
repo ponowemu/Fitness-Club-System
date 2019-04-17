@@ -51,7 +51,7 @@ namespace TrimFitAPI.Controllers
         }
 
         // proste logowanie na szybko
-        [HttpPost]
+        [HttpPost("[controller]/[action]/")]
         public async Task<IActionResult> Login(User temp_user)
         {
            

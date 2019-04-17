@@ -4041,3 +4041,11 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
         margin-right: 15px;
         float:none !important;
     }
+
+.cart-elements td
+{
+    vertical-align:middle !important;
+}
+.single-product::before {
+    content:none !important;
+}

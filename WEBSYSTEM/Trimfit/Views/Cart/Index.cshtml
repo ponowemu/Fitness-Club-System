@@ -1,0 +1,104 @@
+﻿@model IEnumerable<CartView>
+@{
+    int counter = 1;
+    decimal value = 0;
+}
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="wizard-steps">
+                        <div class="wizard-step wizard-step-active">
+                            <div class="wizard-step-icon">
+                                <i class="fas fa-shopping-basket"></i>
+                            </div>
+                            <div class="wizard-step-label">
+                                Koszyk zakupów
+                            </div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <div class="wizard-step-label">
+                                Podsumowanie zamówienia
+                            </div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-icon">
+                                <i class="fas fa-money-bill"></i>
+                            </div>
+                            <div class="wizard-step-label">
+                                Sposób płatności
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Produkty w zamówieniu</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-md cart-elements" >
+                                <tbody>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nazwa</th>
+                                        <th>Cena netto</th>
+                                        <th>Cena brutto</th>
+                                        <th>Ilość</th>
+                                        <th>Razem</th>
+                                        <th>Dodatkowe informacje</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                    @foreach (var element in Model)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>@element.Element_Name</td>
+                                            <td>@element.Element_Net_Price zł</td>
+                                            <td>@element.Element_Gross_Price zł</td>
+                                            <td>
+
+                                                <input type="number" value="@element.Element_Quantity" class="form-control element_quantity" min="1" max="20" style="width:65px;">
+
+                                            </td>
+                                            <td>@element.Element_Total zł</td>
+                                            <td></td>
+                                            <td><button class="btn btn-primary">Usuń</button> </td>
+
+                                        </tr>
+                                        value += element.Element_Total;
+                                        counter++;
+                                    }
+                                    <tr style="color:#fff; background-color:#878787">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><b>Suma:</b></td>
+                                        <td><b>@value zł</b></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button class="btn btn-busket float-right">Przejdź do podsumowania</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

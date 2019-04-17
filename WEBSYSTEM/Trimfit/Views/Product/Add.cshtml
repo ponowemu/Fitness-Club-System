@@ -1,0 +1,172 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">Nowa produkt</h2>
+        <p class="section-lead">Wypełnij wszystkie pola formularza i dodaj nowy produkt.</p>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Podstawowe informacje</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="modal-part-add product-needs-validation" method="post" id="modal-add-new-product" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Nazwa</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-ad"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nazwa" name="product-name" id="product_name" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź nazwę produktu.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Przypisane kategorie</label>
+                                    <select class="form-control select2" multiple="" id="categories_list">
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                        <option value="5">Option 5</option>
+                                        <option value="6">Option 6</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena brutto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-money-bill-alt"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control product-gross-price" id="product_gross_price" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź cenę brutto usługi.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena netto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-money-bill-alt"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" readonly="readonly" class="form-control product-net-price" id="product_net_price">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Stan</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" min="1" max="100" id="product_quantity" />
+                                        <div class="invalid-feedback">
+                                            Maksymalnie możesz dodać 100 szt.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Klub</label>
+                                    <select class="form-group select2" multiple="" id="clubs_list">
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                        <option value="5">Option 5</option>
+                                        <option value="6">Option 6</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Widoczność</label>
+                                    <select class="form-control" id="product_status">
+                                        <option value="1">Widoczny</option>
+                                        <option value="0">Niewidoczny</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="btn btn-icon btn-primary" type="submit" value="Dodaj">
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ikona produktu</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group col-md-12 float-left">
+
+                            <div class="selectgroup selectgroup-pills">
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="product_icon" value="1" class="selectgroup-input" checked="">
+                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-tshirt"></i></span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="product_icon" value="2" class="selectgroup-input">
+                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-shoe-prints"></i></span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="product_icon" value="3" class="selectgroup-input">
+                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-utensils"></i></span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="product_icon" value="4" class="selectgroup-input">
+                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-baseball-ball"></i></span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</section>
