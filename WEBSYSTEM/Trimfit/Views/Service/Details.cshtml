@@ -10,39 +10,159 @@
             <div class="col-12 col-sm-6 col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>@Model.Service_Name</h4>
+                        <h4>Dodatkowe informacje</h4>
                     </div>
                     <div class="card-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                        <div class="row" style="margin:10px 0px 20px 0px;">
+                            @foreach (var tag in Model.Category)
+                            {
+                                <span class="badge badge-danger" style="margin-right:10px;">@tag.Category_Name</span>
+                            }
+                        </div>
+
+                        <b>Czas trwania:</b> @Model.Service_Duration min
+                        <br />
+                        <b>Cena brutto:</b> @Model.Service_Gross_Price PLN
+
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20px;">
                             <li class="nav-item">
-                                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="opis" aria-selected="false">Opis</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#description" role="tab" aria-controls="opis" aria-selected="true">Opis</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="pracownicy" aria-selected="false">Pracownicy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active show" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="true">Contact</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#employees" role="tab" aria-controls="pracownicy" aria-selected="false">Pracownicy</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab">
+                                @Html.Raw(Model.Service_Description)
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                Sed sed metus vel lacus hendrerit tempus. Sed efficitur velit tortor, ac efficitur est lobortis quis. Nullam lacinia metus erat, sed fermentum justo rutrum ultrices. Proin quis iaculis tellus. Etiam ac vehicula eros, pharetra consectetur dui. Aliquam convallis neque eget tellus efficitur, eget maximus massa imperdiet. Morbi a mattis velit. Donec hendrerit venenatis justo, eget scelerisque tellus pharetra a.
-                            </div>
-                            <div class="tab-pane fade active show" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
+                            <div class="tab-pane fade " id="employees" role="tabpanel" aria-labelledby="employees-tab">
+                                <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+                                    @foreach (var item in Model.Employee)
+                                    {
+                                        <li class="media">
+                                            <img alt="image" class="mr-3 rounded-circle" width="50" src="@item.Employee_Photo_Url">
+                                            <div class="media-body">
+                                                <div class="media-title">@item.Employee_Firstname @item.Employee_Lastname</div>
+                                                <div class="text-job text-muted">@item.Employee_Display_Name</div>
+                                            </div>
+                                            <div class="media-progressbar">
+                                                <div class="progress-text">30%</div>
+                                                <div class="progress" data-height="6" style="height: 6px;">
+                                                    <div class="progress-bar bg-primary" data-width="30%" style="width: 30%;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="media-cta">
+                                                <a asp-controller="Employee" asp-action="Details" asp-route-id="@item.Employee_Id" class="btn btn-outline-primary">Szczegóły</a>
+                                            </div>
+                                        </li>
+                                    }
+
+
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-12 col-sm-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Dostępność</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="section-title mt-0">Poniedziałek</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Mon[0] </td>
+                                <td>@Model.Service_Timelimit_Mon[1] </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title mt-0">Wtorek</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Tue[0] </td>
+                                <td>@Model.Service_Timelimit_Tue[1] </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title mt-0">Środa</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Wed[0] </td>
+                                <td>@Model.Service_Timelimit_Wed[1] </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title mt-0">Czwartek</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Thu[0] </td>
+                                <td>@Model.Service_Timelimit_Thu[1] </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title mt-0">Piątek</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Fri[0] </td>
+                                <td>@Model.Service_Timelimit_Fri[1] </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title mt-0">Sobota</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Sat[0] </td>
+                                <td>@Model.Service_Timelimit_Sat[1] </td>
+                            </tr>
+                        </table>
+
+                        <div class="section-title mt-0">Niedziela</div>
+                        <table class="table table-striped">
+                            <tr>
+                                <td><b>Od</b> </td>
+                                <td><b>Do</b> </td>
+                            </tr>
+                            <tr>
+                                <td>@Model.Service_Timelimit_Sun[0] </td>
+                                <td>@Model.Service_Timelimit_Sun[1] </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>

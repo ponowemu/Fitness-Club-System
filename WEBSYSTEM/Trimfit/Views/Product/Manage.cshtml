@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ProductView>
+@{
+    int counter = 1;
+}
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a asp-controller="Service" asp-action="Add" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-service"><i class="far fa-edit"></i> Nowa usługa</a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Lista usług</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table-services">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Lp.
+                                        </th>
+                                        <th>Nazwa usługi</th>
+                                        <th>Opis</th>
+                                        <th>Cena brutto</th>
+                                        <th>Przypisani pracownicy</th>
+                                        <th>Przypisane tagi</th>
+                                        <th>Klub</th>
+                                        <th>Ograniczenia czasowe</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @counter
+                                        </td>
+                                        <td>
+                                            @item.Service_Name
+                                        </td>
+                                        <td>@Html.Raw(item.Service_Description)</td>
+                                        <td>@item.Service_Gross_Price</td>
+                                        <td>
+                                            <ul>
+                                                @foreach (var employee in item.Employee)
+                                                    {
+                                                <li>@employee.Employee_Firstname @employee.Employee_Lastname</li>
+                                                    }
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                @foreach (var tag in item.Category)
+                                                    {
+                                                <li><span class="badge badge-danger">@tag.Category_Name</span></li>
+                                                    }
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                                @foreach (var club in item.Club)
+                                                    {
+                                                <li>@club.Club_Name ( @club.Club_Id )</li>
+                                                    }
+                                            </ul>
+                                        </td>
+                                        <td>Ograniczenia czasowe</td>
+                                        <td>akcje</td>
+                                    </tr>
+                                        counter++;
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

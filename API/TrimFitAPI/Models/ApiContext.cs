@@ -40,5 +40,6 @@ namespace TrimFitAPI.Models
     public DbSet<TrimFitAPI.Models.Address> Address { get; set; }
     public DbSet<TrimFitAPI.Models.VoucherCustomer> VoucherCustomer { get; set; }
     public DbSet<TrimFitAPI.Models.UserDetail> UserDetail { get; set; }
+    public DbSet<TrimFitAPI.Models.Product> Product { get; set; }
     }
 }

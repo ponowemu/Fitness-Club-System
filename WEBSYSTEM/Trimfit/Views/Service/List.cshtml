@@ -29,7 +29,7 @@
                             <p>
                                 @Html.Raw(service.Service_Description)
                             </p>
-                            <div class="section-title service-price">@service.Service_Gross_Price</div>
+                            <div class="section-title service-price">@service.Service_Gross_Price zł</div>
                             <div class="article-cta">
                                 <a asp-controller="Service" asp-action="Details" asp-route-id="@service.Service_Id" class="btn btn-primary service-readmore"> Czytaj więcej</a>
                                 <a href="#" class="btn btn-busket "><i class="fas fa-shopping-cart"></i> Rezerwuj</a>
@@ -44,3 +44,35 @@
     </div>
 
 </section>
+
+
+<form class="modal-part" id="modal-login-part">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+    <div class="form-group">
+        <label>Nazwa</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-ad"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nazwa" name="timetable_name" id="timetable_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Status</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </div>
+            </div>
+            <select class="form-control" name="timetable_status" id="timetable_status">
+                <option value="2">Szkic</option>
+                <option value="1">Aktywny</option>
+                <option value="0">Nieaktywny</option>
+            </select>
+        </div>
+    </div>
+
+</form>

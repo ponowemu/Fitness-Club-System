@@ -4027,3 +4027,17 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
         transform: translate(0, 160%)
     }
 }
+.service-price {
+    text-align:right;
+}
+    .service-price:before {
+        content: ' ';
+        border-radius: 5px;
+        height: 8px;
+        width: 30px;
+        background-color: #328cc1;
+        display: inline-block;
+        margin-top: 6px;
+        margin-right: 15px;
+        float:none !important;
+    }
