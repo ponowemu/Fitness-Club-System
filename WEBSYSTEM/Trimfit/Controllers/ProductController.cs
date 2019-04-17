@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Trimfit.Data;
@@ -38,22 +39,52 @@ namespace Trimfit.Controllers
                     Product_Id = product.Product_Id,
                     Product_Net_Price = product.Product_Net_Price,
                     Product_Quantity = product.Product_Quantity,
-                    Product_Status = product.Product_Status
+                    Product_Status = product.Product_Status,
+                    Product_Icon = product.Product_Icon,
+                    Category = categories
                 });
 
             }
 
             return products_view;
         }
+        [HttpPost]
+        public JsonResult AddToCart(int product_id)
+        {
+            try
+            {
+                if(Request.Cookies["products_cart"] != null)
+                {
+                    var option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddMinutes(10);
+                    Response.Cookies.Append("products_cart", product_id.ToString()+","+Request.Cookies["products_cart"], option);
+                }
+                else
+                {
+                    var option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddMinutes(10);
+                    Response.Cookies.Append("products_cart", product_id.ToString(), option);
+                }
+                
+            }
+            catch(Exception e)
+            {
+                return new JsonResult(e.Message);
+            }
+            
+            return new JsonResult("OK");
+        }
         public IActionResult Index()
         {
             // TODO: coś z tym zrobić
             return View();
         }
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            // TODO: implement
-            return View();
+            var products_list = await this.GetProductsList();
+
+            ViewData["header"] = "Wszystkie produkty";
+            return View(products_list);
         }
         public async Task<IActionResult> Manage()
         {

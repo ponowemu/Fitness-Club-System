@@ -15,5 +15,6 @@ namespace Trimfit.Models
         public int Product_Quantity { get; set; }
         public int Product_Status { get; set; }
         public List<Category> Category { get; set; }
+        public string Product_Icon { get; set; }
     }
 }

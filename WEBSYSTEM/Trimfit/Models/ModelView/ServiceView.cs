@@ -27,5 +27,6 @@ namespace Trimfit.Models
         public List<TimeSpan> Service_Timelimit_Sun { get; set; }
         public List<Category> Category { get; set; }
         public int Service_Duration { get; set; }
+        public string Service_Photo_Url { get; set; }
     }
 }

@@ -60,7 +60,6 @@ $(".service-needs-validation").submit(function () {
         var sun_from = $("#sun_from").val();
         var sun_to = $("#sun_to").val();
 
-        alert(mon_from);
 
         $.ajax({
             url: "/Service/PostService",
@@ -92,6 +91,8 @@ $(".service-needs-validation").submit(function () {
             },
             success: function (data) {
                 $("#loader-wrapper").fadeOut();
+                swal('Usługa utworzona', 'Pomyślnie dodano nową usługę!', 'success');
+
             },
             error: function (data) {
                 $("#loader-wrapper").fadeOut();

@@ -58,7 +58,8 @@ namespace Trimfit.Controllers
                     Service_Timelimit_Thu = service.Service_Timelimit_Thu,
                     Service_Timelimit_Tue = service.Service_Timelimit_Tue,
                     Service_Timelimit_Wed = service.Service_Timelimit_Wed,
-                    Service_Duration = service.Service_Duration
+                    Service_Duration = service.Service_Duration,
+                    Service_Photo_Url = service.Service_Photo_Url
                 });
 
             }

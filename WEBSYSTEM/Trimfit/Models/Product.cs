@@ -24,5 +24,7 @@ namespace Trimfit.Models
         public int Product_Status { get; set; }
         [JsonProperty(PropertyName ="category_id")]
         public List<int> Category_Id { get; set; }
+        [JsonProperty(PropertyName ="product_icon")]
+        public string Product_Icon { get; set; }
     }
 }
