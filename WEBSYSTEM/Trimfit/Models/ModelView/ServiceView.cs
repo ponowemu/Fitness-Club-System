@@ -14,8 +14,8 @@ namespace Trimfit.Models
         public int Service_Id { get; set; }
         public string Service_Name { get; set; }
         public List<Employee> Employee { get; set; }
-        public double Service_Net_Price { get; set; }
-        public double Service_Gross_Price { get; set; }
+        public decimal Service_Net_Price { get; set; }
+        public decimal Service_Gross_Price { get; set; }
         public List<Club> Club { get; set; }
         public string Service_Description { get; set; }
         public List<TimeSpan> Service_Timelimit_Mon { get; set; }

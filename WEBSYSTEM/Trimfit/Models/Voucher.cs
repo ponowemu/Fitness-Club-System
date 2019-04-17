@@ -31,9 +31,9 @@ namespace Trimfit.Models
         [JsonProperty(PropertyName ="voucher_max_suspend_times")]
         public int Voucher_Max_Suspend_Times { get; set; }
         [JsonProperty(PropertyName ="voucher_net_price")]
-        public double Voucher_Net_Price { get; set; }
+        public decimal Voucher_Net_Price { get; set; }
         [JsonProperty(PropertyName ="voucher_gross_price")]
-        public double Voucher_Gross_Price { get; set; }
+        public decimal Voucher_Gross_Price { get; set; }
         [JsonProperty(PropertyName ="activity_id")]
         public List<int> Activitiy_Id { get; set; }
         [JsonProperty(PropertyName ="voucher_timelimit_mon")]

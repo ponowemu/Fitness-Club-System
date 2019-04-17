@@ -30,6 +30,8 @@ namespace TrimFitAPI.Models
         public DbSet<Category> Category { get; set; }
         public DbSet<Service> Service { get; set; }
 
+        public DbSet<Reservation> Reservation { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(SecData.ConnectionString);

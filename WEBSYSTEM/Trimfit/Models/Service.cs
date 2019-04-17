@@ -17,9 +17,9 @@ namespace Trimfit.Models
         [JsonProperty(PropertyName ="employee_id")]
         public List<int> Employee_Id { get; set; }
         [JsonProperty(PropertyName ="service_net_price")]
-        public double Service_Net_Price { get; set; }
+        public decimal Service_Net_Price { get; set; }
         [JsonProperty(PropertyName ="service_gross_price")]
-        public double Service_Gross_Price { get; set; }
+        public decimal Service_Gross_Price { get; set; }
         [JsonProperty(PropertyName ="club_id")]
         public List<int> Club_Id { get; set; }
         [JsonProperty(PropertyName ="service_description")]
