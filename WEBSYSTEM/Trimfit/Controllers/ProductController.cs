@@ -53,7 +53,7 @@ namespace Trimfit.Controllers
             return products_view;
         }
         [HttpPost]
-        public async Task<JsonResult> PostProduct(int product_id, string product_name, decimal product_net_price, decimal product_gross_price, int product_quantity, string product_icon, int product_status, List<int> category_id, List<int> club_id)
+        public async Task<JsonResult> PostProduct(int product_id, string product_name, string product_net_price, decimal product_gross_price, int product_quantity, string product_icon, int product_status, List<int> category_id, List<int> club_id)
         {
             ApiContext _context = new ApiContext();
             string result = "";
@@ -66,7 +66,7 @@ namespace Trimfit.Controllers
                 Product_Icon = product_icon,
                 Product_Status = product_status,
                 Product_Name = product_name,
-                Product_Net_Price = product_net_price,
+                Product_Net_Price = Math.Round(Convert.ToDecimal(product_net_price.Replace(".",",")),2),
                 Product_Quantity = product_quantity
             };
 
