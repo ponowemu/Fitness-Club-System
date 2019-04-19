@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="168dp"
             android:layout_marginEnd="24dp"
 
             android:hint="@string/prompt_email"
@@ -25,7 +25,7 @@
             android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 
     <EditText
             android:id="@+id/password"
@@ -45,6 +45,8 @@
             app:layout_constraintTop_toBottomOf="@+id/username"/>
 
     <Button
+            android:background="@drawable/button_style"
+            android:textColor="@color/colorWhite"
             android:id="@+id/login"
             android:enabled="false"
             android:layout_width="wrap_content"
