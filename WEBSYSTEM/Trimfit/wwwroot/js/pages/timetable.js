@@ -33,3 +33,4 @@ $("#table-1").dataTable({
         { "sortable": true, "targets": [2, 3] }
     ]
 });
+

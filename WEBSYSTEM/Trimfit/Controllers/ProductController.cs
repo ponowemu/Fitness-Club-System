@@ -66,7 +66,7 @@ namespace Trimfit.Controllers
                 Product_Icon = product_icon,
                 Product_Status = product_status,
                 Product_Name = product_name,
-                Product_Net_Price = Math.Round(Convert.ToDecimal(product_net_price.Replace(".",",")),2),
+                Product_Net_Price = Math.Round(Convert.ToDecimal(product_net_price.Replace(".", ",")), 2),
                 Product_Quantity = product_quantity
             };
 
@@ -83,54 +83,7 @@ namespace Trimfit.Controllers
 
             return new JsonResult(result);
         }
-        [HttpPost]
-        public JsonResult AddToCart(int product_id)
-        {
-            try
-            {
-                if (Request.Cookies["products_cart"] != null)
-                {
-                    List<string> new_elements_list = new List<string>();
-                    bool checker = false;
-                    var elements = Request.Cookies["products_cart"].Split(",");
-                    foreach (var element in elements)
-                    {
-                        var single_element = element.Split(":");
-                        if (single_element[0] == product_id.ToString())
-                        {
-                            checker = true;
-                            var q = int.Parse(single_element[1]);
-                            q += 1;
-                            var new_element = single_element[0] + ":" + q.ToString();
-                            new_elements_list.Add(new_element);
-                        }
-                        else
-                            new_elements_list.Add(element);
-
-                    }
-                    if (checker == false)
-                        new_elements_list.Add(product_id.ToString() + ":1");
-
-                    var option = new CookieOptions();
-                    option.Expires = DateTime.Now.AddMinutes(15);
-                    Response.Cookies.Append("products_cart", String.Join(",", new_elements_list), option);
-                }
-                else
-                {
-                    var option = new CookieOptions();
-                    option.Expires = DateTime.Now.AddMinutes(15);
-                    Response.Cookies.Append("products_cart", product_id.ToString() + ":1", option);
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(e.Message);
-            }
-
-            return new JsonResult("OK");
-        }
+       
         public IActionResult Index()
         {
             // TODO: coś z tym zrobić

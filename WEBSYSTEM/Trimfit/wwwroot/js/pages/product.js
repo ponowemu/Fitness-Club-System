@@ -1,11 +1,11 @@
 ﻿
 
-
+// obsługujem CRUD'a na koszyku
 $(document).ready(function () {
     $('.single-product').on('click', function () {
 
         $.ajax({
-            url: '/Product/AddToCart/',
+            url: '/Cart/AddToCart/',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -20,6 +20,60 @@ $(document).ready(function () {
         });
 
     });
+
+    $('.element_quantity').on('input', function () {
+        var value = $(this).val();
+        var product_id = $(this).prev('input').val();
+        $.ajax({
+            url: '/Cart/ChangeQuantityFromCart/',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                product_id: product_id,
+                quantity: value
+            },
+            success: function (msg) {
+                location.reload();
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+        });
+    });
+
+    $('.element_delete').on('click', function () {
+        var product_id = $(this).prev('input').val();
+        swal({
+            title: 'Jesteś pewien?',
+            text: 'Czy na pewno chcesz usunąć ten produkt z koszyka?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/Cart/RemoveFromCart/',
+                        dataType: 'json',
+                        type: 'post',
+                        data:
+                        {
+                            product_id: product_id
+                        },
+                        success: function (msg) {
+                            swal('Poof! Your imaginary file has been deleted!', {
+                                icon: 'success',
+                            });
+                            location.reload();
+                        },
+                        error: function (msg) {
+                            alert(msg);
+                        }
+                    });
+
+                }
+            });
+    });
 });
 
 $("#product_gross_price").on('input', function () {
@@ -31,7 +85,7 @@ $("#product_gross_price").on('input', function () {
 
 $(".product_icon").on('click', function () {
     console.log($(this));
-    $('.product_icon').attr('checked',null);
+    $('.product_icon').attr('checked', null);
     $(this).attr('checked', 'checked');
 });
 
