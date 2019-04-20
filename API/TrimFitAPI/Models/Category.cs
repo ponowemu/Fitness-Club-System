@@ -17,5 +17,7 @@ namespace TrimFitAPI.Models
         public string Category_Name { get; set; }
         [Column("category_color")]
         public string Category_Color { get; set; }
+        [Column("category_type")]
+        public int Category_Type { get; set; }
     }
 }

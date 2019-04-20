@@ -16,5 +16,7 @@ namespace Trimfit.Models
         public string Category_Name { get; set; }
         [JsonProperty(PropertyName = "category_color")]
         public string Category_Color { get; set; }
+        [JsonProperty(PropertyName = "category_type")]
+        public int Category_Type { get; set; }
     }
 }
