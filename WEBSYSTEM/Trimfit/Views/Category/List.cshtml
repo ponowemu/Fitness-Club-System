@@ -1,7 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Category>
 @{
+    int counter = 1;
 }
 
 <section class="section">
@@ -23,17 +22,29 @@
                             <table class="table table-striped" id="category_list">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">
-                                            Lp.
+                                        <th>
+                                            #
                                         </th>
-                                        <th>Nazwa grafiku</th>
-                                        <th>Utworzono</th>
-                                        <th>Ostatnia edycja</th>
-                                        <th>Status</th>
+                                        <th>Nazwa kategorii</th>
+                                        <th>Kolor kategorii</th>
                                         <th>Akcje</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>@item.Category_Name</td>
+                                            <td><span style="width:120px; border-radius:10px; height:25px; float:left; background-color:@item.Category_Color"></span></td>
+                                            <td>
+                                                <button class="btn btn-icon icon-left btn-primary mb-3 edit-category "><i class="fas fa-pencil-alt"></i> Edytuj</button>
+                                                <button class="btn btn-icon icon-left btn-danger mb-3 "><i class="fas fa-trash-alt"></i> Usuń</button>
+                                            </td>
+                                        </tr>
+                                        counter++;
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -42,3 +53,48 @@
         </div>
     </div>
 </section>
+
+
+<form class="modal-part" id="new-category">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+    <div class="form-group">
+        <label>Nazwa</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-ad"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nazwa" name="category_name" id="category_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Kolor kategorii</label>
+        <div class="input-group">
+            <input type="color" id="category_color" class="form-control">
+        </div>
+    </div>
+
+</form>
+
+<form class="modal-part" id="edit-category">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+    <div class="form-group">
+        <label>Nazwa</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-ad"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nazwa" name="edit_category_name" id="edit_category_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Kolor kategorii</label>
+        <div class="input-group">
+            <input type="color" id="edit_category_color" class="form-control">
+        </div>
+    </div>
+
+</form>

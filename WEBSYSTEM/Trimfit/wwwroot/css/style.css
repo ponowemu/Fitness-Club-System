@@ -3976,8 +3976,8 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     top: 50%;
     left: 55%;
     transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
+    width: 55px;
+    height: 55px;
     /* display: none; */
 }
 
