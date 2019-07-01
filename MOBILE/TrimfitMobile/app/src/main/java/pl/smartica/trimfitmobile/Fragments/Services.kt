@@ -8,17 +8,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import kotlinx.android.synthetic.main.fragment_services.*
+import kotlinx.android.synthetic.main.fragment_services.view.*
 import org.json.JSONArray
 import pl.smartica.trimfitmobile.Callback
 import pl.smartica.trimfitmobile.R
 import pl.smartica.trimfitmobile.ServiceAdapter
 import pl.smartica.trimfitmobile.Tester
 import pl.smartica.trimfitmobile.model.Service
+import pl.smartica.trimfitmobile.viewmodels.ServicesViewModel
+import java.util.logging.Logger
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,20 +44,16 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class Services : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    var serviceList: MutableList<Service>? = null
-    var adapter:ServiceAdapter? = null
+    //MVVM approach:
+    lateinit var mAdapter:ServiceAdapter;
+    lateinit var mRecyclerView: RecyclerView;
+    lateinit var loadingBar: ProgressBar;
+    lateinit var mServicesViewModel: ServicesViewModel;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -57,48 +61,35 @@ class Services : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_services, container, false)
-        serviceList= mutableListOf()
-        adapter = ServiceAdapter(this.context!!,serviceList!!)
-        val recycler = view.findViewById<RecyclerView>(R.id.service_recycler)
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(this.context)
-        sendRequest(this.context!!)
-        // Inflate the layout for this fragment
+        loadingBar = view.findViewById(R.id.loadingBar)
+        mRecyclerView = view.findViewById<RecyclerView>(R.id.service_recycler)
+
+        setProgressBarVisible(true)
+        mServicesViewModel = ViewModelProviders.of(this).get(ServicesViewModel::class.java)
+        mServicesViewModel.initialize(this.context!!)
+
+        mServicesViewModel.getServicesList().observe(this, Observer {
+            mAdapter.notifyDataSetChanged()
+            if (it.count() > 0)
+                setProgressBarVisible(false)
+        })
+        Log.v("BEFORE","BEFORE INIT")
+        initRecyclerView()
         return view
     }
-    fun TestButton(view: View)
-    {
-        Log.v("Service","Click")
+    private fun setProgressBarVisible(visible: Boolean){
+        if (visible)
+            loadingBar.visibility = View.VISIBLE
+        else
+            loadingBar.visibility = View.GONE
     }
-    public fun sendRequest(context: Context)
-    {
-        // Instantiate the RequestQueue.
-        val queue = Callback.getInstance(context).requestQueue
-        val url = "http://api.trimfit.pl/api/Services"
-        val stringReq = JsonArrayRequest(Request.Method.GET,url,null,
-            Response.Listener<JSONArray> {
-                    response ->setRecylerView(response)
-                Log.d("RESPONE",response.toString()) },
-            Response.ErrorListener {
-                    error ->  Log.v("TAG", "ERROR LUL: " + error.toString())
-            })
-        Callback.getInstance(context).addToRequestQueue(stringReq)
+
+    private fun initRecyclerView() {
+        mAdapter = ServiceAdapter(this.context!!, mServicesViewModel.getServicesList().value!!)
+        mRecyclerView.adapter = mAdapter
+        mRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
-    fun setRecylerView(jsonArray: JSONArray){
-        val view = LayoutInflater.from(this.context).inflate(R.layout.fragment_services, null, false)
 
-        if (jsonArray != null)
-        {
-            for (item in 0..jsonArray!!.length()-1)
-            {
-                serviceList!!.add(Service(jsonArray.getJSONObject(item).getString("service_Name"),jsonArray.getJSONObject(item).getString("service_Description")))
-            }
-        }
-        adapter!!.notifyDataSetChanged();
-   //     Log.v("Services",getServicedData())
-
-
-    }
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
@@ -120,23 +111,4 @@ class Services : Fragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Services.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Services().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

@@ -25,21 +25,18 @@ class ServiceAdapter(context: Context, itemList: MutableList<Service>): Recycler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceHolder {
         val view  = LayoutInflater.from(parent.context).inflate(R.layout.service_item,parent,false)
-        val holder = ServiceHolder(view.service_layout)
-        return holder
+        return ServiceHolder(view.service_layout)
     }
 
     override fun getItemCount(): Int {
-        if (serviceList != null)
-            return serviceList.count()
-        else
-            return 0
+        return serviceList.count()
     }
 
     override fun onBindViewHolder(holder: ServiceHolder, position: Int) {
-        holder.descriptionText!!.text = Html.fromHtml(serviceList[position].serviceDescription, Html.FROM_HTML_MODE_COMPACT)
-        holder.headerText!!.text = Html.fromHtml(serviceList[position].serviceHeader, Html.FROM_HTML_MODE_COMPACT)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.descriptionText!!.text = Html.fromHtml(serviceList[position].serviceDescription, Html.FROM_HTML_MODE_COMPACT)
+            holder.headerText!!.text = Html.fromHtml(serviceList[position].serviceHeader, Html.FROM_HTML_MODE_COMPACT)
         } else {
             holder.descriptionText!!.text = Html.fromHtml(serviceList[position].serviceDescription)
             holder.headerText!!.text = Html.fromHtml(serviceList[position].serviceHeader)
