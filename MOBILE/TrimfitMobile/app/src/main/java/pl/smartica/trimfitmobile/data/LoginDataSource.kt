@@ -40,7 +40,7 @@ class LoginDataSource {
                     val User = LoggedInUser(java.util.UUID.randomUUID().toString(), "ponowemu")
 
                     result = Result.Success(User)
-                    Log.d("RESPONE",response.toString())
+                    Log.d("RESPONE ",response.toString())
                 },
                 Response.ErrorListener { error->
                     Log.v("TAG", "ERROR LUL: " + error.toString())
