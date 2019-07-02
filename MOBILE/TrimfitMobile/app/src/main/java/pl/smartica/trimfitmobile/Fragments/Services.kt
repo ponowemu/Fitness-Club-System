@@ -1,6 +1,5 @@
 package pl.smartica.trimfitmobile.Fragments
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,23 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import kotlinx.android.synthetic.main.fragment_services.*
-import kotlinx.android.synthetic.main.fragment_services.view.*
-import org.json.JSONArray
-import pl.smartica.trimfitmobile.Callback
 import pl.smartica.trimfitmobile.R
 import pl.smartica.trimfitmobile.ServiceAdapter
-import pl.smartica.trimfitmobile.Tester
-import pl.smartica.trimfitmobile.model.Service
 import pl.smartica.trimfitmobile.viewmodels.ServicesViewModel
-import java.util.logging.Logger
 
 
 // TODO: Rename parameter arguments, choose names that match
