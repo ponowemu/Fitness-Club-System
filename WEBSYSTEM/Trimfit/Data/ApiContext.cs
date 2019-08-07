@@ -75,10 +75,24 @@ namespace Trimfit.Data
         }
         public async Task<JsonResult> DeleteRequest(string url)
         {
+            string result = "";
             using (var client = new HttpClient())
             {
+                client.BaseAddress = new Uri(BaseUrl);
+                using (var r = await client.DeleteAsync(url))
+                {
+                    if (r.IsSuccessStatusCode)
+                    {
+                        result = "200";
+                    }
+                    else
+                    {
+                        result = r.Content.ReadAsStringAsync().Result;
+                    }
+
+                }
             }
-            return new JsonResult("");
+            return new JsonResult(result);
         }
 
     }

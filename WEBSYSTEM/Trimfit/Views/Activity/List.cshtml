@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="row">
             <div class="col-md-12">
-                <a href="#" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-category"><i class="far fa-edit"></i> Dodaj nową</a>
+                <a href="#" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-activity"><i class="far fa-edit"></i> Dodaj nową</a>
             </div>
             <div class="col-md-12">
                 <div class="card">
@@ -39,26 +39,25 @@
                                             <td>@item.Activity_Name</td>
                                             <td><span style="width:120px; border-radius:10px; height:25px; float:left; background-color:@item.Activity_Color"></span></td>
                                             <td>
-                                                <ul>
-                                                    @if (item.Employee != null && item.Employee.Count > 0)
+                                                @if (item.Employee != null && item.Employee.Count > 0)
+                                                {
+                                                    @foreach (var employee in item.Employee)
                                                     {
-                                                        @foreach (var employee in item.Employee)
-                                                        {
-                                                            <li>@employee.Employee_Display_Name</li>
-                                                        }
+                                                        <a href="#">
+                                                            <img alt="image" src="@employee.Employee_Photo_Url" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1">@employee.Employee_Display_Name</div>
+                                                        </a>
                                                     }
-                                                    else
-                                                    {
-                                                        <li>
-                                                            <strong>Brak powiązanych pracowników</strong>
-                                                        </li>
-                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <strong>Brak powiązanych pracowników</strong>
+                                                }
 
-                                                </ul>
                                             </td>
                                             <td>
-                                                <button class="btn btn-icon icon-left btn-primary mb-3 edit-category "><i class="fas fa-pencil-alt"></i> Edytuj</button>
-                                                <button class="btn btn-icon icon-left btn-danger mb-3 "><i class="fas fa-trash-alt"></i> Usuń</button>
+                                                <input type="hidden" value="@item.Activity_Id" name="activity_id" />
+                                                <button class="btn btn-icon icon-left btn-primary mb-3 edit-activity "><i class="fas fa-pencil-alt"></i> Edytuj</button>
+                                                <button class="btn btn-icon icon-left btn-danger mb-3 delete-activity "><i class="fas fa-trash-alt"></i> Usuń</button>
                                             </td>
                                         </tr>
                                         counter++;
@@ -74,26 +73,62 @@
 </section>
 
 
-<form class="modal-part" id="new-category">
-    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+<form class="modal-part" id="new-activity">
+    <p>Wypełnij wszystkie pola formularza i dodaj nową aktywność!</p>
+
     <div class="form-group">
-        <label>Nazwa</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="fas fa-ad"></i>
+        <div class="control-label">Status</div>
+        <label class="mt-2">
+            <input type="checkbox" id="activity_status" name="custom-switch-checkbox" class="custom-switch-input">
+            <span class="custom-switch-indicator"></span>
+            <span class="custom-switch-description">Włączony/wyłączony</span>
+        </label>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-9">
+                <label>Nazwa</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Nazwa" name="activity_name" id="activity_name">
                 </div>
             </div>
-            <input type="text" class="form-control" placeholder="Nazwa" name="category_name" id="category_name">
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Kolor</label>
+                    <div class="input-group">
+                        <input type="color" id="activity_color" class="form-control">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="form-group">
-        <label>Kolor kategorii</label>
-        <div class="input-group">
-            <input type="color" id="category_color" class="form-control">
-        </div>
+        <label>Opis</label>
+        <textarea id="activity_description" class="summernote-simple" style="display: none;"></textarea>
     </div>
-
+    <div class="form-group">
+        <label>Powiązani pracownicy</label>
+        <select class="form-control select2 select2-hidden-accessible" id="employee_id" multiple="">
+            @foreach (var item in ViewData["employees"] as IList<Employee>)
+            {
+                <option value="@item.Employee_Id">@item.Employee_Display_Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Powiązane kategorie</label>
+        <select class="form-control select2 select2-hidden-accessible" id="category_id" multiple="">
+            @foreach (var item in ViewData["categories"] as IList<Category>)
+            {
+                <option value="@item.Category_Id">@item.Category_Name</option>
+            }
+        </select>
+    </div>
 </form>
 
 <form class="modal-part" id="edit-category">

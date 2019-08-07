@@ -17,11 +17,10 @@
                         <div id="external-events">
                             <h4>Draggable Events</h4>
                             <div id="external-events-list">
-                                <div class="fc-event list-group-item">AKROBATYKA 1 </div>
-                                <div class="fc-event list-group-item">BALET </div>
-                                <div class="fc-event list-group-item">ĆWICZENIA KOREKCYJNE DLA DZIECI </div>
-                                <div class="fc-event list-group-item">PILATES</div>
-                                <div class="fc-event list-group-item">ZUMBA FITNESS</div>
+                                @foreach (var item in ViewData["categories"] as IList<Category>)
+                                {
+                                    <div class="fc-event list-group-item">@item.Category_Name</div>
+                                }
                             </div>
                             <p>
                                 <input type="checkbox" id="drop-remove" />

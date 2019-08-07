@@ -14,7 +14,7 @@ namespace Trimfit.Controllers
     public class TimetableController : Controller
     {
         public IActionResult Index()
-        {
+        {    
             return View();
         }
         [HttpGet("[controller]/[action]/")]
@@ -38,9 +38,11 @@ namespace Trimfit.Controllers
             return View(timetables);
         }
         [HttpGet("[controller]/Edit/{id}")]
-        public IActionResult EditTimetable()
+        public async Task<IActionResult> EditTimetable()
         {
             ViewData["Header"] = "Edytuj grafik";
+            var categories = new CategoryController();
+            ViewData["categories"] = await categories.GetAsync();
             return View();
         }
         public IActionResult List()
