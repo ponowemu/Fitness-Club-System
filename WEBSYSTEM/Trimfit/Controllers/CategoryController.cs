@@ -28,6 +28,8 @@ namespace Trimfit.Controllers
 
             return categories;
         }
+        
+
         public async Task<JsonResult> AddAsync(string category_name, string category_color)
         {
 
@@ -61,7 +63,7 @@ namespace Trimfit.Controllers
             ViewData["Header"] = "Lista kategorii";
 
             var categories = await this.GetAsync();
-
+            
             return View(categories);
         }
     }

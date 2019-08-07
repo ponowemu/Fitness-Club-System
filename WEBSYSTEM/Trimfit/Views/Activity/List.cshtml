@@ -1,7 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ActivityView>
 @{
+    int counter = 1;
 }
 
 <section class="section">
@@ -10,6 +9,111 @@
     </div>
     <div class="section-body">
         <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-category"><i class="far fa-edit"></i> Dodaj nową</a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wszystkie zajęcia</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="category_list">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>Nazwa aktywności</th>
+                                        <th>Kolor aktywności</th>
+                                        <th>Powiązani instruktorzy</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@counter</td>
+                                            <td>@item.Activity_Name</td>
+                                            <td><span style="width:120px; border-radius:10px; height:25px; float:left; background-color:@item.Activity_Color"></span></td>
+                                            <td>
+                                                <ul>
+                                                    @if (item.Employee != null && item.Employee.Count > 0)
+                                                    {
+                                                        @foreach (var employee in item.Employee)
+                                                        {
+                                                            <li>@employee.Employee_Display_Name</li>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>
+                                                            <strong>Brak powiązanych pracowników</strong>
+                                                        </li>
+                                                    }
+
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-icon icon-left btn-primary mb-3 edit-category "><i class="fas fa-pencil-alt"></i> Edytuj</button>
+                                                <button class="btn btn-icon icon-left btn-danger mb-3 "><i class="fas fa-trash-alt"></i> Usuń</button>
+                                            </td>
+                                        </tr>
+                                        counter++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+
+<form class="modal-part" id="new-category">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+    <div class="form-group">
+        <label>Nazwa</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-ad"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nazwa" name="category_name" id="category_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Kolor kategorii</label>
+        <div class="input-group">
+            <input type="color" id="category_color" class="form-control">
+        </div>
+    </div>
+
+</form>
+
+<form class="modal-part" id="edit-category">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
+    <div class="form-group">
+        <label>Nazwa</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-ad"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nazwa" name="edit_category_name" id="edit_category_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Kolor kategorii</label>
+        <div class="input-group">
+            <input type="color" id="edit_category_color" class="form-control">
+        </div>
+    </div>
+
+</form>
