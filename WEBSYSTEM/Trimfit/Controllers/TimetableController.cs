@@ -14,7 +14,7 @@ namespace Trimfit.Controllers
     public class TimetableController : Controller
     {
         public IActionResult Index()
-        {    
+        {
             return View();
         }
         [HttpGet("[controller]/[action]/")]
@@ -28,7 +28,7 @@ namespace Trimfit.Controllers
 
             var timetables_response = await _context.GetRequest("Timetables/");
             var timetables_list = JsonConvert.DeserializeObject<List<Timetable>>(timetables_response.Value.ToString());
-            
+
             foreach (var single_timetable in timetables_list)
             {
                 timetables.Add(single_timetable);
@@ -41,8 +41,13 @@ namespace Trimfit.Controllers
         public async Task<IActionResult> EditTimetable()
         {
             ViewData["Header"] = "Edytuj grafik";
-            var categories = new CategoryController();
-            ViewData["categories"] = await categories.GetAsync();
+
+            var activities = new ActivityController();
+            ViewData["activities"] = await activities.GetAsync();
+
+            var rooms = new RoomController();
+            ViewData["rooms"] = await rooms.GetAsync();
+
             return View();
         }
         public IActionResult List()
@@ -60,10 +65,10 @@ namespace Trimfit.Controllers
             ApiContext _context = new ApiContext();
             Timetable timetable = new Timetable();
             string result = "";
-            
+
             try
             {
-               
+
                 timetable.Timetable_Name = timetable_name;
                 timetable.Timetable_Status = int.Parse(timetable_status);
                 timetable.Timetable_Created = DateTime.Now;
@@ -74,12 +79,75 @@ namespace Trimfit.Controllers
                 result = response.Value.ToString();
                 // zastanowić się w jaki sposób czytać i przekazywać responsy!!!
             }
-            catch(HttpRequestException e)
+            catch (HttpRequestException e)
             {
                 result = e.Message;
             }
-            
+
             return new JsonResult(result);
+        }
+        public async Task<JsonResult> GetActivityAsync(int id)
+        {
+            ApiContext _context = new ApiContext();
+            try
+            {
+                var result = await _context.GetRequest("TimetableActivities/" + id + "");
+
+                Response.StatusCode = 200;
+                return new JsonResult(result.Value);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(ex.Message);
+            }
+        }
+        public async Task<JsonResult> AddActivityAsync([FromBody] TimetableActivity timetable_activity)
+        {
+            ApiContext _context = new ApiContext();
+
+            try
+            {
+                var result = await _context.PostRequest("TimetableActivities/", timetable_activity);
+                Response.StatusCode = 200;
+                return new JsonResult(result.Value);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(ex.Message);
+            }
+        }
+        [HttpPut]
+        public async Task<JsonResult> EditActivityTimeAsync(int id, string starttime, string endtime, string day)
+        {
+            ApiContext _context = new ApiContext();
+
+            try
+            {
+
+                var dateStartTimeOffset = DateTimeOffset.Parse(starttime, null);
+                var dateEndTimeOffset = DateTimeOffset.Parse(endtime, null);
+
+                var response = await this.GetActivityAsync(id);
+                var element = JsonConvert.DeserializeObject<TimetableActivity>(response.Value.ToString());
+                element.Timetable_Activity_Starttime = dateStartTimeOffset.DateTime;
+                element.Timetable_Activity_Endtime = dateEndTimeOffset.DateTime;
+                element.Timetable_Activity_Day = day;
+
+                var result = await _context.PutRequest("TimetableActivities/" + id + "", element);
+
+                Response.StatusCode = 200;
+                return new JsonResult(result);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(ex.Message);
+            }
         }
     }
 }

@@ -92,6 +92,29 @@ namespace Trimfit.Controllers
 
             return employee;
         }
+        [HttpGet("[controller]/[action]/{activity_id}")]
+        public async Task<JsonResult> GetActivityEmployees(int activity_id)
+        {
+            List<Employee> elist = new List<Employee>();
+            ApiContext _context = new ApiContext();
+            try
+            {
+                var activities_response = await _context.GetRequest("Activities/" + activity_id + "/");
+                var activities_list = JsonConvert.DeserializeObject<Activity>(activities_response.Value.ToString());
+        
+                foreach (var item in activities_list.Employee_Id)
+                {
+                    var el = await this.GetEmployeeAsync(item);
+                    elist.Add(el);
+                }
+                return new JsonResult(elist);
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(ex.Message);
+            }
+           
+        }
         public async Task<IActionResult> Index()
         {
 

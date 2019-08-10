@@ -15,11 +15,11 @@
                     </div>
                     <div class="col-md-2 float-left">
                         <div id="external-events">
-                            <h4>Draggable Events</h4>
+                            <h4>Wszystkie aktywności</h4>
                             <div id="external-events-list">
-                                @foreach (var item in ViewData["categories"] as IList<Category>)
+                                @foreach (var item in ViewData["activities"] as IList<Activity>)
                                 {
-                                    <div class="fc-event list-group-item">@item.Category_Name</div>
+                                    <div class="fc-event list-group-item" data-id="@item.Activity_Id">@item.Activity_Name</div>
                                 }
                             </div>
                             <p>
@@ -30,12 +30,85 @@
                     </div>
                 </div>
             </div>
-            
+
 
 
 
         </div>
     </div>
 </section>
+<a id="but" class="button">cos tam</a>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Szczegóły aktywności</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Wypełnij wszystkie pola formularza i przypisz aktywność do grafiku!</p>
+
+                <div class="form-group">
+                    <label>Instruktor</label>
+                    <select class="form-control select2 select2-hidden-accessible" id="ta_employee_id">
+                        <option value="1">Mikołaj</option>
+                        <option value="1">Tomek</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sala zajęć</label>
+                    <select class="form-control select2 select2-hidden-accessible" id="ta_room_id">
+                        @foreach(var item in ViewData["rooms"] as IList<Room>)
+                        {
+                            <option value="@item.Room_Id">@item.Room_Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Limit miejsc</label>
+                            <input type="number" class="form-control" id="ta_limit_places" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="control-label">Lista rezerwowa</div>
+                            <label class="mt-2">
+                                <input type="checkbox" id="ta_reservation_list" name="custom-switch-checkbox" class="custom-switch-input">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description">Włączony/wyłączony</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="form-group">
+                    <label>Powtarzalność</label>
+                    <select class="form-control" id="ta_repeatable">
+                        <option value="1">Nie powtarzaj</option>
+                        <option value="1">Co tydzień</option>
+                        <option value="1">Co dwa tygodnie</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Kolor aktywności</label>
+                    <div class="input-group">
+                        <input type="color" id="ta_activity_color" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 

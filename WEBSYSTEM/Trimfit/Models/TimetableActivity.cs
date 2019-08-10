@@ -10,31 +10,31 @@ namespace Trimfit.Models
 {
     public class TimetableActivity
     {
-        [JsonProperty(PropertyName ="timetable_activity_id")]
+        [JsonProperty(PropertyName ="timetable_Activity_Id")]
         public int Timetable_Activity_Id { get; set; }
-        [JsonProperty(PropertyName ="employee_id")]
+        [JsonProperty(PropertyName ="employee_Id")]
         public int Employee_Id { get; set; }
-        [JsonProperty(PropertyName ="activity_id")]
+        [JsonProperty(PropertyName ="activity_Id")]
         public int Activity_Id { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_day")]
+        [JsonProperty(PropertyName ="timetable_Activity_Day")]
         public string Timetable_Activity_Day { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_starttime")]
+        [JsonProperty(PropertyName ="timetable_Activity_Starttime")]
         public DateTime Timetable_Activity_Starttime { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_endtime")]
+        [JsonProperty(PropertyName ="timetable_Activity_Endtime")]
         public DateTime Timetable_Activity_Endtime { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_limit_places")]
+        [JsonProperty(PropertyName ="timetable_Activity_Limit_Places")]
         public int Timetable_Activity_Limit_Places { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_free_places")]
+        [JsonProperty(PropertyName ="timetable_Activity_Free_Places")]
         public int Timetable_Activity_Free_Places { get; set; }
-        [JsonProperty(PropertyName ="room_id")]
+        [JsonProperty(PropertyName ="room_Id")]
         public int Room_Id { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_repeatable")]
+        [JsonProperty(PropertyName ="timetable_Activity_Repeatable")]
         public int Timetable_Activity_Repeatable { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_status")]
+        [JsonProperty(PropertyName ="timetable_Activity_Status")]
         public int Timetable_Activity_Status { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_reservation_list")]
+        [JsonProperty(PropertyName ="timetable_Activity_Reservation_List")]
         public bool Timetable_Activity_Reservation_List { get; set; }
-        [JsonProperty(PropertyName ="timetable_activity_color")]
+        [JsonProperty(PropertyName ="timetable_Activity_Color")]
         public string Timetable_Activity_Color { get; set; }
 
     }
