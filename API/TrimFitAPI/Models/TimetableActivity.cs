@@ -20,9 +20,9 @@ namespace TrimFitAPI.Models
         [Column("timetable_activity_day")]
         public string Timetable_Activity_Day { get; set; }
         [Column("timetable_activity_starttime")]
-        public DateTime Timetable_Activity_Starttime { get; set; }
+        public TimeSpan Timetable_Activity_Starttime { get; set; }
         [Column("timetable_activity_endtime")]
-        public DateTime Timetable_Activity_Endtime { get; set; }
+        public TimeSpan Timetable_Activity_Endtime { get; set; }
         [Column("timetable_activity_limit_places")]
         public int Timetable_Activity_Limit_Places { get; set; }
         [Column("timetable_activity_free_places")]
