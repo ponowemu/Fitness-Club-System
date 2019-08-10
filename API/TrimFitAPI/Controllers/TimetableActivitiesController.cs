@@ -93,7 +93,7 @@ namespace TrimFitAPI.Controllers
             _context.Timetable_activity.Add(timetableActivity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTimetable", new { id = timetableActivity.Timetable_Activity_Id }, timetableActivity);
+            return CreatedAtAction("GetTimetableActivity", new { id = timetableActivity.Timetable_Activity_Id }, timetableActivity);
         }
 
         // DELETE: api/Timetables/5
