@@ -36,6 +36,10 @@ namespace Trimfit.Models
         public bool Timetable_Activity_Reservation_List { get; set; }
         [JsonProperty(PropertyName ="timetable_Activity_Color")]
         public string Timetable_Activity_Color { get; set; }
+        [JsonProperty(PropertyName = "timetable_Id")]
+        public int Timetable_Id { get; set; }
+        [NotMapped]
+        public string Activity_Title { get; set; }
 
     }
 }

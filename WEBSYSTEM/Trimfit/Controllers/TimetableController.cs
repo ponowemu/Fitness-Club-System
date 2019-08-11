@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -95,6 +96,33 @@ namespace Trimfit.Controllers
 
                 Response.StatusCode = 200;
                 return new JsonResult(result.Value);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(ex.Message);
+            }
+        }
+        public async Task<JsonResult> GetTimetableActivityAsync(int timetable_id)
+        {
+            ApiContext _context = new ApiContext();
+            try
+            {
+                var result = await _context.GetRequest("TimetableActivities/");
+                var list = JsonConvert.DeserializeObject<List<TimetableActivity>>(result.Value.ToString()).Where(l => l.Timetable_Id == timetable_id);
+                
+                foreach(var el in list)
+                {
+                    var ac = await _context.GetRequest("Activities/" + el.Activity_Id + "");
+                    var activity = JsonConvert.DeserializeObject<Activity>(ac.Value.ToString());
+
+                    el.Activity_Title = activity.Activity_Name;
+                }
+                
+
+                Response.StatusCode = 200;
+                return new JsonResult(list);
 
             }
             catch (Exception ex)

@@ -28,7 +28,7 @@
             },
             success: function () {
                 form.stopProgress();
-                swal('Kategoria utworzona', 'Pomyślnie dodano nową kategorię!', 'success').then((value) => {
+                swal('Aktywność utworzona', 'Pomyślnie dodano nową aktywność!', 'success').then((value) => {
                     location.reload();
                 });
             },

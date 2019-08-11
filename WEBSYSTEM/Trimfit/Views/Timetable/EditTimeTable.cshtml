@@ -15,17 +15,14 @@
                     </div>
                     <div class="col-md-2 float-left">
                         <div id="external-events">
-                            <h4>Wszystkie aktywności</h4>
+                            <h4>Dostępne aktywności</h4>
                             <div id="external-events-list">
                                 @foreach (var item in ViewData["activities"] as IList<Activity>)
                                 {
-                                    <div class="fc-event list-group-item" data-id="@item.Activity_Id">@item.Activity_Name</div>
+                                    <div class="fc-event list-group-item" id="@item.Activity_Id" data-color="@item.Activity_Color" data-id="@item.Activity_Id">@item.Activity_Name</div>
                                 }
                             </div>
-                            <p>
-                                <input type="checkbox" id="drop-remove" />
-                                <label for="drop-remove">usuń</label>
-                            </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -37,7 +34,7 @@
         </div>
     </div>
 </section>
-<a id="but" class="button">cos tam</a>
+<a id="dupa" class="button">cos tam</a>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
