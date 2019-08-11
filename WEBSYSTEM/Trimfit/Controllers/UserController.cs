@@ -30,7 +30,7 @@ namespace Trimfit.Controllers
             ApiContext _context = new ApiContext();
 
             var UserResponse = await _context.PostRequest("Users/Login",user);
-            if (UserResponse.StatusCode == 200)
+            if (UserResponse.Value.ToString() != "400")
             {
                 List<Claim> claims = new List<Claim>
                 {

@@ -65,12 +65,12 @@ namespace Trimfit.Data
                     }
                     else
                     {
-                        result = r.Content.ReadAsStringAsync().Result;
+                        result = "400";
+                        //result = r.Content.ReadAsStringAsync().Result;
                     }
 
                 }
             }
-
             return new JsonResult(result);
         }
         public async Task<JsonResult> DeleteRequest(string url)
