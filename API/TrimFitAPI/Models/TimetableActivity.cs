@@ -37,6 +37,8 @@ namespace TrimFitAPI.Models
         public bool Timetable_Activity_Reservation_List { get; set; }
         [Column("timetable_activity_color")]
         public string Timetable_Activity_Color { get; set; }
+        [Column("timetable_id")]
+        public int Timetable_Id { get; set; }
 
     }
 }
