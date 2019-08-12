@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var calendar = new Calendar(calendarEl, {
         firstDay: 1,
+        allDayDefault: false,
         locale: 'pl',
-        forceEventDuration: true,
         scrollTime: '09:00:00',
-        plugins: ['interaction', 'timeGrid'],
         timeZone: 'UTC',
+        plugins: ['interaction', 'timeGrid'],
         defaultView: 'timeGridWeek',
         header: {
             left: 'prev,next today',
@@ -84,22 +84,29 @@ document.addEventListener('DOMContentLoaded', function () {
             $(".modal-footer > .btn").unbind('click').click(function (e) {
                 e.preventDefault();
                 $("#exampleModal").modal('hide');
-
+                console.log(info.event);
                 var color = $("#ta_activity_color").val();
+                var repeat = $("#ta_repeatable").val();
+                var end = new Date(info.event.start.toISOString());
+
+                if (info.event.end === null) 
+                    end.setHours(new Date(info.event.start.toISOString()).getHours() + 1);
+                else
+                    end = info.event.end.toISOString();
 
                 if (color === "#000000")
                     color = original_color;
-
+                
                 var timetable_activity = {
                     Employee_Id: $("#ta_employee_id").val(),
                     Room_Id: $("#ta_room_id").val(),
                     Activity_Id: activity_id,
                     Timetable_Activity_Day: new Date(info.event.start.toISOString()).getDay(),
                     Timetable_Activity_Starttime: info.event.start.toISOString(),
-                    Timetable_Activity_Endtime: info.event.start.toISOString(),
+                    Timetable_Activity_Endtime: end,
                     Timetable_Activity_Limit_Places: $("#ta_limit_places").val(),
                     Timetable_Activity_Free_Places: $("#ta_limit_places").val(),
-                    Timetable_Activity_Repeatable: "1",
+                    Timetable_Activity_Repeatable: repeat,
                     Timetable_Activity_Status: "1",
                     Timetable_Activity_Reservation_List: true,
                     Timetable_Activity_Color: color,
@@ -136,48 +143,83 @@ document.addEventListener('DOMContentLoaded', function () {
             //alert(info.event.title + " was dropped on A " + info.event.start.toISOString());
         },
         eventDrop: function (info) {
-            // id of db record in table: timetable_activity
-            var t_a_id = info.event.extendedProps.t_a_id;
-            // update process
-            $.ajax({
-                url: "/Timetable/EditActivityTimeAsync",
-                type: "PUT",
-                data: {
-                    id: t_a_id,
-                    starttime: info.event.start.toISOString(),
-                    endtime: info.event.end.toISOString(),
-                    day: new Date(info.event.start.toISOString()).getDay()
-                },
-                success: function () {
-                    alert("OK");
-                },
-                error: function () {
-                    alert("NIE OK");
-                }
-            });
+            swal({
+                title: 'Jesteś pewien?',
+                text: 'Wprowadzone zmiany będą widoczne dla wszystkich!',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true
+            })
+                .then((sure) => {
+                    if (sure) {
+                        // id of db record in table: timetable_activity
+                        var t_a_id = info.event.extendedProps.t_a_id;
+                        // update process
+                        $.ajax({
+                            url: "/Timetable/EditActivityTimeAsync",
+                            type: "PUT",
+                            data: {
+                                id: t_a_id,
+                                starttime: info.event.start.toISOString(),
+                                endtime: info.event.end.toISOString(),
+                                day: new Date(info.event.start.toISOString()).getDay()
+                            },
+                            success: function () {
+                                swal('Twoje zmiany zostały zapisane!', {
+                                    icon: 'success'
+                                });
+                            },
+                            error: function () {
+                                info.revert();
+                                swal('Coś poszło nie tak!', { icon: 'error' });
+                            }
+                        });
 
+                    } else {
+                        info.revert();
+                        swal('Żadne zmiany nie zostały poczynione!');
+                    }
+                });
         },
         eventResize: function (info) {
-            // id of db record in table: timetable_activity
-            var t_a_id = info.event.extendedProps.t_a_id;
-            // update process
-            $.ajax({
-                url: "/Timetable/EditActivityTimeAsync",
-                type: "PUT",
-                data: {
-                    id: t_a_id,
-                    starttime: info.event.start.toISOString(),
-                    endtime: info.event.end.toISOString(),
-                    day: new Date(info.event.start.toISOString()).getDay()
-                },
-                success: function () {
-                    alert("OK");
-                },
-                error: function () {
-                    alert("NIE OK");
-                }
-            });
+            swal({
+                title: 'Jesteś pewien?',
+                text: 'Czy na pewno chcesz zmienić czas trwania aktywności?',
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true
+            })
+                .then((sure) => {
+                    if (sure) {
+                       
+                        // id of db record in table: timetable_activity
+                        var t_a_id = info.event.extendedProps.t_a_id;
+                        // update process
+                        $.ajax({
+                            url: "/Timetable/EditActivityTimeAsync",
+                            type: "PUT",
+                            data: {
+                                id: t_a_id,
+                                starttime: info.event.start.toISOString(),
+                                endtime: info.event.end.toISOString(),
+                                day: new Date(info.event.start.toISOString()).getDay()
+                            },
+                            success: function () {
+                                swal('Twoje zmiany zostały zapisane!', {
+                                    icon: 'success'
+                                });
+                            },
+                            error: function () {
+                                info.revert();
+                                swal('Coś poszło nie tak!', { icon: 'error' });
+                            }
+                        });
 
+                    } else {
+                        info.revert();
+                        swal('Żadne zmiany nie zostały poczynione!');
+                    }
+                });
         }
 
     });
@@ -191,16 +233,39 @@ document.addEventListener('DOMContentLoaded', function () {
         data: { timetable_id: TimetableId },
         success: function (data) {
             $.each(data, function (index, value) {
-                calendar.addEvent({
-                    extendedProps: {
-                        t_a_id: value.timetable_Activity_Id
-                    },
-                    color: value.timetable_Activity_Color,
-                    textColor: "#fff",
-                    title: value.activity_Title,
-                    start: value.timetable_Activity_Starttime,
-                    end: value.timetable_Activity_Endtime
-                });
+                // params
+                // [1] : each week
+                // [2] : each two weeks
+                if (value.timetable_Activity_Repeatable === 1) {
+                    var start_date = new Date(value.timetable_Activity_Starttime);
+                    var end_date = new Date(value.timetable_Activity_Endtime);
+                    calendar.addEvent({
+                        extendedProps: {
+                            t_a_id: value.timetable_Activity_Id
+                        },
+                        color: value.timetable_Activity_Color,
+                        textColor: "#fff",
+                        title: value.activity_Title,
+                        start: value.timetable_Activity_Starttime,
+                        end: value.timetable_Activity_Endtime,
+                        daysOfWeek: [start_date.getDay()],
+                        startTime: start_date.getHours() + ":" + start_date.getMinutes(),
+                        endTime: end_date.getHours() + ":" + end_date.getMinutes()
+                    });
+                }
+                else {
+                    calendar.addEvent({
+                        extendedProps: {
+                            t_a_id: value.timetable_Activity_Id
+                        },
+                        color: value.timetable_Activity_Color,
+                        textColor: "#fff",
+                        title: value.activity_Title,
+                        start: value.timetable_Activity_Starttime,
+                        end: value.timetable_Activity_Endtime,
+                    });
+                }
+                
             });
         }
     });
