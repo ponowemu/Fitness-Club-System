@@ -19,7 +19,7 @@
                             <div id="external-events-list">
                                 @foreach (var item in ViewData["activities"] as IList<Activity>)
                                 {
-                                    <div class="fc-event list-group-item" id="@item.Activity_Id" data-color="@item.Activity_Color" data-id="@item.Activity_Id">@item.Activity_Name</div>
+                                    <div class="fc-event list-group-item" id="@item.Activity_Id" data-color="@item.Activity_Color" data-id="@item.Activity_Id" style="background-color:@item.Activity_Color; border-color:@item.Activity_Color">@item.Activity_Name</div>
                                 }
                             </div>
                             

@@ -149,6 +149,34 @@ namespace Trimfit.Controllers
             }
         }
         [HttpPut]
+        public async Task<JsonResult> EditActivityTimeModelAsync([FromBody] TimetableActivity ta)
+        {
+           
+            try
+            {
+                ApiContext _context = new ApiContext();
+                var response = await this.GetActivityAsync(ta.Timetable_Activity_Id);
+                var element = JsonConvert.DeserializeObject<TimetableActivity>(response.Value.ToString());
+                element.Timetable_Activity_Color = ta.Timetable_Activity_Color;
+                element.Room_Id = ta.Room_Id;
+                element.Employee_Id = ta.Employee_Id;
+                element.Timetable_Activity_Free_Places = ta.Timetable_Activity_Free_Places;
+                element.Timetable_Activity_Limit_Places = ta.Timetable_Activity_Limit_Places;
+                element.Timetable_Activity_Reservation_List = ta.Timetable_Activity_Reservation_List;
+
+                var result = await _context.PutRequest("TimetableActivities/" + ta.Timetable_Activity_Id + "", element);
+
+                Response.StatusCode = 200;
+                return new JsonResult(result);
+
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(ex.Message);
+            }
+        }
+        [HttpPut]
         public async Task<JsonResult> EditActivityTimeAsync(int id, string starttime, string endtime, string day)
         {
             ApiContext _context = new ApiContext();

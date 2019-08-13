@@ -264,7 +264,7 @@ temporary rendered events).
     font-size: .85em;
     line-height: 1.4;
     margin-top: 5px;
-    border-radius: 3px;
+    /*border-radius: 3px;*/
     border: 1px solid #3788d8;
 }
 
@@ -279,6 +279,7 @@ temporary rendered events).
         color: #fff;
         /* default TEXT color */
         text-decoration: none;
+        cursor:pointer;
         /* if <a> has an href */
     }
 
