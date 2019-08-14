@@ -205,5 +205,22 @@ namespace Trimfit.Controllers
                 return new JsonResult(ex.Message);
             }
         }
+        [HttpDelete]
+        public async Task<JsonResult> DeleteTimetableActivity(int taId)
+        {
+            try
+            {
+                ApiContext _context = new ApiContext();
+                var response = await _context.DeleteRequest("TimetableActivities/"+taId+"");
+                Response.StatusCode = 200;
+
+                return new JsonResult(response);
+            }
+            catch
+            {
+                Response.StatusCode = 400;
+                return new JsonResult("Something went wrong");
+            }
+        }
     }
 }

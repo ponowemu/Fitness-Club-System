@@ -162,6 +162,8 @@ document.addEventListener('DOMContentLoaded', function () {
             //alert(info.event.title + " was dropped on A " + info.event.start.toISOString());
         },
         eventDrop: function (info) {
+            // moving the element that already exists on the timetable
+            // EDIT the day
             swal({
                 title: 'Jesteś pewien?',
                 text: 'Wprowadzone zmiany będą widoczne dla wszystkich!',
@@ -201,6 +203,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         },
         eventResize: function (info) {
+            // change size of the event
+            // EDIT duration time in db
             swal({
                 title: 'Jesteś pewien?',
                 text: 'Czy na pewno chcesz zmienić czas trwania aktywności?',
@@ -236,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     } else {
                         info.revert();
-                        swal('Żadne zmiany nie zostały poczynione!');
+                        swal('Żadne zmiany nie zostały poczynione!', { icon: 'info' });
                     }
                 });
         },
@@ -247,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 show: true
             });
 
-            
+
 
             // pobieramy podstawowe dane
             // ustawiamy wartości w modal oknie
@@ -257,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var repeat = info.event.extendedProps.t_a_r;
             var room_id = info.event.extendedProps.room_id;
             var color = info.event.extendedProps.t_a_c;
-            
+
             $("#ta_limit_places").val(limit_places);
             $("#ta_room_id").val(room_id);
             if (info.event.extendedProps.t_a_r_l === true)
@@ -288,9 +292,9 @@ document.addEventListener('DOMContentLoaded', function () {
             $(".modal-footer > .btn").unbind('click').click(function (e) {
                 e.preventDefault();
                 $("#exampleModal").modal('hide');
-                
-                
-                var t_activity = createTimetableActivityModel(timetable_activity_id,activity_id, info.event.start, info.event.end, color);
+
+
+                var t_activity = createTimetableActivityModel(timetable_activity_id, activity_id, info.event.start, info.event.end, color);
 
                 $.ajax({
                     url: "/Timetable/EditActivityTimeModelAsync/",
@@ -301,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         info.event.setProp("color", $("#ta_activity_color").val());
                         swal('Twoje zmiany zostały zapisane!', {
                             icon: 'success'
-                        }); 
+                        });
                     },
                     error: function () {
                         swal('Błąd', 'Nie udało się zaktualizować aktywności. Skontaktuj się z administratorem!', 'error');
@@ -312,19 +316,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
         },
         eventDragStop: function (info) {
-            alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+            // DELETING by dropping outside the div.
+
             var offset = $("#calendar").offset();
-            alert(offset.left);
-            if (info.jsEvent.pageX < offset.left || offset.left > info.jsEvent.pageX) {
-                alert("POZA");
+            if (info.jsEvent.pageX < offset.left || info.jsEvent.pageX > offset.left + $("#calendar").width() || info.jsEvent.pageY < offset.top || info.jsEvent.pageY > offset.top + $("#calendar").height()) {
+                // el is outside the div
+                // we can proceed delete
+                swal({
+                    title: 'Jesteś pewien?',
+                    text: 'Czy na pewno chcesz usunąć aktywność z grafiku?',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true
+                })
+                    .then((sure) => {
+                        if (sure) {
+                            info.event.remove();
+                            $.ajax({
+                                url: "/Timetable/DeleteTimetableActivity",
+                                data: {
+                                    taId: info.event.extendedProps.t_a_id
+                                },
+                                type: "DELETE",
+                                success: function () {
+                                    swal('Twoje zmiany zostały zapisane!', {
+                                        icon: 'success'
+                                    });
+                                },
+                                error: function () {
+                                    info.revert();
+                                    swal('Coś poszło nie tak!', { icon: 'error' });
+                                }
+                            });
+                        }
+                        else {
+                            swal('Żadne zmiany nie zostały poczynione!', { icon: 'info' });
+                        }
+                    });
             }
         },
         eventRender: function (info) {
-            var tooltip = new Tooltip(info.el, {
-                title: "Jakieś tam coś",
-                placement: 'top',
+            $(info.el).popover({
+                title: "Szczegóły",
+                content: "Instruktor: " + info.event.extendedProps.employee_id + "<br /> Pokój: " + info.event.extendedProps.employee_id + "<br /> Limit miejsc: 99 <br />Wolne miejsca: 99",
                 trigger: 'hover',
-                container: 'body'
+                placement: 'right',
+                container: 'body',
+                html: true
             });
         }
     });
