@@ -148,6 +148,30 @@ namespace Trimfit.Controllers
 
             return result;
         }
+        [HttpGet]
+        public async Task<JsonResult> CheckAvailability(DateTime date, int service_id)
+        {
+            ApiContext _context = new ApiContext();
+            // pytanie czy to po tej stronie czy po stronie API 
+            // dodać jeszcze sprawdzenie ograniczeń czasowych po stronie usługi
+
+            try
+            {
+                var response = await _context.GetRequest("Reservations/");
+                var reservations = JsonConvert.DeserializeObject<List<Reservation>>(response.Value.ToString());
+
+                var list = reservations.Where(p => p.Service_Id == service_id && p.Reservation_From == date).ToList();
+
+                if (list == null)
+                    return new JsonResult(200);
+                else
+                    return new JsonResult(400);
+            }
+            catch(Exception ex)
+            {
+                return new JsonResult(ex.Message);
+            }
+        }
         public async Task<IActionResult> List()
         {
 

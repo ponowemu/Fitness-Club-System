@@ -115,6 +115,63 @@ $('#summernote-new-service').summernote({
 });
 
 
+
+// Proces rezerwacji danej usługi
+// 
+// Generalnie tak:
+// 1) wybieramy masażyk
+// 2) otwiera się nam popup na którym dopinamy szczegóły
+// 2.1) wybieramy datę, system sprawdza, itd. 
+// 2.2) end-point user dostaje liste proponowanych terminów
+// 3) usługa jest dodawana do koszyka ze wszystkimi szczegółami
+
+$(document).ready(function () {
+
+    $(".book_service").on('click', function (event) {
+        event.preventDefault();
+        var service_id = $(this).attr('data-serviceid');
+        //alert(service_id);
+        $('.book_service_date').daterangepicker({
+            locale: { format: 'YYYY-MM-DD hh:mm' },
+            singleDatePicker: true,
+            timePicker: true,
+            timePicker24Hour: true,
+            parentEl: $("#book_service_modal")
+        });
+
+        $('#book_service_modal').modal({
+            show: true
+        });
+
+        $('.book_service_date').on('apply.daterangepicker', function (ev, picker) {
+            var timestamp = picker.startDate.format("YYYY-MM-DD HH:mm:ss");
+            // here we have to check to availability of service
+            $.ajax({
+                url: "/Service/CheckAvailability/",
+                type: "GET",
+                data: {
+                    date: timestamp,
+                    service_id: service_id  
+                },
+                success: function (response) {
+                    if (response === "200") {
+                        alert("Można");
+                    }
+                    else {
+                        alert("Nie można");
+                    }
+                },
+                error: function (response) {
+                    swal('Błąd', 'W tej chwili nie możemy sprawdzić dostępności danej usługi. Przepraszamy!', 'error');
+                }
+            });
+        });
+    });
+
+});
+// koniec rezerwacji
+
+
 var cleaveB = new Cleave('.service-duration-time', {
     numericOnly: true,
     blocks: [3]
@@ -127,9 +184,7 @@ var cleaveC = new Cleave('.service-gross-price', {
     numeralPositiveOnly: true
 });
 
-
 // Select2
 if (jQuery().select2) {
     $(".select2").select2();
 }
-
