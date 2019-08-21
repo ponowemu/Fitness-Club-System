@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+  //  [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -49,17 +54,20 @@ namespace TrimFitAPI.Controllers
         {
             return _context.User;
         }
-
-        // proste logowanie na szybko
+        //logowanie
+        [AllowAnonymous]
         [HttpPost("[action]/")]
         public async Task<IActionResult> Login(User temp_user)
         {
            
             var hash_password = SHA1HashStringForUTF8String(temp_user.User_password);
-            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password == hash_password.ToString()).SingleOrDefaultAsync();
-
+            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password.ToLower() == hash_password.ToString()).SingleOrDefaultAsync();
+            user = await Authenticate(user);
             if (user != null)
-                return Ok();
+            {
+                user.User_password = null;
+                return Ok(user);
+            }
             else
                 return BadRequest("User doesn't exist.");
         }
@@ -121,7 +129,7 @@ namespace TrimFitAPI.Controllers
 
         // POST: api/Users
         [HttpPost]
-        private async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<IActionResult> PostUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
@@ -153,6 +161,30 @@ namespace TrimFitAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(user);
+        }
+
+        private async Task<User> Authenticate(User user)
+        {
+            // return null if user not found
+            if (user == null)
+                return null;
+
+            // authentication successful so generate jwt token
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(SecData.ApiKey);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.User_id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(30),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.User_Token = tokenHandler.WriteToken(token);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
         private bool UserExists(int id)

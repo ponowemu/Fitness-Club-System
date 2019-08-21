@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +18,8 @@ namespace TrimFitAPI.Models
         public string User_login { get; set; }
         [Column("user_password")]
         public string User_password { get; set; }
+        [Column("user_token")]
+        public string User_Token { get; set; }
         [Column("user_type")]
         public int User_Type { get; set; }
         [Column("customer_id")]
