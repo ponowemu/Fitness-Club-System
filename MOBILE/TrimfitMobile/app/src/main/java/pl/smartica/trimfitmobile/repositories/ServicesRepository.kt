@@ -41,7 +41,6 @@ class ServicesRepository {
             for (item in 0..jsonArray!!.length()-1)
             {
                 serviceList.add(Service(jsonArray.getJSONObject(item).getString("service_Name"), jsonArray.getJSONObject(item).getString("service_Description")))
-                Log.v("ADDED", "Adding")
             }
             mServiceList.value = serviceList
         }

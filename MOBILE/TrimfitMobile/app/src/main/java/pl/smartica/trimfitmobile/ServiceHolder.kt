@@ -1,5 +1,6 @@
 package pl.smartica.trimfitmobile
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -12,10 +13,10 @@ class ServiceHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var parentLayout:ConstraintLayout? = null
 
     init{
-         super.itemView
-         headerText = itemView.service_header
-         descriptionText = itemView.service_description
-         parentLayout = itemView.service_layout
+        super.itemView
+        headerText = itemView.service_header
+        descriptionText = itemView.service_description
+        parentLayout = itemView.service_layout
     }
 
 }
