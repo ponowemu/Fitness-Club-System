@@ -35,10 +35,10 @@ class Services : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     //MVVM approach:
-    lateinit var mAdapter:ServiceAdapter;
-    lateinit var mRecyclerView: RecyclerView;
-    lateinit var loadingBar: ProgressBar;
-    lateinit var mServicesViewModel: ServicesViewModel;
+    lateinit var mAdapter: ServiceAdapter
+    lateinit var mRecyclerView: RecyclerView
+    lateinit var loadingBar: ProgressBar
+    lateinit var mServicesViewModel: ServicesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +61,12 @@ class Services : Fragment() {
             if (it.count() > 0)
                 setProgressBarVisible(false)
         })
-        Log.v("BEFORE","BEFORE INIT")
+        Log.v("BEFORE", "BEFORE INIT")
         initRecyclerView()
         return view
     }
-    private fun setProgressBarVisible(visible: Boolean){
+
+    private fun setProgressBarVisible(visible: Boolean) {
         if (visible)
             loadingBar.visibility = View.VISIBLE
         else

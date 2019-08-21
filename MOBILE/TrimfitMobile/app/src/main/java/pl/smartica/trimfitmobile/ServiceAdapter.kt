@@ -1,17 +1,14 @@
 package pl.smartica.trimfitmobile
 
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Context
 import android.os.Build
 import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import pl.smartica.trimfitmobile.model.Service
 import kotlinx.android.synthetic.main.service_item.view.*
-import kotlinx.android.synthetic.main.service_item.*
+import pl.smartica.trimfitmobile.model.Service
 
 class ServiceAdapter(context: Context, itemList: MutableList<Service>): RecyclerView.Adapter<ServiceHolder>() {
     var serviceList: MutableList<Service> = mutableListOf()

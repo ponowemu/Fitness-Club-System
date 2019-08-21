@@ -17,6 +17,8 @@
     <string name="navigation_drawer_services">Usługi</string>
     <string name="navigation_drawer_products">Produkty</string>
 
+    <string name="button_reserve">&#xf07a; Rezerwuj</string>
+    <string name="button_read_more">Czytaj więcej</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
