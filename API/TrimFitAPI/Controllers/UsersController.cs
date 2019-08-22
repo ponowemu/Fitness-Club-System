@@ -70,7 +70,6 @@ namespace TrimFitAPI.Controllers
                 return BadRequest("User doesn't exist.");
         }
 
-        [AllowAnonymous]
         [HttpPost("[action]/")]
         public async Task<IActionResult> ChangePassword(PasswordChange data)
         {
