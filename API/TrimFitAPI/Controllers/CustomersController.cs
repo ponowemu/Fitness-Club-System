@@ -24,7 +24,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Customer> GetCustomer()
         {
-            return _context.Customer;
+            return _context.Customer
+                //.Include(a=>a.Address)
+                ;
         }
 
         // GET: api/Customers/5
@@ -36,7 +38,9 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = await _context.Customer
+                //.Include(a => a.Address)
+                .FirstOrDefaultAsync(x=>x.Customer_Id == id);
 
             if (customer == null)
             {

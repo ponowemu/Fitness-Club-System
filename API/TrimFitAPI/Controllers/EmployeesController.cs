@@ -24,7 +24,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Employee> GetEmployee()
         {
-            return _context.Employee;
+            return _context.Employee
+                //.Include(e=>e.Address)
+                ;
         }
 
         // GET: api/Employees/5
@@ -36,7 +38,9 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employee = await _context.Employee.FindAsync(id);
+            var employee = await _context.Employee
+                //.Include(e => e.Address)
+                .FirstOrDefaultAsync(x=>x.Employee_Id == id);
 
             if (employee == null)
             {

@@ -22,7 +22,7 @@ class ServicesRepository {
     fun getServicesFromAPI(context: Context){
 
         // Instantiate the RequestQueue.
-        val queue = Callback.getInstance(context).requestQueue
+        val queue = Callback.getInstance(context)
         val url = "http://api.trimfit.pl/api/Services"
         val stringReq = JsonArrayRequest(
             Request.Method.GET,url,null,
@@ -33,16 +33,19 @@ class ServicesRepository {
             Response.ErrorListener {
                     error ->  Log.v("TAG", "ERROR LUL: " + error.toString())
             })
-        Callback.getInstance(context).addToRequestQueue(stringReq)
+        queue.addToRequestQueue(stringReq)
     }
+
     fun convertJsonToItems(jsonArray: JSONArray){
         if (jsonArray != null)
         {
-            for (item in 0..jsonArray!!.length()-1)
+            for (i in 0..jsonArray!!.length()-1)
             {
-                serviceList.add(Service(jsonArray.getJSONObject(item).getString("service_Name"), jsonArray.getJSONObject(item).getString("service_Description")))
+                val item = jsonArray.getJSONObject(i)
+                serviceList.add(Service(item))
             }
             mServiceList.value = serviceList
         }
     }
+
 }

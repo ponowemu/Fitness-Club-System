@@ -111,7 +111,7 @@ namespace TrimFitAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrimFit API V1");
                 c.RoutePrefix = string.Empty;
             });
-            app.UseAuthentication();
+      //      app.UseAuthentication();
             app.UseMvc();
         }
     }

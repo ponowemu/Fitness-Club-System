@@ -13,26 +13,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.smartica.trimfitmobile.R
-import pl.smartica.trimfitmobile.ServiceAdapter
+import pl.smartica.trimfitmobile.data.adapters.ServiceAdapter
 import pl.smartica.trimfitmobile.viewmodels.ServicesViewModel
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [Services.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [Services.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class Services : Fragment() {
-    private var listener: OnFragmentInteractionListener? = null
+    private var listener: Products.OnFragmentInteractionListener? = null
 
     //MVVM approach:
     lateinit var mAdapter: ServiceAdapter
@@ -74,7 +59,10 @@ class Services : Fragment() {
     }
 
     private fun initRecyclerView() {
-        mAdapter = ServiceAdapter(this.context!!, mServicesViewModel.getServicesList().value!!)
+        mAdapter = ServiceAdapter(
+            this.context!!,
+            mServicesViewModel.getServicesList().value!!
+        )
         mRecyclerView.adapter = mAdapter
         mRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
@@ -84,20 +72,5 @@ class Services : Fragment() {
         listener?.onFragmentInteraction(uri)
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
 
 }

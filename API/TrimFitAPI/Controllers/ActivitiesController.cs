@@ -10,7 +10,7 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {   
-    [Authorize]
+   // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ActivitiesController : ControllerBase
@@ -26,7 +26,10 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Activity> GetActivity()
         {
-            return _context.Activity;
+            return _context.Activity
+                //.Include(c=>c.Category)
+                //.Include(e=>e.Employee)
+                ;
         }
 
         // GET: api/Activities/5
@@ -38,7 +41,10 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var activity = await _context.Activity.FindAsync(id);
+            var activity = await _context.Activity
+                //.Include(c => c.Category)
+                //.Include(e => e.Employee)
+                .FirstOrDefaultAsync(x=>x.Activity_Id == id);
 
             if (activity == null)
             {
