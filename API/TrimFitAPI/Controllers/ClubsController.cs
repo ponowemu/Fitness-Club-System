@@ -25,7 +25,7 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<Club> GetClub()
         {
             return _context.Club
-                //.Include(a=>a.Address)
+                .Include(a => a.Address)
                 ;
         }
 
@@ -39,7 +39,7 @@ namespace TrimFitAPI.Controllers
             }
 
             var club = await _context.Club
-                //.Include(a => a.Address)
+                .Include(a => a.Address)
                 .FirstOrDefaultAsync(x => x.Club_Id == id);
 
             if (club == null)

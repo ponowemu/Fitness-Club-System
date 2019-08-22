@@ -27,8 +27,8 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<Activity> GetActivity()
         {
             return _context.Activity
-                //.Include(c=>c.Category)
-                //.Include(e=>e.Employee)
+                //.Include(c => c.Category)
+                //.Include(e => e.Employee)
                 ;
         }
 

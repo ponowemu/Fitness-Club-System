@@ -24,7 +24,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<PositionClub> GetPosition_club()
         {
-            return _context.Position_club;
+            return _context.Position_club
+                .Include(p=>p.Position)
+                .Include(c=>c.Club);
         }
 
         // GET: api/PositionClubs/5
@@ -36,7 +38,10 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var positionClub = await _context.Position_club.FindAsync(id);
+            var positionClub = await _context.Position_club
+                .Include(p => p.Position)
+                .Include(c => c.Club)
+                .FirstOrDefaultAsync(x=>x.Position_Club_Id == id); 
 
             if (positionClub == null)
             {

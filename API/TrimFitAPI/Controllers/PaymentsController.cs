@@ -23,7 +23,7 @@ namespace TrimFitAPI.Models
         [HttpGet]
         public IEnumerable<Payment> GetPayment()
         {
-            return _context.Payment;
+            return _context.Payment.Include(p=>p.Customer);
         }
 
         // GET: api/Payments/5
@@ -35,7 +35,9 @@ namespace TrimFitAPI.Models
                 return BadRequest(ModelState);
             }
 
-            var payment = await _context.Payment.FindAsync(id);
+            var payment = await _context.Payment
+                .Include(p => p.Customer)
+                .FirstOrDefaultAsync(x=>x.Payment_Id == id);
 
             if (payment == null)
             {

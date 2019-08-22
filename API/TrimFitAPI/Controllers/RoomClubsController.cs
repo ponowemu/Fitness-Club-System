@@ -24,7 +24,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<RoomClub> GetRoom_club()
         {
-            return _context.Room_club;
+            return _context.Room_club
+                .Include(r=>r.Room)
+                .Include(c=>c.Club);
         }
 
         // GET: api/RoomClubs/5
@@ -36,7 +38,11 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var roomClub = await _context.Room_club.FindAsync(id);
+            var roomClub = await _context.Room_club
+                .Include(r => r.Room)
+                .Include(c => c.Club)
+                .FirstOrDefaultAsync(x=>x.Room_Club_Id == id)
+                ;
 
             if (roomClub == null)
             {

@@ -15,8 +15,10 @@ namespace TrimFitAPI.Models
         public int Reservation_Id { get; set; }
         [Column("service_id")]
         public int Service_Id { get; set; }
+        public Service Service { get; set; }
         [Column("club_id")]
         public int Club_Id { get; set; }
+        public Club Club { get; set; }
         [Column("reservation_from")]
         public DateTime Reservation_From { get; set; }
         [Column("reservation_to")]

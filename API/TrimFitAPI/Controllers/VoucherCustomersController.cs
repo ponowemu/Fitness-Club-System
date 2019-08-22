@@ -24,7 +24,10 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<VoucherCustomer> GetVoucherCustomer()
         {
-            return _context.VoucherCustomer;
+            return _context.VoucherCustomer
+                .Include(v=>v.Voucher)
+                .Include(c=>c.Customer)
+                ;
         }
 
         // GET: api/VoucherCustomers/5
@@ -36,7 +39,10 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var voucherCustomer = await _context.VoucherCustomer.FindAsync(id);
+            var voucherCustomer = await _context.VoucherCustomer
+                .Include(v => v.Voucher)
+                .Include(c => c.Customer)
+                .FirstOrDefaultAsync(x=>x.Voucher_Customer_Id == id);
 
             if (voucherCustomer == null)
             {

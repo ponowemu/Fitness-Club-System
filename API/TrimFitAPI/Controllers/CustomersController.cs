@@ -25,7 +25,7 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<Customer> GetCustomer()
         {
             return _context.Customer
-                //.Include(a=>a.Address)
+                .Include(a => a.Address)
                 ;
         }
 
@@ -39,7 +39,7 @@ namespace TrimFitAPI.Controllers
             }
 
             var customer = await _context.Customer
-                //.Include(a => a.Address)
+                .Include(a => a.Address)
                 .FirstOrDefaultAsync(x=>x.Customer_Id == id);
 
             if (customer == null)

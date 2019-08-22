@@ -25,7 +25,7 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<Employee> GetEmployee()
         {
             return _context.Employee
-                //.Include(e=>e.Address)
+                .Include(e => e.Address)
                 ;
         }
 
@@ -39,7 +39,7 @@ namespace TrimFitAPI.Controllers
             }
 
             var employee = await _context.Employee
-                //.Include(e => e.Address)
+                .Include(e => e.Address)
                 .FirstOrDefaultAsync(x=>x.Employee_Id == id);
 
             if (employee == null)

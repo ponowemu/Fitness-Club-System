@@ -24,7 +24,8 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Timetable> GetTimetable()
         {
-            return _context.Timetable;
+            return _context.Timetable
+                .Include(c=>c.Club);
         }
 
         // GET: api/Timetables/5
@@ -36,7 +37,9 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var timetable = await _context.Timetable.FindAsync(id);
+            var timetable = await _context.Timetable
+                .Include(c => c.Club)
+                .FirstOrDefaultAsync(x=>x.Timetable_Id == id);
 
             if (timetable == null)
             {

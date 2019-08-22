@@ -25,12 +25,11 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<TimetableActivity> GetTimetableActivities()
         {
             return _context.Timetable_activity
-                //.Include(e => e.Employee)
-                //.Include(a => a.Activity)
-                //.Include(t => t.Timetable)
-                //.Include(r => r.Room)
+                .Include(e => e.Employee)
+                .Include(a => a.Activity)
+                .Include(t => t.Timetable)
+                .Include(r => r.Room)
                 ;
-            //hehe   
         }
 
         // GET: api/Timetables/5
@@ -41,11 +40,12 @@ namespace TrimFitAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             var timetable = await _context.Timetable_activity
-                //.Include(a => a.Activity)
-                //.Include(t => t.Timetable)
-                //.Include(r => r.Room)
-                //.Include(e => e.Employee)
+                .Include(a => a.Activity)
+                .Include(t => t.Timetable)
+                .Include(r => r.Room)
+                .Include(e => e.Employee)
                 .FirstOrDefaultAsync(x => x.Timetable_Activity_Id == id);
             //var timetable = await _context.Timetable_activity.FindAsync(id);
 

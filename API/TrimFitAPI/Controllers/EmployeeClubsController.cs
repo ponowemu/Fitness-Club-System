@@ -24,7 +24,10 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<EmployeeClub> GetEmployee_club()
         {
-            return _context.Employee_club;
+            return _context.Employee_club
+                .Include(e=>e.Employee)
+                .Include(c=>c.Club)
+                ;
         }
 
         // GET: api/EmployeeClubs/5
@@ -36,7 +39,11 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employeeClub = await _context.Employee_club.FindAsync(id);
+            var employeeClub = await _context.Employee_club
+                .Include(e => e.Employee)
+                .Include(c => c.Club)
+                .FirstOrDefaultAsync(x=>x.Employee_Club_Id == id)
+                ;
 
             if (employeeClub == null)
             {
