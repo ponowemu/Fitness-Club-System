@@ -76,18 +76,17 @@ namespace TrimFitAPI
                         Url = "https://example.com/license"
                     }
                 });
-                var security = new Dictionary<string, IEnumerable<string>>
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
                 {
-                    {"Bearer", new string[] { }},
-                };
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Description = "JWT Authorization header {token}",
                     Name = "Authorization",
                     In = "header",
                     Type = "apiKey"
                 });
-                c.AddSecurityRequirement(security);
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
+                });
             });
         }
 
@@ -111,7 +110,7 @@ namespace TrimFitAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrimFit API V1");
                 c.RoutePrefix = string.Empty;
             });
-      //      app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

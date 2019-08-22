@@ -22,8 +22,8 @@ namespace TrimFitAPI.Models
         public int Activity_Id { get; set; }
         public Activity Activity { get; set; }
 
-        //[Column("timetable_activity_day")]
-        //public string Timetable_Activity_Day { get; set; }
+        [Column("timetable_activity_day")]
+        public string Timetable_Activity_Day { get; set; }
         [Column("timetable_activity_starttime")]
         public DateTime Timetable_Activity_Starttime { get; set; }
         [Column("timetable_activity_endtime")]

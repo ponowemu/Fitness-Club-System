@@ -57,15 +57,30 @@ namespace TrimFitAPI.Controllers
         //logowanie
         [AllowAnonymous]
         [HttpPost("[action]/")]
-        public async Task<IActionResult> Login(User temp_user)
+        public async Task<IActionResult> Login(UserLogin temp_user)
         {
-           
             var hash_password = SHA1HashStringForUTF8String(temp_user.User_password);
             var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password.ToLower() == hash_password.ToString()).SingleOrDefaultAsync();
             user = await Authenticate(user);
             if (user != null)
             {
-                user.User_password = null;
+                return Ok(user);
+            }
+            else
+                return BadRequest("User doesn't exist.");
+        }
+
+        [AllowAnonymous]
+        [HttpPost("[action]/")]
+        public async Task<IActionResult> ChangePassword(PasswordChange data)
+        {
+            var hash_password = SHA1HashStringForUTF8String(data.User_Old_Password);
+            var user = await _context.User.Where(u => u.User_login == data.User_Login.ToLower() && u.User_password.ToLower() == hash_password.ToString()).SingleOrDefaultAsync();       
+            if (user != null)
+            {
+                user.User_password = SHA1HashStringForUTF8String(data.User_New_Password);
+                user = await Authenticate(user);
+                await _context.SaveChangesAsync();
                 return Ok(user);
             }
             else
@@ -176,9 +191,9 @@ namespace TrimFitAPI.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.User_id.ToString())
+                    new Claim(ClaimTypes.Name, user.User_FirstName.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(30),
+                Expires = DateTime.UtcNow.AddDays(360),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);

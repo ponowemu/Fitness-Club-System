@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
-{   
-   // [Authorize]
+{
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ActivitiesController : ControllerBase
@@ -26,10 +27,10 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Activity> GetActivity()
         {
-            return _context.Activity
-                //.Include(c => c.Category)
+            return _context.Activity;
+                //.Include(c => c.Category).ToList()
                 //.Include(e => e.Employee)
-                ;
+                
         }
 
         // GET: api/Activities/5
