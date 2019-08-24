@@ -1,11 +1,10 @@
-package pl.smartica.trimfitmobile.CustomRequests
+package pl.smartica.trimfitmobile.api.CustomRequests
 
 import com.android.volley.AuthFailureError
 import com.android.volley.NetworkResponse
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import org.json.JSONArray
-import org.json.JSONObject
 
 class CustomJsonArrayRequest(
     method:Int, url: String,

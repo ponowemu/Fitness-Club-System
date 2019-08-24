@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.ui.login
+package pl.smartica.trimfitmobile.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

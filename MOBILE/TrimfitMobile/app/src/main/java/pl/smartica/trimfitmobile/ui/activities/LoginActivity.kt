@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile
+package pl.smartica.trimfitmobile.ui.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -20,10 +20,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import pl.smartica.trimfitmobile.R
 
 import pl.smartica.trimfitmobile.data.model.LoggedInUserView
-import pl.smartica.trimfitmobile.viewmodels.LoginViewModel
-import pl.smartica.trimfitmobile.viewmodels.LoginViewModelFactory
+import pl.smartica.trimfitmobile.viewModels.LoginViewModel
+import pl.smartica.trimfitmobile.viewModels.LoginViewModelFactory
 import kotlin.coroutines.CoroutineContext
 
 class LoginActivity : AppCompatActivity(),CoroutineScope  {

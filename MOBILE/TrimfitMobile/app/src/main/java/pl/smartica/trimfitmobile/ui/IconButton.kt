@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile
+package pl.smartica.trimfitmobile.ui
 
 import android.content.Context
 import android.graphics.Typeface

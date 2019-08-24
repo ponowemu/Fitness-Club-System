@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context="Fragments.Calendar" android:id="@+id/frameLayout5">
+                                                   tools:context=".ui.fragments.Calendar" android:id="@+id/frameLayout5">
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendar_recycler"

@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.ui.login
+package pl.smartica.trimfitmobile.data.model
 
 /**
  * User details post authentication that is exposed to the UI

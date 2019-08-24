@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.ui.login
+package pl.smartica.trimfitmobile.viewModels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,6 +9,9 @@ import pl.smartica.trimfitmobile.data.LoginRepository
 import pl.smartica.trimfitmobile.data.Result
 
 import pl.smartica.trimfitmobile.R
+import pl.smartica.trimfitmobile.data.model.LoggedInUserView
+import pl.smartica.trimfitmobile.data.model.LoginFormState
+import pl.smartica.trimfitmobile.data.model.LoginResult
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -23,17 +26,22 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         val result = loginRepository.login(username, password ,context)
 
         if (result is Result.Success) {
-            _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+            _loginResult.value = LoginResult(
+                success = LoggedInUserView(displayName = result.data.displayName)
+            )
         } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+            _loginResult.value =
+                LoginResult(error = R.string.login_failed)
         }
     }
 
     fun loginDataChanged(username: String, password: String) {
         if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
+            _loginForm.value =
+                LoginFormState(passwordError = R.string.invalid_password)
         } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
+            _loginForm.value =
+                LoginFormState(isDataValid = true)
         }
     }
 

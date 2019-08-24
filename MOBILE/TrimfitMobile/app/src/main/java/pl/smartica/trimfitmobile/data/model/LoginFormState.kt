@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.ui.login
+package pl.smartica.trimfitmobile.data.model
 
 /**
  * Data validation state of the login form.

@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile
+package pl.smartica.trimfitmobile.api
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -14,7 +14,8 @@ class Callback constructor(context: Context) {
         private var INSTANCE: Callback? = null
         fun getInstance(context: Context) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Callback(context).also {
+                INSTANCE
+                    ?: Callback(context).also {
                     INSTANCE = it
                 }
             }

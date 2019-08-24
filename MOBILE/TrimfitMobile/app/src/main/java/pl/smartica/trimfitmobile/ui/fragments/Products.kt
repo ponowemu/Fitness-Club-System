@@ -1,6 +1,5 @@
-package pl.smartica.trimfitmobile.Fragments
+package pl.smartica.trimfitmobile.ui.fragments
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log

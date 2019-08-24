@@ -1,8 +1,7 @@
-package pl.smartica.trimfitmobile.Fragments
+package pl.smartica.trimfitmobile.ui.fragments
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.smartica.trimfitmobile.R
 import pl.smartica.trimfitmobile.adapters.ServiceAdapter
-import pl.smartica.trimfitmobile.data.model.LoggedInUser
-import pl.smartica.trimfitmobile.viewmodels.CalendarViewModel
+import pl.smartica.trimfitmobile.viewModels.CalendarViewModel
 
 
 class Calendar : Fragment() {

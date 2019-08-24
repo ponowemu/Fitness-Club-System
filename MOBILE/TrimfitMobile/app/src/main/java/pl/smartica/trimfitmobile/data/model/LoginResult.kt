@@ -1,4 +1,6 @@
-package pl.smartica.trimfitmobile.ui.login
+package pl.smartica.trimfitmobile.data.model
+
+import pl.smartica.trimfitmobile.data.model.LoggedInUserView
 
 /**
  * Authentication result : success (user details) or error message.

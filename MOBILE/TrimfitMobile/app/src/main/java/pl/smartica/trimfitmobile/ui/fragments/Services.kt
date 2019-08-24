@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.Fragments
+package pl.smartica.trimfitmobile.ui.fragments
 
 import android.net.Uri
 import android.os.Bundle
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.smartica.trimfitmobile.R
 import pl.smartica.trimfitmobile.adapters.ServiceAdapter
-import pl.smartica.trimfitmobile.viewmodels.ServicesViewModel
+import pl.smartica.trimfitmobile.viewModels.ServicesViewModel
 
 class Services : Fragment() {
     private var listener: Products.OnFragmentInteractionListener? = null

@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.model
+package pl.smartica.trimfitmobile.api.model
 
 import org.json.JSONObject
 import java.math.BigDecimal

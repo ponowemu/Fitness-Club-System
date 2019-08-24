@@ -1,8 +1,6 @@
-package pl.smartica.trimfitmobile
+package pl.smartica.trimfitmobile.ui.activities
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
@@ -15,7 +13,9 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import pl.smartica.trimfitmobile.Fragments.*
+import pl.smartica.trimfitmobile.ui.fragments.*
+import pl.smartica.trimfitmobile.PagerAdapter
+import pl.smartica.trimfitmobile.R
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()

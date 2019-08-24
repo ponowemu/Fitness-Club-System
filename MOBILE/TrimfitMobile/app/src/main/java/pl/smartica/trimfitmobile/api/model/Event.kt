@@ -1,5 +1,6 @@
-package pl.smartica.trimfitmobile.model
+package pl.smartica.trimfitmobile.api.model
 
+import pl.smartica.trimfitmobile.api.model.Activity
 import java.util.*
 
 class Event {
