@@ -54,7 +54,7 @@ namespace TrimFitAPI.Controllers
         }
 
         [HttpGet("{id}/registrations")]
-        public async Task<IActionResult> GetRegistrations([FromRoute] int id, [FromRoute] bool incoming = true)
+        public async Task<IActionResult> GetRegistrations([FromRoute] int id, [FromRoute] bool incoming = false)
         {
             if (!ModelState.IsValid)
             {
@@ -67,6 +67,32 @@ namespace TrimFitAPI.Controllers
             var Registration = await _context.Registration
                 .Include(t=>t.TimetableActivity)
                 .Include(p=>p.Payment)
+                .Where(predicate)
+                .FirstOrDefaultAsync(x => x.Customer_Id == id);
+
+            if (Registration == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Registration);
+        }
+
+        [HttpGet("{id}/reservations")]
+        public async Task<IActionResult> GerReservations([FromRoute] int id, [FromRoute] bool incoming = false)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var predicate = PredicateBuilder.New<Reservation>(true);
+            if (incoming)
+                predicate = predicate.And(x => x.Reservation_From >= DateTime.Today);
+
+            var Registration = await _context.Reservation
+                .Include(s=>s.Service)
+                .Include(p => p.Payment)
+                .Include(c=>c.Club)
                 .Where(predicate)
                 .FirstOrDefaultAsync(x => x.Customer_Id == id);
 
