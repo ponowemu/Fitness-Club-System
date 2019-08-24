@@ -26,5 +26,8 @@ namespace TrimFitAPI.Models
         [Column("customer_id")]
         public int Customer_Id { get; set; }
         public Customer Customer { get; set; }
+        [Column("payment_id")]
+        public int Payment_Id { get; set; }
+        public Payment Payment { get; set; }
     }
 }
