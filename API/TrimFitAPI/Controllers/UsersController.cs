@@ -59,8 +59,8 @@ namespace TrimFitAPI.Controllers
         [HttpPost("[action]/")]
         public async Task<IActionResult> Login(UserLogin temp_user)
         {
-            var hash_password = SHA1HashStringForUTF8String(temp_user.User_password);
-            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password.ToLower() == hash_password.ToString()).SingleOrDefaultAsync();
+            //var hash_password = SHA1HashStringForUTF8String(temp_user.User_password);
+            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password.ToLower() == temp_user.User_password).SingleOrDefaultAsync();
             user = await Authenticate(user);
             if (user != null)
             {
@@ -73,11 +73,16 @@ namespace TrimFitAPI.Controllers
         [HttpPost("[action]/")]
         public async Task<IActionResult> ChangePassword(PasswordChange data)
         {
-            var hash_password = SHA1HashStringForUTF8String(data.User_Old_Password);
-            var user = await _context.User.Where(u => u.User_login == data.User_Login.ToLower() && u.User_password.ToLower() == hash_password.ToString()).SingleOrDefaultAsync();       
+            //var hash_password = SHA1HashStringForUTF8String(data.User_Old_Password);
+            var user = await _context.User.Where(u => u.User_login == data.User_Login.ToLower() && u.User_password.ToLower() == data.User_Old_Password).SingleOrDefaultAsync(); 
             if (user != null)
             {
-                user.User_password = SHA1HashStringForUTF8String(data.User_New_Password);
+                if (user.User_password == data.User_New_Password)
+                {
+                    //TODO: Change the return for same password
+                    return BadRequest("Password cannot be the same");
+                }
+                //user.User_password = SHA1HashStringForUTF8String(data.User_New_Password);
                 user = await Authenticate(user);
                 await _context.SaveChangesAsync();
                 return Ok(user);
@@ -143,17 +148,17 @@ namespace TrimFitAPI.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<IActionResult> PostUser([FromBody] UserLogin user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            _context.User.Add(user);
+            var new_user = (User)user;
+            _context.User.Add(new_user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.User_id }, user);
+            return CreatedAtAction("GetUser", new { id = new_user.User_id }, new_user);
         }
 
         // DELETE: api/Users/5
