@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ActivitiesController : ControllerBase
@@ -25,6 +28,9 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<Activity> GetActivity()
         {
             return _context.Activity;
+                //.Include(c => c.Category).ToList()
+                //.Include(e => e.Employee)
+                
         }
 
         // GET: api/Activities/5
@@ -36,7 +42,35 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            var activity = await _context.Activity
+                //.Include(c => c.Category)
+                //.Include(e => e.Employee)
+                .FirstOrDefaultAsync(x=>x.Activity_Id == id);
+
+            if (activity == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(activity);
+        }
+
+
+        // GET: api/Activities/5
+        [HttpGet("{id}/Employees")]
+        public async Task<IActionResult> Employees([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var activity = await _context.Activity.FindAsync(id);
+            foreach (var item in activity.Category_Id)
+            {
+
+                activity.Category.Add(await _context.Category.FindAsync(item));
+            }
 
             if (activity == null)
             {

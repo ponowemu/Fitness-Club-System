@@ -13,7 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TrimFitAPI.Models;
 using Swashbuckle.AspNetCore.Swagger;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace TrimFitAPI
 {
@@ -30,10 +32,30 @@ namespace TrimFitAPI
         public void ConfigureServices(IServiceCollection services)
         {
             SecData.ConnectionString = Configuration["Database:ConnectionString"];
+            SecData.ApiKey = Configuration["Database:ServiceApiKey"];
             services.AddEntityFrameworkNpgsql()
                .AddDbContext<ApiContext>()
                .BuildServiceProvider();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var key = Encoding.ASCII.GetBytes(SecData.ApiKey);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
@@ -53,6 +75,17 @@ namespace TrimFitAPI
                         Name = "Use under LICX",
                         Url = "https://example.com/license"
                     }
+                });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                {
+                    Description = "JWT Authorization header {token}",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
                 });
             });
         }
@@ -77,7 +110,7 @@ namespace TrimFitAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrimFit API V1");
                 c.RoutePrefix = string.Empty;
             });
-
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

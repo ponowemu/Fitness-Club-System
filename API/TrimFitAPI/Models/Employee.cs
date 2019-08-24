@@ -27,11 +27,18 @@ namespace TrimFitAPI.Models
         public List<int> Position_Id { get; set; }
         [Column("employee_status")]
         public int Employee_Status { get; set; }
+
         [Column("address_id")]
-        public int Address_Id { get; set; }
+        public int? Address_Id { get; set; }
+        public Address Address { get; set; }
+
         [Column("employee_display_name")]
         public string Employee_Display_Name { get; set; }
         [Column("employee_photo_url")]
         public string Employee_Photo_Url { get; set; }
+
+        [Column("user_id")]
+        public int? User_id { get; set; }
+        public User User { get; set; }
     }
 }

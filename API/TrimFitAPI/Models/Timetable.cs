@@ -23,5 +23,6 @@ namespace TrimFitAPI.Models
         public DateTime Timetable_Edited { get; set; }
         [Column("club_id")]
         public int Club_Id { get; set; }
+        public Club Club { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClubsController : ControllerBase
@@ -24,7 +26,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Club> GetClub()
         {
-            return _context.Club;
+            return _context.Club
+                .Include(a => a.Address)
+                ;
         }
 
         // GET: api/Clubs/5
@@ -36,7 +40,9 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var club = await _context.Club.FindAsync(id);
+            var club = await _context.Club
+                .Include(a => a.Address)
+                .FirstOrDefaultAsync(x => x.Club_Id == id);
 
             if (club == null)
             {

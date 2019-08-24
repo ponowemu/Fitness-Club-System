@@ -21,9 +21,12 @@ namespace TrimFitAPI.Models
         public int Activity_Status { get; set; }
         [Column("category_id")]
         public List<int> Category_Id { get; set; }
+        [NotMapped]
+        public List<Category> Category { get; set; }
         [Column("activity_color")]
         public string Activity_Color { get; set; }
         [Column("employee_id")]
         public List<int> Employee_Id { get; set; }
+       // public List<Employee> Employee { get; set; }
     }
 }

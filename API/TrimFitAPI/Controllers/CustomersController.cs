@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LinqKit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -24,7 +27,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Customer> GetCustomer()
         {
-            return _context.Customer;
+            return _context.Customer
+                .Include(a => a.Address)
+                ;
         }
 
         // GET: api/Customers/5
@@ -36,7 +41,9 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var customer = await _context.Customer.FindAsync(id);
+            var customer = await _context.Customer
+                .Include(a => a.Address)
+                .FirstOrDefaultAsync(x=>x.Customer_Id == id);
 
             if (customer == null)
             {
@@ -44,6 +51,57 @@ namespace TrimFitAPI.Controllers
             }
 
             return Ok(customer);
+        }
+
+        [HttpGet("{id}/Registrations")]
+        public async Task<IActionResult> GetRegistrations([FromRoute] int id, [FromRoute] bool incoming = false)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var predicate = PredicateBuilder.New<Registration>(true);
+            if (incoming)
+                predicate = predicate.And(x => x.TimetableActivity.Timetable_Activity_Starttime >= DateTime.Today);
+
+            var Registration = await _context.Registration
+                .Include(t=>t.TimetableActivity)
+                .Include(p=>p.Payment)
+                .Where(predicate)
+                .FirstOrDefaultAsync(x => x.Customer_Id == id);
+
+            if (Registration == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Registration);
+        }
+
+        [HttpGet("{id}/Reservations")]
+        public async Task<IActionResult> GerReservations([FromRoute] int id, [FromRoute] bool incoming = false)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var predicate = PredicateBuilder.New<Reservation>(true);
+            if (incoming)
+                predicate = predicate.And(x => x.Reservation_From >= DateTime.Today);
+
+            var Registration = await _context.Reservation
+                .Include(s=>s.Service)
+                .Include(p => p.Payment)
+                .Include(c=>c.Club)
+                .Where(predicate)
+                .FirstOrDefaultAsync(x => x.Customer_Id == id);
+
+            if (Registration == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Registration);
         }
 
         // PUT: api/Customers/5

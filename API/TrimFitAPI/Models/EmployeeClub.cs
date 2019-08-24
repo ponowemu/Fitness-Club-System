@@ -15,7 +15,9 @@ namespace TrimFitAPI.Models
         public int Employee_Club_Id { get; set; }
         [Column("employee_id")]
         public int Employee_Id { get; set; }
+        public Employee Employee { get; set; }
         [Column("club_id")]
         public int Club_Id { get; set; }
+        public Club Club { get; set; }
     }
 }
