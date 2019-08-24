@@ -104,7 +104,7 @@ namespace TrimFitAPI.Controllers
         public async Task<IActionResult> Login(UserLogin temp_user)
         {
             //var hash_password = SHA1HashStringForUTF8String(temp_user.User_password);
-            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password.ToLower() == temp_user.User_password).SingleOrDefaultAsync();
+            var user = await _context.User.Where(u => u.User_login == temp_user.User_login && u.User_password.ToUpper() == temp_user.User_password).SingleOrDefaultAsync();
             user = await Authenticate(user);
             if (user != null)
             {
@@ -118,15 +118,15 @@ namespace TrimFitAPI.Controllers
         public async Task<IActionResult> ChangePassword(PasswordChange data)
         {
             //var hash_password = SHA1HashStringForUTF8String(data.User_Old_Password);
-            var user = await _context.User.Where(u => u.User_login == data.User_Login.ToLower() && u.User_password.ToLower() == data.User_Old_Password).SingleOrDefaultAsync(); 
+            var user = await _context.User.Where(u => u.User_login == data.User_Login && u.User_password.ToUpper() == data.User_Old_Password).SingleOrDefaultAsync(); 
             if (user != null)
             {
-                if (user.User_password == data.User_New_Password)
+                if (user.User_password.ToUpper() == data.User_New_Password.ToUpper())
                 {
                     //TODO: Change the return for same password
                     return BadRequest("Password cannot be the same");
                 }
-                user.User_password = data.User_New_Password;
+                user.User_password = data.User_New_Password.ToUpper();
                 //user.User_password = SHA1HashStringForUTF8String(data.User_New_Password);
                 user = await Authenticate(user);
                 await _context.SaveChangesAsync();
