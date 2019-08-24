@@ -26,68 +26,22 @@ import kotlin.coroutines.suspendCoroutine
  */
 class LoginDataSource {
     lateinit var result: Result<LoggedInUser>
-    fun login(username: String, password: String, context: Context): Result<LoggedInUser> {
+
+    suspend fun login(username: String, password: String, context: Context) = suspendCoroutine<Result<LoggedInUser>> {cont->
         try {
             // TODO: handle loggedInUser authentication
+      /*      val params = HashMap<String, String>()
+            params["user_login"] = username
+            params["user_password"] = "dupa"*/
+            Log.v("USER:", username)
+            Log.v("Password: ", password)
             val jsonBody = JSONObject()
             jsonBody.put("user_login", username)
-            jsonBody.put("password", password)
+            jsonBody.put("user_password", password)
             val queue = Callback.getInstance(context).requestQueue
             val url = "http://api.trimfit.pl/api/Users/Login"
             val stringReq = JsonObjectRequest(
-                Request.Method.POST,url,jsonBody,
-                Response.Listener<JSONObject> { response ->
-                    val User = LoggedInUser(java.util.UUID.randomUUID().toString(), "ponowemu")
-
-                    result = Result.Success(User)
-                    Log.d("RESPONE ",response.toString())
-                },
-                Response.ErrorListener { error->
-                    Log.v("TAG", "ERROR LUL: " + error.toString())
-                    result = Result.Error(throw Exception("Wrong password"));
-                })
-
-            Callback.getInstance(context).addToRequestQueue(stringReq)
-            val User = LoggedInUser(java.util.UUID.randomUUID().toString(), "ponowemu")
-            return Result.Success(User)
-
-
-        /*  val jsonBody = JSONObject()
-            jsonBody.put("user_login", "ponowemu")
-            jsonBody.put("password", "dupa")
-            val queue = Callback.getInstance(context).requestQueue
-            val url = "http://api.trimfit.pl/api/Users/Login"
-            val stringReq = JsonObjectRequest(
-                Request.Method.POST,url,jsonBody,
-                Response.Listener<JSONObject> { response ->
-
-                    Log.d("RESPONE",response.toString())
-                },
-                Response.ErrorListener { error->
-                    Log.v("TAG", "ERROR LUL: " + error.toString())
-
-                })
-            Callback.getInstance(context).addToRequestQueue(stringReq)*/
-         //   return Result.Success(fakeUser)
-        } catch (e: Throwable) {
-            Log.v("problem http request" , e.toString())
-            return Result.Error(IOException("Error logging in", e))
-        }
-    }
-
-    suspend fun loginSync(username: String, password: String, context: Context) = suspendCoroutine<Result<LoggedInUser>> {cont->
-        try {
-            // TODO: handle loggedInUser authentication
-            val params = HashMap<String, String>()
-            params["user_login"] = "ponowemu"
-            params["user_password"] = "dupa"
-        /*    val jsonBody = JSONObject()
-            jsonBody.put("user_login", "ponowemu")
-            jsonBody.put("user_password", "dupa")*/
-            val queue = Callback.getInstance(context).requestQueue
-            val url = "http://api.trimfit.pl/api/Users/Login"
-            val stringReq = JsonObjectRequest(
-                Request.Method.POST,url, JSONObject(params),
+                Request.Method.POST,url, jsonBody,
                 Response.Listener<JSONObject> { response ->
                     val User = LoggedInUser(java.util.UUID.randomUUID().toString(), "ponowemu")
                     Log.v("RESPONE",response.toString())

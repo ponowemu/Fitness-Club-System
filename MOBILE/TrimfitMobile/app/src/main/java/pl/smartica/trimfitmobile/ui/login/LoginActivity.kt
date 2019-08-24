@@ -46,25 +46,6 @@ class LoginActivity : AppCompatActivity(),CoroutineScope  {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-        val test_button = findViewById<Button>(R.id.button_test22)
-        test_button.setOnClickListener {
-            val jsonBody = JSONObject()
-            jsonBody.put("user_login", "ponowemu2")
-            jsonBody.put("user_password", "dupa")
-            val queue = Callback.getInstance(applicationContext).requestQueue
-            val url = "http://api.trimfit.pl/api/Users/Login"
-            val stringReq = JsonObjectRequest(
-                Request.Method.POST,url,jsonBody,
-                Response.Listener<JSONObject> { response ->
-
-                    Toast.makeText(applicationContext, "It is working xD", Toast.LENGTH_SHORT).show()
-                },
-                Response.ErrorListener { error->
-                    Toast.makeText(applicationContext, error.networkResponse.statusCode, Toast.LENGTH_SHORT).show()
-
-                })
-            Callback.getInstance(applicationContext).addToRequestQueue(stringReq)
-        }
         loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 

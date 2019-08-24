@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.smartica.trimfitmobile.R
 import pl.smartica.trimfitmobile.adapters.ServiceAdapter
+import pl.smartica.trimfitmobile.data.model.LoggedInUser
 import pl.smartica.trimfitmobile.viewmodels.CalendarViewModel
 
 
@@ -46,7 +47,6 @@ class Calendar : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.v(TAG,"Resumed")
     }
 
 
