@@ -126,6 +126,7 @@ namespace TrimFitAPI.Controllers
                     //TODO: Change the return for same password
                     return BadRequest("Password cannot be the same");
                 }
+                user.User_password = data.User_New_Password;
                 //user.User_password = SHA1HashStringForUTF8String(data.User_New_Password);
                 user = await Authenticate(user);
                 await _context.SaveChangesAsync();
