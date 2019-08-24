@@ -18,8 +18,8 @@ namespace TrimFitAPI.Models
         public string User_Token { get; set; }
         [Column("user_type")]
         public int User_Type { get; set; }
-        [Column("customer_id")]
-        public int Customer_Id { get; set; }
+        //[Column("customer_id")]
+        //public int Customer_Id { get; set; }
         [Column("user_status")]
         public int User_Status { get; set; }
         [Column("user_photo_url")]

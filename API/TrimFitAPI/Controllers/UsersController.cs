@@ -27,7 +27,6 @@ namespace TrimFitAPI.Controllers
             _context = context;
         }
 
-
         public static string SHA1HashStringForUTF8String(string s)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -37,6 +36,7 @@ namespace TrimFitAPI.Controllers
             sha1.Dispose();
             return HexStringFromBytes(hashBytes);
         }
+
         public static string HexStringFromBytes(byte[] bytes)
         {
             var sb = new StringBuilder();

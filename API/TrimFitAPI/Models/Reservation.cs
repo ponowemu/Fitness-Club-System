@@ -23,5 +23,8 @@ namespace TrimFitAPI.Models
         public DateTime Reservation_From { get; set; }
         [Column("reservation_to")]
         public DateTime Reservation_To { get; set; }
+        [Column("customer_id")]
+        public int Customer_Id { get; set; }
+        public Customer Customer { get; set; }
     }
 }
