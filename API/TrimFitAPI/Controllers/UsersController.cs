@@ -54,6 +54,50 @@ namespace TrimFitAPI.Controllers
         {
             return _context.User;
         }
+
+
+        [HttpGet("{id}/Customer")]
+        public async Task<IActionResult> GetCustomer([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var Customer = await _context.Customer
+                .Include(a=>a.Address)
+                .Include(u=>u.User)
+                .FirstOrDefaultAsync(x=>x.User_id == id);
+
+            if (Customer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Customer);
+        }
+
+        [HttpGet("{id}/Employee")]
+        public async Task<IActionResult> GetEmployee([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var Employee = await _context.Employee
+                .Include(a => a.Address)
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(x => x.User_id == id);
+
+            if (Employee == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Employee);
+        }
+
         //logowanie
         [AllowAnonymous]
         [HttpPost("[action]/")]

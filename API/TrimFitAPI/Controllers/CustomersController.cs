@@ -53,7 +53,7 @@ namespace TrimFitAPI.Controllers
             return Ok(customer);
         }
 
-        [HttpGet("{id}/registrations")]
+        [HttpGet("{id}/Registrations")]
         public async Task<IActionResult> GetRegistrations([FromRoute] int id, [FromRoute] bool incoming = false)
         {
             if (!ModelState.IsValid)
@@ -78,7 +78,7 @@ namespace TrimFitAPI.Controllers
             return Ok(Registration);
         }
 
-        [HttpGet("{id}/reservations")]
+        [HttpGet("{id}/Reservations")]
         public async Task<IActionResult> GerReservations([FromRoute] int id, [FromRoute] bool incoming = false)
         {
             if (!ModelState.IsValid)
