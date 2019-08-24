@@ -55,6 +55,31 @@ namespace TrimFitAPI.Controllers
             return Ok(activity);
         }
 
+
+        // GET: api/Activities/5
+        [HttpGet("{id}/Employees")]
+        public async Task<IActionResult> Employees([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var activity = await _context.Activity.FindAsync(id);
+            foreach (var item in activity.Category_Id)
+            {
+
+                activity.Category.Add(await _context.Category.FindAsync(item));
+            }
+
+            if (activity == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(activity);
+        }
+
         // PUT: api/Activities/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutActivity([FromRoute] int id, [FromBody] Activity activity)

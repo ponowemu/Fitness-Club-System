@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.data.adapters
+package pl.smartica.trimfitmobile.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

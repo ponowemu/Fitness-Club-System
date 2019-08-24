@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +25,23 @@ namespace TrimFitAPI.Controllers
 
         // GET: api/Timetables
         [HttpGet]
-        public IEnumerable<TimetableActivity> GetTimetableActivities()
+        public IEnumerable<TimetableActivity> GetTimetableActivities([FromQuery] bool incoming = false, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null)
         {
+            var predicate = PredicateBuilder.New<TimetableActivity>(true);
+            if (from != null)
+                predicate = predicate.And(x => x.Timetable_Activity_Starttime >= from);
+            else if (incoming)
+                predicate = predicate.And(x => x.Timetable_Activity_Starttime >= DateTime.Today);
+            if (to != null)
+                predicate = predicate.And(x => x.Timetable_Activity_Starttime <= to);
+
             return _context.Timetable_activity
                 .Include(e => e.Employee)
                 .Include(a => a.Activity)
                 .Include(t => t.Timetable)
                 .Include(r => r.Room)
-                ;
+                .Where(predicate);
+
         }
 
         // GET: api/Timetables/5

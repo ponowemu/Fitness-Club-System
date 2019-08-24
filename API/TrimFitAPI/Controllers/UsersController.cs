@@ -34,7 +34,7 @@ namespace TrimFitAPI.Controllers
 
             var sha1 = SHA1.Create();
             byte[] hashBytes = sha1.ComputeHash(bytes);
-
+            sha1.Dispose();
             return HexStringFromBytes(hashBytes);
         }
         public static string HexStringFromBytes(byte[] bytes)
@@ -108,7 +108,7 @@ namespace TrimFitAPI.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        private async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
+        public async Task<IActionResult> PutUser([FromRoute] int id, [FromBody] User user)
         {
             if (!ModelState.IsValid)
             {

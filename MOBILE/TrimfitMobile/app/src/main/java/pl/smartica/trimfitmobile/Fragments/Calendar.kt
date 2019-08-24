@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.smartica.trimfitmobile.R
-import pl.smartica.trimfitmobile.data.adapters.ServiceAdapter
+import pl.smartica.trimfitmobile.adapters.ServiceAdapter
 import pl.smartica.trimfitmobile.viewmodels.CalendarViewModel
 
 

@@ -1,6 +1,5 @@
-package pl.smartica.trimfitmobile.data.adapters
+package pl.smartica.trimfitmobile.adapters
 
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout

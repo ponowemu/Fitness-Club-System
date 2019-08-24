@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.data.adapters
+package pl.smartica.trimfitmobile.adapters
 
 import android.view.View
 import android.widget.TextView

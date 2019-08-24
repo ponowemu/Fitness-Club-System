@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.data.adapters
+package pl.smartica.trimfitmobile.adapters
 
 import android.content.Context
 import android.util.Log
@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.calendar_item.view.*
-import kotlinx.android.synthetic.main.service_item.view.*
 import pl.smartica.trimfitmobile.R
 import pl.smartica.trimfitmobile.model.Event
-import pl.smartica.trimfitmobile.model.Service
 
 class CalendarAdapter(context: Context, itemList: MutableList<Event>): RecyclerView.Adapter<ServiceHolder>() {
     var eventList: MutableList<Event> = mutableListOf()

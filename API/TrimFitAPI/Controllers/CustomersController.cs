@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,31 @@ namespace TrimFitAPI.Controllers
             }
 
             return Ok(customer);
+        }
+
+        [HttpGet("{id}/registrations")]
+        public async Task<IActionResult> GetRegistrations([FromRoute] int id, [FromRoute] bool incoming = true)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var predicate = PredicateBuilder.New<Registration>(true);
+            if (incoming)
+                predicate = predicate.And(x => x.TimetableActivity.Timetable_Activity_Starttime >= DateTime.Today);
+
+            var Registration = await _context.Registration
+                .Include(t=>t.TimetableActivity)
+                .Include(p=>p.Payment)
+                .Where(predicate)
+                .FirstOrDefaultAsync(x => x.Customer_Id == id);
+
+            if (Registration == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Registration);
         }
 
         // PUT: api/Customers/5
