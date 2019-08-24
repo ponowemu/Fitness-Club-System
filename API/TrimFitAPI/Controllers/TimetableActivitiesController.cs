@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +26,7 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<TimetableActivity> GetTimetableActivities([FromQuery] bool incoming = false, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null)
         {
-            var predicate = PredicateBuilder.New<TimetableActivity>(true);
+            var predicate = PredicateBuilder.True<TimetableActivity>();
             if (from != null)
                 predicate = predicate.And(x => x.Timetable_Activity_Starttime >= from);
             else if (incoming)
