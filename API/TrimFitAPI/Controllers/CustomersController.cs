@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -60,7 +59,7 @@ namespace TrimFitAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var predicate = PredicateBuilder.New<Registration>(true);
+            var predicate = PredicateBuilder.True<Registration>();
             if (incoming)
                 predicate = predicate.And(x => x.TimetableActivity.Timetable_Activity_Starttime >= DateTime.Today);
 
@@ -85,7 +84,7 @@ namespace TrimFitAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var predicate = PredicateBuilder.New<Reservation>(true);
+            var predicate = PredicateBuilder.True<Reservation>();
             if (incoming)
                 predicate = predicate.And(x => x.Reservation_From >= DateTime.Today);
 
