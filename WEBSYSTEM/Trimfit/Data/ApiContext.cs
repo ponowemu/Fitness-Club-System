@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,16 +14,21 @@ namespace Trimfit.Data
     public class ApiContext
     {
         private static string BaseUrl = "http://api.trimfit.pl/api/";
-
+        public static string Token = "";
         public ApiContext()
         {
 
+        }
+        public void setToken(string token)
+        {
+            Token = token;
         }
         public async Task<JsonResult> GetRequest(string url)
         {
             string result = "";
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization =new AuthenticationHeaderValue("Bearer", Token);
                 client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.GetAsync(url))
                 {
@@ -42,6 +48,7 @@ namespace Trimfit.Data
             string result = "";
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
                 client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.PutAsync(url, new StringContent(JsonConvert.SerializeObject(model, Formatting.Indented), Encoding.UTF8, "application/json")))
                 {
@@ -56,6 +63,7 @@ namespace Trimfit.Data
             string result = "";
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
                 client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(model, Formatting.Indented), Encoding.UTF8, "application/json")))
                 {
@@ -78,6 +86,7 @@ namespace Trimfit.Data
             string result = "";
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
                 client.BaseAddress = new Uri(BaseUrl);
                 using (var r = await client.DeleteAsync(url))
                 {

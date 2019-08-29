@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Trimfit.Data;
 using Trimfit.Models;
 
@@ -24,20 +25,35 @@ namespace Trimfit.Controllers
             return View();
         }
 
+        private string HashPassword(string randomString)
+        {
+            var crypt = new SHA256Managed();
+            string hash = String.Empty;
+            byte[] crypto = crypt.ComputeHash(Encoding.ASCII.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash += theByte.ToString("x2");
+            }
+            return hash;
+        }
         [HttpPost]
         public async Task<IActionResult> Login(User user)
         {
             ApiContext _context = new ApiContext();
+            var pass = HashPassword(user.User_password);
+            user.User_password = pass.ToUpper();
 
             var UserResponse = await _context.PostRequest("Users/Login",user);
+            
             if (UserResponse.Value.ToString() != "400")
             {
+                var user_result = JsonConvert.DeserializeObject<User>(UserResponse.Value.ToString());
                 List<Claim> claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, "Sean Connery"),
-                    new Claim(ClaimTypes.Email, user.User_login)
+                    new Claim(ClaimTypes.Email, user.User_login),
                 };
-
+                _context.setToken(user_result.User_Token);
                 ClaimsIdentity identity = new ClaimsIdentity(claims, "cookie");
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 

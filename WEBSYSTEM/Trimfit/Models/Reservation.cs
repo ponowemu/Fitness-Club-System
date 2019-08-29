@@ -12,5 +12,6 @@ namespace Trimfit.Models
         public int Club_Id { get; set; }
         public DateTime Reservation_From { get; set; }
         public DateTime Reservation_To { get; set; }
+        public int Customer_Id { get; set; }
     }
 }

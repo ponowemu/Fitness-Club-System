@@ -32,5 +32,7 @@ namespace Trimfit.Models
         public string Employee_Display_Name { get; set; }
         [JsonProperty(PropertyName ="employee_photo_url")]
         public string Employee_Photo_Url { get; set; }
+        [JsonProperty(PropertyName = "user_id")]
+        public int User_Id { get; set; }
     }
 }

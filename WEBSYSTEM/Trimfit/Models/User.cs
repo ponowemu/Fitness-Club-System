@@ -18,8 +18,6 @@ namespace Trimfit.Models
         public string User_password { get; set; }
         [JsonProperty(PropertyName ="user_type")]
         public int User_Type { get; set; }
-        [JsonProperty(PropertyName ="customer_id")]
-        public int Customer_Id { get; set; }
         [JsonProperty(PropertyName ="user_status")]
         public int User_Status { get; set; }
         [JsonProperty(PropertyName ="user_photo_url")]
@@ -28,6 +26,8 @@ namespace Trimfit.Models
         public string User_FirstName { get; set; }
         [JsonProperty(PropertyName ="user_lastname")]
         public string User_LastName { get; set; }
+        [JsonProperty(PropertyName = "user_token")]
+        public string User_Token { get; set; }
 
     }
 }
