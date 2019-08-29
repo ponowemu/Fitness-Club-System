@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistrationsController : ControllerBase
@@ -24,7 +26,11 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Registration> GetRegistration()
         {
-            return _context.Registration;
+            return _context.Registration
+                .Include(t=>t.TimetableActivity)
+                .Include(p=>p.Payment)
+                .Include(c=>c.Customer)
+                ;
         }
 
         // GET: api/Registrations/5
@@ -36,7 +42,12 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var registration = await _context.Registration.FindAsync(id);
+            var registration = await _context.Registration
+                .Include(t => t.TimetableActivity)
+                .Include(p => p.Payment)
+                .Include(c => c.Customer)
+                .FirstOrDefaultAsync(x=>x.Registration_Id == id)
+                ;
 
             if (registration == null)
             {

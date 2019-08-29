@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class VoucherCustomersController : ControllerBase
@@ -24,7 +26,10 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<VoucherCustomer> GetVoucherCustomer()
         {
-            return _context.VoucherCustomer;
+            return _context.VoucherCustomer
+                .Include(v=>v.Voucher)
+                .Include(c=>c.Customer)
+                ;
         }
 
         // GET: api/VoucherCustomers/5
@@ -36,7 +41,10 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var voucherCustomer = await _context.VoucherCustomer.FindAsync(id);
+            var voucherCustomer = await _context.VoucherCustomer
+                .Include(v => v.Voucher)
+                .Include(c => c.Customer)
+                .FirstOrDefaultAsync(x=>x.Voucher_Customer_Id == id);
 
             if (voucherCustomer == null)
             {

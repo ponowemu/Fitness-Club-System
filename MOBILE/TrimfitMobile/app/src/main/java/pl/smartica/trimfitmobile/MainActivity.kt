@@ -19,6 +19,7 @@ import pl.smartica.trimfitmobile.Fragments.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    public val xddd = ""
     private var pagerAdapter: PagerAdapter? = null
     private var viewPager: ViewPager? = null
 

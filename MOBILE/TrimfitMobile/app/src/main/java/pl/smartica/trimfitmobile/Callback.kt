@@ -31,6 +31,14 @@ class Callback constructor(context: Context) {
                 }
             })
     }
+    var statusCode: Int? = 0
+    var tagForCode: String = ""
+
+    fun setStatusCode(code: Int, tag: String = ""){
+        statusCode = code
+        tagForCode = tag
+    }
+
     val requestQueue: RequestQueue by lazy {
         Volley.newRequestQueue(context.applicationContext)
     }

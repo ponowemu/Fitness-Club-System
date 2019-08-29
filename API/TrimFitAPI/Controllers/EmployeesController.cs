@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
@@ -24,7 +26,9 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Employee> GetEmployee()
         {
-            return _context.Employee;
+            return _context.Employee
+                .Include(e => e.Address)
+                ;
         }
 
         // GET: api/Employees/5
@@ -36,7 +40,9 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employee = await _context.Employee.FindAsync(id);
+            var employee = await _context.Employee
+                .Include(e => e.Address)
+                .FirstOrDefaultAsync(x=>x.Employee_Id == id);
 
             if (employee == null)
             {

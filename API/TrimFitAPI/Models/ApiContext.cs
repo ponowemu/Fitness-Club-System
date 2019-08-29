@@ -7,8 +7,7 @@ namespace TrimFitAPI.Models
     {
         public ApiContext(DbContextOptions<ApiContext> options)
             : base(options)
-        {
-        }
+        {}
         public DbSet<Activity> Activity { get; set; }
         public DbSet<ActivityClub> Activity_club {get; set;}
         public DbSet<Club> Club {get; set;}
@@ -29,17 +28,17 @@ namespace TrimFitAPI.Models
         public DbSet<Timetable> Timetable { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Service> Service { get; set; }
-
         public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<VoucherCustomer> VoucherCustomer { get; set; }
+        public DbSet<UserDetail> UserDetail { get; set; }
+        public DbSet<Product> Product { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {   
             optionsBuilder.UseNpgsql(SecData.ConnectionString);
         }
-    public DbSet<TrimFitAPI.Models.User> User { get; set; }
-    public DbSet<TrimFitAPI.Models.Address> Address { get; set; }
-    public DbSet<TrimFitAPI.Models.VoucherCustomer> VoucherCustomer { get; set; }
-    public DbSet<TrimFitAPI.Models.UserDetail> UserDetail { get; set; }
-    public DbSet<TrimFitAPI.Models.Product> Product { get; set; }
+
     }
 }

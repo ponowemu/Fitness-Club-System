@@ -8,6 +8,6 @@ namespace TrimFitAPI.Models
     public class SecData
     {
         public static string ConnectionString { get; set; }
-        public static string ApiKeys { get; set; }
+        public static string ApiKey { get; set; }
     }
 }
