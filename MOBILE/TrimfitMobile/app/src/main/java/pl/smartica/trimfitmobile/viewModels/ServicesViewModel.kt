@@ -1,16 +1,10 @@
-package pl.smartica.trimfitmobile.viewmodels
+package pl.smartica.trimfitmobile.viewModels
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import org.json.JSONArray
-import pl.smartica.trimfitmobile.Callback
-import pl.smartica.trimfitmobile.model.Service
+import pl.smartica.trimfitmobile.api.model.Service
 import pl.smartica.trimfitmobile.repositories.ServicesRepository
 
 class ServicesViewModel : ViewModel(){

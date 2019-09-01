@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.viewmodels
+package pl.smartica.trimfitmobile.viewModels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

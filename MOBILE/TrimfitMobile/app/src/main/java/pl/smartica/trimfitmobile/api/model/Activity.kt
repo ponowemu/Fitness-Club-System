@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.model
+package pl.smartica.trimfitmobile.api.model
 
 class Activity {
     var activityName: String? = null

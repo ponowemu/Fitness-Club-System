@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.service_item.view.*
 import pl.smartica.trimfitmobile.R
-import pl.smartica.trimfitmobile.model.Service
+import pl.smartica.trimfitmobile.api.model.Service
 
 class ServiceAdapter(context: Context, itemList: MutableList<Service>): RecyclerView.Adapter<ServiceHolder>() {
     var serviceList: MutableList<Service> = mutableListOf()

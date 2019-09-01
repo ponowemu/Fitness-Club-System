@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".Fragments.Dashboard" android:id="@+id/frameLayout2">
+                                                   tools:context=".ui.fragments.Dashboard" android:id="@+id/frameLayout2">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

@@ -6,16 +6,11 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
-import pl.smartica.trimfitmobile.Callback
-import pl.smartica.trimfitmobile.data.model.LoggedInUser
-import java.io.BufferedReader
+import pl.smartica.trimfitmobile.api.Callback
+import pl.smartica.trimfitmobile.api.model.LoggedInUser
 import java.io.IOException
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
 import java.lang.Exception
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -27,14 +22,8 @@ import kotlin.coroutines.suspendCoroutine
 class LoginDataSource {
     lateinit var result: Result<LoggedInUser>
 
-    suspend fun login(username: String, password: String, context: Context) = suspendCoroutine<Result<LoggedInUser>> {cont->
+    suspend fun login(username: String, password: String, context: Context) = suspendCoroutine<Result<LoggedInUser>> { cont->
         try {
-            // TODO: handle loggedInUser authentication
-      /*      val params = HashMap<String, String>()
-            params["user_login"] = username
-            params["user_password"] = "dupa"*/
-            Log.v("USER:", username)
-            Log.v("Password: ", password)
             val jsonBody = JSONObject()
             jsonBody.put("user_login", username)
             jsonBody.put("user_password", password)
@@ -43,7 +32,10 @@ class LoginDataSource {
             val stringReq = JsonObjectRequest(
                 Request.Method.POST,url, jsonBody,
                 Response.Listener<JSONObject> { response ->
-                    val User = LoggedInUser(java.util.UUID.randomUUID().toString(), "ponowemu")
+                    val User = LoggedInUser(
+                        UUID.randomUUID().toString(),
+                        "ponowemu"
+                    )
                     Log.v("RESPONE",response.toString())
                     cont.resume(Result.Success(User))
                 },
