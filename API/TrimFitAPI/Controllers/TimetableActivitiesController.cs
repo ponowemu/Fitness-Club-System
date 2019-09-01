@@ -24,7 +24,7 @@ namespace TrimFitAPI.Controllers
 
         // GET: api/Timetables
         [HttpGet]
-        public IEnumerable<TimetableActivity> GetTimetableActivities([FromQuery] bool incoming = false, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null)
+        public IEnumerable<TimetableActivity> GetTimetableActivities([FromQuery] bool incoming = false, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null, [FromQuery] int? timetable = null)
         {
             var predicate = PredicateBuilder.True<TimetableActivity>();
             if (from != null)
@@ -33,6 +33,8 @@ namespace TrimFitAPI.Controllers
                 predicate = predicate.And(x => x.Timetable_Activity_Starttime >= DateTime.Today);
             if (to != null)
                 predicate = predicate.And(x => x.Timetable_Activity_Starttime <= to);
+            if (timetable != null)
+                predicate = predicate.And(x => x.Timetable_Id == timetable);
 
             return _context.Timetable_activity
                 .Include(e => e.Employee)

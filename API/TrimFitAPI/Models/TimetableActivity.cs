@@ -47,7 +47,7 @@ namespace TrimFitAPI.Models
         public string Timetable_Activity_Color { get; set; }
         [Column("timetable_id")]
 
-        public int? Timetable_Id { get; set; }
+        public int Timetable_Id { get; set; }
         public Timetable Timetable { get; set; }
 
     }
