@@ -24,7 +24,7 @@ namespace TrimFitAPI.Controllers
 
         // GET: api/Timetables
         [HttpGet]
-        public IEnumerable<TimetableActivity> GetTimetableActivities([FromQuery] bool incoming = false, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null, [FromQuery] int? timetable = null)
+        public IEnumerable<TimetableActivity> GetTimetableActivities([FromQuery] bool incoming = false, [FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null, [FromQuery] int? timetable = null, [FromQuery] bool related = false)
         {
             var predicate = PredicateBuilder.True<TimetableActivity>();
             if (from != null)
@@ -36,12 +36,21 @@ namespace TrimFitAPI.Controllers
             if (timetable != null)
                 predicate = predicate.And(x => x.Timetable_Id == timetable);
 
-            return _context.Timetable_activity
-                .Include(e => e.Employee)
-                .Include(a => a.Activity)
-                .Include(t => t.Timetable)
-                .Include(r => r.Room)
-                .Where(predicate);
+            if (related == true)
+            {
+                return _context.Timetable_activity
+                    .Include(e => e.Employee)
+                    .Include(a => a.Activity)
+                    .Include(t => t.Timetable)
+                    .Include(r => r.Room)
+                    .Where(predicate);
+            }
+            else
+            {
+                return _context.Timetable_activity
+                    .Where(predicate);
+            }
+
 
         }
 
