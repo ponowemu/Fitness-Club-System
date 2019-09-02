@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Proxies;
 using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Models
