@@ -38,7 +38,7 @@ namespace TrimFitAPI.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {   
-            optionsBuilder.UseLazyLoadingProxies().UseNpgsql(SecData.ConnectionString);
+            optionsBuilder.UseNpgsql(SecData.ConnectionString);
         }
 
     }

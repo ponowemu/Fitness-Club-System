@@ -16,11 +16,11 @@ namespace TrimFitAPI.Models
 
         [Column("employee_id")]
         public int Employee_Id { get; set; }
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
 
         [Column("activity_id")]
         public int Activity_Id { get; set; }
-        public virtual Activity Activity { get; set; }
+        public Activity Activity { get; set; }
 
         [Column("timetable_activity_day")]
         public string Timetable_Activity_Day { get; set; }
@@ -35,7 +35,7 @@ namespace TrimFitAPI.Models
 
         [Column("room_id")]
         public int Room_Id { get; set; }
-        public virtual Room Room { get; set; }
+        public Room Room { get; set; }
 
         [Column("timetable_activity_repeatable")]
         public int Timetable_Activity_Repeatable { get; set; }
@@ -48,7 +48,7 @@ namespace TrimFitAPI.Models
         [Column("timetable_id")]
 
         public int Timetable_Id { get; set; }
-        public virtual Timetable Timetable { get; set; }
+        public Timetable Timetable { get; set; }
 
     }
 }

@@ -69,6 +69,7 @@ namespace TrimFitAPI.Controllers
                 .Include(r => r.Room)
                 .Include(e => e.Employee)
                 .FirstOrDefaultAsync(x => x.Timetable_Activity_Id == id);
+
             //var timetable = await _context.Timetable_activity.FindAsync(id);
 
             if (timetable == null)
