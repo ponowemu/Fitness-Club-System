@@ -30,7 +30,7 @@ namespace TrimFitAPI.Models
 
         [Column("address_id")]
         public int? Address_Id { get; set; }
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
 
         [Column("employee_display_name")]
         public string Employee_Display_Name { get; set; }
@@ -39,6 +39,6 @@ namespace TrimFitAPI.Models
 
         [Column("user_id")]
         public int? User_id { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

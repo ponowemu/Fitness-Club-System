@@ -15,7 +15,7 @@ namespace TrimFitAPI.Models
         public int Payment_Id { get; set; }
         [Column("customer_id")]
         public int Customer_Id { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         [Column("payment_type_id")]
         public int Payment_Type_Id {get;set;}
         [Column("payment_status")]

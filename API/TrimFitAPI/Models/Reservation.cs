@@ -15,19 +15,19 @@ namespace TrimFitAPI.Models
         public int Reservation_Id { get; set; }
         [Column("service_id")]
         public int Service_Id { get; set; }
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
         [Column("club_id")]
         public int Club_Id { get; set; }
-        public Club Club { get; set; }
+        public virtual Club Club { get; set; }
         [Column("reservation_from")]
         public DateTime Reservation_From { get; set; }
         [Column("reservation_to")]
         public DateTime Reservation_To { get; set; }
         [Column("customer_id")]
         public int Customer_Id { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         [Column("payment_id")]
         public int Payment_Id { get; set; }
-        public Payment Payment { get; set; }
+        public virtual Payment Payment { get; set; }
     }
 }

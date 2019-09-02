@@ -19,6 +19,6 @@ namespace TrimFitAPI.Models
         public int Club_Status { get; set; }
         [Column("address_id")]
         public int Address_Id { get; set; }
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
     }
 }
