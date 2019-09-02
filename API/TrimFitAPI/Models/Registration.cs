@@ -18,7 +18,7 @@ namespace TrimFitAPI.Models
         public virtual TimetableActivity TimetableActivity { get; set; }
         [Column("customer_id")]
         public int Customer_Id { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         [Column("registration_created")]
         public DateTime Registartion_Created { get; set; }
         [Column("payment_id")]
