@@ -15,7 +15,7 @@ namespace TrimFitAPI.Models
         public int Activity_Club_Id { get; set; }
         [Column("activity_id")]
         public int Activity_Id { get; set; }
-        public Activity Activity { get; set; }
+        public virtual Activity Activity { get; set; }
         [Column("club_id")]
         public int Club_Id { get; set; }
         public virtual Club Club { get; set; }
