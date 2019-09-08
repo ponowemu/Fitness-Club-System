@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.smartica.trimfitmobile.R
+import pl.smartica.trimfitmobile.adapters.CalendarAdapter
 import pl.smartica.trimfitmobile.adapters.ServiceAdapter
 import pl.smartica.trimfitmobile.viewModels.CalendarViewModel
 
@@ -19,7 +21,7 @@ class Calendar : Fragment() {
 
     private val TAG = "ProductsFragment"
     private var listener: Products.OnFragmentInteractionListener? = null
-    lateinit var adapter: ServiceAdapter
+    lateinit var adapter: CalendarAdapter
     private lateinit var loadingBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var calendarViewModel: CalendarViewModel
@@ -38,7 +40,12 @@ class Calendar : Fragment() {
         setProgressBarVisible(true)
         calendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel::class.java)
         calendarViewModel.initialize(this.context!!)
-
+        calendarViewModel.getEventList().observe(this, Observer {
+            adapter.notifyDataSetChanged()
+            if (it.count() > 0)
+                setProgressBarVisible(false)
+        })
+        initRecyclerView()
         // Inflate the layout for this fragment
         return view
     }
@@ -49,10 +56,9 @@ class Calendar : Fragment() {
 
 
     private fun initRecyclerView() {
-       /* adapter = ServiceAdapter(
-            this.context!!,
-            //mServicesViewModel.getServicesList().value!!
-        )9*/
+        adapter = CalendarAdapter(
+            this.context!!, calendarViewModel.getEventList().value!!
+        )
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.context)
     }

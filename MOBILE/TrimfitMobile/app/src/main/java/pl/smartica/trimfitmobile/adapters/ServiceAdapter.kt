@@ -31,16 +31,14 @@ class ServiceAdapter(context: Context, itemList: MutableList<Service>): Recycler
     }
 
     override fun onBindViewHolder(holder: ServiceHolder, position: Int) {
-        holder.priceText!!.text = serviceList[position].servicePriceGross.toString()
+        holder.priceText.text = serviceList[position].servicePriceGross.toString()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            holder.descriptionText!!.text = Html.fromHtml(serviceList[position].serviceDescription, Html.FROM_HTML_MODE_COMPACT)
-            holder.headerText!!.text = Html.fromHtml(serviceList[position].serviceHeader, Html.FROM_HTML_MODE_COMPACT)
+            holder.descriptionText.text = Html.fromHtml(serviceList[position].serviceDescription, Html.FROM_HTML_MODE_COMPACT)
+            holder.headerText.text = Html.fromHtml(serviceList[position].serviceHeader, Html.FROM_HTML_MODE_COMPACT)
         } else {
-            holder.descriptionText!!.text = Html.fromHtml(serviceList[position].serviceDescription)
-            holder.headerText!!.text = Html.fromHtml(serviceList[position].serviceHeader)
+            holder.descriptionText.text = Html.fromHtml(serviceList[position].serviceDescription)
+            holder.headerText.text = Html.fromHtml(serviceList[position].serviceHeader)
         }
 
     }
-
-
 }

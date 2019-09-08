@@ -15,7 +15,7 @@ class ServicesRepository {
     fun getServiceList(context: Context): MutableLiveData<MutableList<Service>>{
         GlobalScope.launch {
             var items = ApiCall()
-                .getItemsFromApi(context, "get","Services", null)
+                .getItemsFromApi(context, "get","Services?status=0", null)
             if (items != null)
                 convertJsonToItems(items)
             Log.v("FINISHED", "CHECKUP")

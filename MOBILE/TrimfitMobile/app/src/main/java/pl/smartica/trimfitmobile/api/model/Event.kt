@@ -1,15 +1,39 @@
 package pl.smartica.trimfitmobile.api.model
 
+import android.os.Build
+import android.util.Log
+import org.json.JSONObject
 import pl.smartica.trimfitmobile.api.model.Activity
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class Event {
     var eventId: Int? = null
     var activity: Activity? = null
-    var employeeId: Int? = null
-    var startTime: Date? = null
-    var endTime: Date? = null
+    var employee: Employee? = null
+    var startTime: LocalDate? = null
+    var endTime: LocalDate? = null
+
+    constructor(item: JSONObject){
+        eventId = item.getInt("timetable_Activity_Id")
+        activity = Activity(item.getJSONObject("activity"))
+        Log.v("Activty", activity!!.activityName)
+        employee = Employee(item.getJSONObject("employee"))
+        Log.v("Activty", employee!!.employeeFirstName)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            startTime = LocalDate.parse(item.getString("timetable_Activity_Starttime"),
+                DateTimeFormatter.ofPattern("yyyy-dd-MM'T'HH:mm:ss"))
+            endTime = LocalDate.parse(item.getString("timetable_Activity_Endtime"),
+                DateTimeFormatter.ofPattern("yyyy-dd-MM'T'HH:mm:ss"))
+        }
+
+
+    }
 }
+
+
 
 /*
   {
