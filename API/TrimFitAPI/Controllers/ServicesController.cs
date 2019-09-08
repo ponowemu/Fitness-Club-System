@@ -24,9 +24,13 @@ namespace TrimFitAPI.Controllers
 
         // GET: api/Services
         [HttpGet]
-        public IEnumerable<Service> GetService()
+        public IEnumerable<Service> GetService([FromQuery] int? status)
         {
-            return _context.Service;
+            var predicate = PredicateBuilder.True<Service>();
+            if (status != null)
+                predicate = predicate.And(x => x.Service_Status == status);
+            return _context.Service.
+                Where(predicate);
         }
 
         // GET: api/Services/5
