@@ -13,21 +13,21 @@ class Event {
     var eventId: Int? = null
     var activity: Activity? = null
     var employee: Employee? = null
-    var startTime: LocalDate? = null
-    var endTime: LocalDate? = null
+    var startTime: LocalDateTime? = null
+    var endTime: LocalDateTime? = null
+    var color: String? = null
 
     constructor(item: JSONObject){
         eventId = item.getInt("timetable_Activity_Id")
         activity = Activity(item.getJSONObject("activity"))
-        Log.v("Activty", activity!!.activityName)
         employee = Employee(item.getJSONObject("employee"))
-        Log.v("Activty", employee!!.employeeFirstName)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            startTime = LocalDate.parse(item.getString("timetable_Activity_Starttime"),
-                DateTimeFormatter.ofPattern("yyyy-dd-MM'T'HH:mm:ss"))
-            endTime = LocalDate.parse(item.getString("timetable_Activity_Endtime"),
-                DateTimeFormatter.ofPattern("yyyy-dd-MM'T'HH:mm:ss"))
+            startTime = LocalDateTime.parse(item.getString("timetable_Activity_Starttime"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+            endTime = LocalDateTime.parse(item.getString("timetable_Activity_Endtime"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
         }
+        color = item.getString("timetable_Activity_Color")
 
 
     }

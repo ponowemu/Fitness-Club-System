@@ -7,7 +7,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
 import pl.smartica.trimfitmobile.api.Callback
-import pl.smartica.trimfitmobile.api.model.LoggedInUser
+import pl.smartica.trimfitmobile.data.model.LoggedInUser
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
@@ -34,14 +34,12 @@ class LoginDataSource {
                 Response.Listener<JSONObject> { response ->
                     val User = LoggedInUser(
                         UUID.randomUUID().toString(),
-                        "ponowemu"
+                        "Michał"
                     )
                     Log.v("RESPONE",response.toString())
                     cont.resume(Result.Success(User))
                 },
                 Response.ErrorListener { error->
-                    if (error.networkResponse == null)
-                        Log.v("TAG", "NULL LUL: " + error.toString())
                     Log.v("TAG", "ERROR LUL: " + error.toString())
                     cont.resume( Result.Error(Exception("Wrong password")))
                 })

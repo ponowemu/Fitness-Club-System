@@ -2,6 +2,7 @@ package pl.smartica.trimfitmobile.ui.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,13 +37,14 @@ class Calendar : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
         recyclerView = view.findViewById<RecyclerView>(R.id.calendar_recycler)
-        loadingBar = view.findViewById(R.id.loadingBar)
+        loadingBar = view.findViewById(R.id.loadingBarCalendar)
         setProgressBarVisible(true)
         calendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel::class.java)
         calendarViewModel.initialize(this.context!!)
         calendarViewModel.getEventList().observe(this, Observer {
             adapter.notifyDataSetChanged()
             if (it.count() > 0)
+                initRecyclerView()
                 setProgressBarVisible(false)
         })
         initRecyclerView()
@@ -54,10 +56,9 @@ class Calendar : Fragment() {
         super.onResume()
     }
 
-
     private fun initRecyclerView() {
         adapter = CalendarAdapter(
-            this.context!!, calendarViewModel.getEventList().value!!
+            this.context!!, calendarViewModel.getItemList()!!
         )
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.context)
@@ -65,7 +66,11 @@ class Calendar : Fragment() {
 
     private fun setProgressBarVisible(visible: Boolean) {
         if (visible)
+        {
+            Log.v("Progress", "show")
             loadingBar.visibility = View.VISIBLE
+        }
+
         else
             loadingBar.visibility = View.GONE
     }

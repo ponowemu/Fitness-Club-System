@@ -1,6 +1,5 @@
 package pl.smartica.trimfitmobile.api
 
-import android.app.DownloadManager
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -8,16 +7,12 @@ import com.android.volley.Request
 import com.android.volley.Response
 import org.json.JSONArray
 import org.json.JSONObject
-import pl.smartica.trimfitmobile.api.Callback
 import pl.smartica.trimfitmobile.api.CustomRequests.CustomJsonArrayRequest
 import pl.smartica.trimfitmobile.api.CustomRequests.CustomJsonObjectRequest
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class ApiCall {
-    var liveError =  MutableLiveData<Boolean>()
-    var liveItems =  MutableLiveData<JSONArray>()
-    var liveItem =  MutableLiveData<JSONObject>()
     val baseUrl: String = "http://api.trimfit.pl/api/"
     var accessToken: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJuYmYiOjE1NjYxNTMyNjMsImV4cCI6MTU2ODc0NTI2MywiaWF0IjoxNTY2MTUzMjYzfQ.gLZArPDFrWes9xgsCzzc5_IEDi-xmCtTfroVeafCgac"
 

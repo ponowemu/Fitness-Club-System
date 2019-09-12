@@ -18,7 +18,6 @@ class ServiceAdapter(context: Context, itemList: MutableList<Service>): Recycler
     init {
         this.context = context
         this.serviceList = itemList
-        Log.v("ServiceAdapter","Constructor")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceHolder {

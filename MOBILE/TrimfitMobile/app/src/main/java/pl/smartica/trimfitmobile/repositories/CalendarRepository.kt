@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import pl.smartica.trimfitmobile.api.ApiCall
@@ -16,7 +17,7 @@ class CalendarRepository {
     fun getItems(context: Context):MutableLiveData<MutableList<Event>>{
         GlobalScope.launch {
             var items = ApiCall()
-                .getItemsFromApi(context, "get","TimetableActivities?incoming=true&related=true", null)
+                .getItemsFromApi(context, "get","TimetableActivities?incoming=true&related=true&timetable=20", null)
             if (items != null)
                 convertJsonToItems(items)
             Log.v("FINISHED timetable ", "CHECKUP activites")
