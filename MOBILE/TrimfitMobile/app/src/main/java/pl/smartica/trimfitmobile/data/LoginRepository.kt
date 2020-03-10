@@ -3,7 +3,7 @@ package pl.smartica.trimfitmobile.data
 import android.content.Context
 import kotlinx.coroutines.*
 import pl.smartica.trimfitmobile.HashUtils
-import pl.smartica.trimfitmobile.api.model.LoggedInUser
+import pl.smartica.trimfitmobile.data.model.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

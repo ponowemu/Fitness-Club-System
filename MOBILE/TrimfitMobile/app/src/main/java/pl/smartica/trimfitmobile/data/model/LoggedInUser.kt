@@ -1,4 +1,4 @@
-package pl.smartica.trimfitmobile.api.model
+package pl.smartica.trimfitmobile.data.model
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

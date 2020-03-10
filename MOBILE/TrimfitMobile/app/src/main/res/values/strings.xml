@@ -2,8 +2,8 @@
     <string name="app_name">Trimfit Mobile</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Michał Kamiński</string>
+    <string name="nav_header_subtitle">mjk1238</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -19,6 +19,7 @@
 
     <string name="button_reserve">&#xf07a; Rezerwuj</string>
     <string name="button_read_more">Czytaj więcej</string>
+    <string name="no_reservations">Nie zapisałeś się na żadne zajęcia</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -34,7 +35,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Zaloguj się</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Witamy !"</string>
+    <string name="welcome">"Witaj "</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Hasło musi posiadać conajmniej 4 znaki</string>
     <string name="login_failed">"Login lub hasło jest niepoprawane"</string>

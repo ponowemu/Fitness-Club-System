@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pagerAdapter = PagerAdapter(supportFragmentManager)
         viewPager = findViewById(R.id.page_containter)
         viewPager?.adapter = pagerAdapter
-        this.setCurrentPage(Dashboard(),"Dashboard")
+        this.setCurrentPage(Calendar(),"Dashboard")
     }
     private fun setCurrentPage(fragment: Fragment, title: String){
         pagerAdapter?.setItem(fragment,title)

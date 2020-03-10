@@ -46,7 +46,6 @@ class Services : Fragment() {
             if (it.count() > 0)
                 setProgressBarVisible(false)
         })
-        Log.v("BEFORE", "BEFORE INIT")
         initRecyclerView()
         return view
     }
