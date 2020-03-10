@@ -19,7 +19,7 @@ namespace TrimFitAPI
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://*:6000;http://localhost:6001")
+                .UseUrls("http://*:7000;http://localhost:7001")
                 .UseStartup<Startup>();
     }
 }
