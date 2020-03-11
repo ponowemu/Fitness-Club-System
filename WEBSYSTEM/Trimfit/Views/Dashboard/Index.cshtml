@@ -10,7 +10,7 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card">
-
+                <div class="card-header"><h4>Zbliżające się zajęcia</h4></div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12">
@@ -19,7 +19,81 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Podsumowanie</h4>
+                    <div class="card-header-action">
+                        <a href="#summary-chart" data-tab="summary-tab" class="btn active">Wykres</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="summary">
+
+                        <div class="summary-chart active" data-tab-group="summary-tab" id="summary-chart">
+                            <canvas id="myChart" height="180"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Statystyki</h4>
+                    <div class="card-header-action">
+                        <a href="#" class="btn active">Tydzień</a>
+                        <a href="#" class="btn">Miesiąc</a>
+                        <a href="#" class="btn">Rok</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart2" height="180"></canvas>
+                    <div class="statistic-details mt-1">
+                        <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
+                            <div class="detail-value">243</div>
+                            <div class="detail-name">Dzisiaj</div>
+                        </div>
+                        <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</div>
+                            <div class="detail-value">405</div>
+                            <div class="detail-name">Ten tydzień</div>
+                        </div>
+                        <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</div>
+                            <div class="detail-value">123</div>
+                            <div class="detail-name">Ten miesiąc</div>
+                        </div>
+                        <div class="statistic-details-item">
+                            <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</div>
+                            <div class="detail-value">432</div>
+                            <div class="detail-name">Ten rok</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h4>Najlepiej oceniani instruktorzy</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mb-4 mb-lg-0 text-center">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </section>
 
 

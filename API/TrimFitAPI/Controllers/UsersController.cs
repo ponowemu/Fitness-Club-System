@@ -226,7 +226,7 @@ namespace TrimFitAPI.Controllers
 
             return Ok(user);
         }
-
+        [HttpPost]
         private async Task<User> Authenticate(User user)
         {
             // return null if user not found

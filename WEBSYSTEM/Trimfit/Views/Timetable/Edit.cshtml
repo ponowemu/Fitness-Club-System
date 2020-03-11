@@ -56,7 +56,9 @@
                                             }
 
                                             <td>
-                                                <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="@item.Timetable_Id" class="btn btn-edit">Edytuj</a>
+                                                <a asp-controller="Timetable" asp-action="EditTimetable" asp-route-id="@item.Timetable_Id" class="btn btn-edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                Edytuj</a>
                                                 <a href="#" class="btn btn-danger">Usuń</a>
                                             </td>
                                         </tr>

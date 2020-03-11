@@ -109,8 +109,8 @@ namespace Trimfit.Controllers
             ApiContext _context = new ApiContext();
             try
             {
-                var result = await _context.GetRequest("TimetableActivities/");
-                var list = JsonConvert.DeserializeObject<List<TimetableActivity>>(result.Value.ToString()).Where(l => l.Timetable_Id == timetable_id);
+                var result = await _context.GetRequest("TimetableActivities/?timetable=20");
+                var list = JsonConvert.DeserializeObject<List<TimetableActivity>>(result.Value.ToString()).Where(l => l.Timetable_Id == timetable_id).Take(100);
                 
                 foreach(var el in list)
                 {

@@ -1,4 +1,8 @@
-﻿$("#add-new-activity").fireModal({
+﻿$("#activity_list").DataTable({
+
+});
+
+$("#add-new-activity").fireModal({
     title: 'Dodaj nową aktywność',
     body: $("#new-activity"),
     footerClass: 'bg-whitesmoke',

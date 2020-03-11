@@ -14,7 +14,7 @@ namespace Trimfit.Data
     public class ApiContext
     {
         private static string BaseUrl = "http://api.trimfit.pl/api/";
-        public static string Token = "";
+        public static string Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1pa2_FgmFqIiwibmJmIjoxNTY3NDIzMzM1LCJleHAiOjE1OTg1MjczMzUsImlhdCI6MTU2NzQyMzMzNX0.DJTkYfyh6GXH9-T7x56VALZNVP0BJTiMtkhXbsHaTAM";
         public ApiContext()
         {
 
@@ -30,6 +30,7 @@ namespace Trimfit.Data
             {
                 client.DefaultRequestHeaders.Authorization =new AuthenticationHeaderValue("Bearer", Token);
                 client.BaseAddress = new Uri(BaseUrl);
+                
                 using (var r = await client.GetAsync(url))
                 {
                     if (r.IsSuccessStatusCode)
@@ -43,6 +44,7 @@ namespace Trimfit.Data
             }
             return new JsonResult(result);
         }
+        
         public async Task<JsonResult> PutRequest(string url, object model)
         {
             string result = "";
