@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Trimfit.Data;
 
 namespace Trimfit
 {
@@ -37,6 +38,8 @@ namespace Trimfit
                        options.AccessDeniedPath = new PathString("/User/Login");
                        options.LoginPath = new PathString("/User/Login");
                    });
+
+            services.AddSingleton<IApiContext, ApiContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

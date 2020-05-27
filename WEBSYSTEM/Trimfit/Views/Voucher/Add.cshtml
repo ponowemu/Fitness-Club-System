@@ -1,0 +1,364 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">Nowy karnet</h2>
+        <p class="section-lead">Wypełnij wszystkie pola formularza i dodaj nowy karnet. <br /> Dzięki <b>ograniczeniom czasowym</b> jesteś w stanie w łatwy sposób ustawić dostępność dodawanego karnetu. </p>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Podstawowe informacje</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="modal-part-add needs-validation" method="post" id="modal-add-new-voucher" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Nazwa</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-ad"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nazwa" name="service-name" id="service_name" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź nazwę karnetu.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Wybierz typ karnetu</label>
+                                    <select class="form-control select2" id="voucher_type_list">
+                                        @foreach (var voucher in ViewData["voucherTypes"] as IList<VoucherType>)
+                                        {
+                                            <option value="@voucher.Voucher_Type_Id">@voucher.Voucher_Type_Name</option>
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12 float-left">
+                                    <label>Wybierz zajęcia</label>
+                                    <select class="form-control select2" multiple="" id="activities_list">
+                                        @foreach (var ac in ViewData["activities"] as IList<Activity>)
+                                        {
+                                            <option value="@ac.Activity_Id">@ac.Activity_Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12 float-left">
+                                    <label>Obowiązuje w okresie</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" placeholder="" class="form-control daterange-cus">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Ważny przez</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                        </div>
+                                        <input type="number" min="0" placeholder="Ilość dni" id="voucher_days" class="form-control">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">dni</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Ważny przez</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                        </div>
+                                        <input type="number" min="0" placeholder="Ilość wejść" id="voucher_entries" class="form-control">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">razy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Ilość możliwych zamrożeń</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-wind"></i>
+                                            </div>
+                                        </div>
+                                        <input type="number" min="0" placeholder="Ilość zamrożeń" id="voucher_freeze_numbers" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Okres zamrożenia</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-sort-numeric-down"></i>
+                                            </div>
+                                        </div>
+                                        <input type="number" min="0" placeholder="Ilość dni" id="voucher_freeze_days" class="form-control">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">dni</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col-md-12">
+                                    <label>Opis</label>
+                                    <textarea id="summernote-new-service" name="summernote-new-service" required=""></textarea>
+                                    <div class="invalid-feedback">
+                                        Uzupełnij opis karnetu.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena brutto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-money-bill-alt"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control service-gross-price" id="service_gross_price" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź cenę brutto usługi.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena netto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-money-bill-alt"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" readonly="readonly" class="form-control service-net-price" id="service_net_price">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="btn btn-icon btn-primary" type="submit" value="Dodaj">
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ograniczenia czasowe</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group col-md-12 float-left">
+                            <div class="col-md-12">
+                                <label>Poniedziałek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="mon_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="mon_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Wtorek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="tue_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="tue_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Środa</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="wen_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="wen_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Czwartek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="thu_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="thu_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Piątek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="fri_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="fri_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Sobota</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="sat_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="sat_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left " style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Niedziela</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="00:00" id="sun_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="23:59" id="sun_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</section>

@@ -503,31 +503,6 @@ div.dataTables_wrapper div.dataTables_processing {
     opacity: 1 !important;
 }
 
-/* 1.9 Date Range Picker */
-.daterangepicker.dropdown-menu {
-    width: auto;
-}
-
-.daterangepicker .input-mini {
-    padding-left: 28px !important;
-}
-
-.daterangepicker .calendar th, .daterangepicker .calendar td {
-    padding: 5px;
-    font-size: 12px;
-}
-
-.ranges li {
-    color: #d9b310;
-}
-
-    .ranges li:hover, .ranges li.active {
-        background-color: #d9b310;
-    }
-
-.daterangepicker td.active, .daterangepicker td.active:hover {
-    background-color: #d9b310;
-}
 
 /* 1.10 Dropzone */
 .dropzone {

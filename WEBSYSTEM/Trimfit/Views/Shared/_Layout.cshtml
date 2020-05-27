@@ -21,6 +21,9 @@
     <link href="~/packages/daygrid/main.css" rel="stylesheet" />
     <link href="~/packages/timegrid/main.css" rel="stylesheet" />
     <link href="~/packages/list/main.css" rel="stylesheet" />
+    <link href="~/css/daterangepicker.css" rel="stylesheet" />
+
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
     <link href="~/css/select2.min.css" rel="stylesheet" />
@@ -218,7 +221,8 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-ticket-alt"></i> <span>Karnety</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link">Test</a></li>
+                                <li><a asp-controller="Voucher" asp-action="List" class="nav-link">Lista karnetów</a></li>
+                                <li><a asp-controller="Voucher" asp-action="Manage" class="nav-link">Zarządzaj karentami</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -320,6 +324,7 @@
     <script src="~/js/pages/category.js"></script>
     <script src="~/js/pages/cart.js"></script>
     <script src="~/js/pages/activity.js"></script>
+    <script src="~/js/pages/voucher.js"></script>
     <!-- Data Table -->
     <!-- Modals-->
     <script src="~/js/modules/chart.min.js"></script>

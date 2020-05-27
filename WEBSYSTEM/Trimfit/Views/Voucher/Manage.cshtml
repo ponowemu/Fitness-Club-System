@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Trimfit.Models.ModelView.VoucherView>
+@{
+    int counter = 1;
+}
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a asp-controller="Voucher" asp-action="Add" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-voucher"><i class="far fa-edit"></i> Nowy karnet</a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Lista dodanych karnetów</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table-services">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            #
+                                        </th>
+                                        <th>Typ</th>
+                                        <th>Opis</th>
+                                        <th>Przypisane zajęcia</th>
+                                        <th>Zamrażalny</th>
+                                        <th>Ilość zamrożeń (okres)</th>
+                                        <th>Okres obowiązywania</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @counter
+                                            </td>
+                                            <td>
+                                                @item.VoucherType.Voucher_Type_Name
+                                            </td>
+                                            <td>@Html.Raw(item.Voucher_Description)</td>
+                                            <td>
+                                                @foreach (var ac in item.Activities)
+                                                {
+                                                    <div class="badge badge-warning" style="background-color:@ac.Activity_Color">@ac.Activity_Name</div>
+                                                }
+                                            </td>
+                                            <td>@Html.Raw(item.Voucher_Max_Suspend_Times > 0 ? "<div class='badge badge-active'>Tak</div>" : "<div class='badge badge-inactive'>Nie</div>")</td>
+                                            <td>@item.Voucher_Max_Suspend_Times (@item.Voucher_Max_Suspend_Days dni)</td>
+                                            <td>@item.Voucher_Startdate - @item.Voucher_Enddate</td>
+                                            <td></td>
+                                        </tr>
+                                        counter++;
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

@@ -54,31 +54,91 @@
                 <option value="2">Pani</option>
             </select>
         </div>
+        <div class="form-group col-md-6">
+            <label for="customer_gender">Status</label>
+            <select class="form-control select2" name="customer_status" id="customer_status">
+                <option value="1">Aktywny</option>
+                <option value="0">Nieaktywny</option>
+            </select>
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="customer_name">Imię</label>
-            <input type="text" class="form-control" id="customer_name" placeholder="Imię">
+            <input type="text" class="form-control" id="customer_name" placeholder="Imię" required>
+            <div class="invalid-feedback">
+                Wpisz poprawnie Imię.
+            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="customer_surname">Nazwisko</label>
-            <input type="text" class="form-control" id="customer_surname" placeholder="Nazwisko">
+            <input type="text" class="form-control" id="customer_surname" required placeholder="Nazwisko">
+            <div class="invalid-feedback">
+                Uzupełnij nazwisko.
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Status</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="fas fa-lock"></i>
-                </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_displayname">Wyświetlana nazwa</label>
+            <input type="text" class="form-control" id="customer_displayname" placeholder="Przyjazna nazwa">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_birthdate">Data urodzenia</label>
+            <input type="text" class="form-control datepicker" id="customer_birthdate" required>
+            <div class="invalid-feedback">
+                Uzupełnij datę urodzenia.
             </div>
-            <select class="form-control select2" name="timetable_status" id="timetable_status">
-                <option value="2">Szkic</option>
-                <option value="1">Aktywny</option>
-                <option value="0">Nieaktywny</option>
-            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_name">Numer telefonu</label>
+            <input type="text" class="form-control" id="customer_phonenumber" placeholder="Numer telefonu" required>
+            <div class="invalid-feedback">
+                Wprowadź numer telefonu.
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_surname">Adres e-mail</label>
+            <input type="text" class="form-control" id="customer_email" required placeholder="Adres e-mail">
+            <div class="invalid-feedback">
+                Wprowadź poprawny adres email.
+            </div>
+        </div>
+    </div>
+    <p>Uzupełnij dane adresowe klienta</p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_name">Ulica</label>
+            <input type="text" class="form-control" required id="customer_street" placeholder="Ulica">
+            <div class="invalid-feedback">
+                Uzupełnij ulicę. 
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_name">Numer domu</label>
+            <input type="text" class="form-control" required id="customer_homenumber" placeholder="Numer domu">
+            <div class="invalid-feedback">
+                Uzupełnij numer domu.
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="customer_street">Kod pocztowy</label>
+            <input type="text" class="form-control" id="customer_postcode" required placeholder="00-000">
+            <div class="invalid-feedback">
+                Wprowadź kod pocztowy.
+            </div>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="customer_name">Miasto</label>
+            <input type="text" class="form-control" required id="customer_city" placeholder="Miasto">
+            <div class="invalid-feedback">
+                Wprowadź poprawne miasto.
+            </div>
         </div>
     </div>
 
