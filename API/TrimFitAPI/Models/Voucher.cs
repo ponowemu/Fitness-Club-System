@@ -52,5 +52,7 @@ namespace TrimFitAPI.Models
         [Column("voucher_timelimit_sun")]
         public List<DateTime> Voucher_Timelimit_Sun { get; set; }
 
+        public IList<VoucherCustomer> Customers { get; set; }
+
     }
 }

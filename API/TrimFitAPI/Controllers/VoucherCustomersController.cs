@@ -42,8 +42,8 @@ namespace TrimFitAPI.Controllers
             }
 
             var voucherCustomer = await _context.VoucherCustomer
-                .Include(v => v.Voucher)
-                .Include(c => c.Customer)
+                    .Include(v => v.Voucher)
+                    .Include(c => c.Customer)
                 .FirstOrDefaultAsync(x=>x.Voucher_Customer_Id == id);
 
             if (voucherCustomer == null)

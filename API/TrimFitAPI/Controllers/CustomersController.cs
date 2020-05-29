@@ -102,8 +102,28 @@ namespace TrimFitAPI.Controllers
 
             return Ok(Registration);
         }
+        [HttpGet("Details")]
+        public async Task<IActionResult> GetDetails()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var customer = await _context.Customer
+                .Include(a => a.Address)
+                .Include(a => a.Vouchers)
+                    .ThenInclude(v => v.Voucher)
+                .ToListAsync();
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            return Ok(customer);
+        }
         [HttpGet("{id}/Vouchers")]
-        public async Task<IActionResult> GetVouchers([FromRoute] int id, [FromQuery] bool incoming = false)
+        public async Task<IActionResult> GetVouchers([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {

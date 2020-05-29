@@ -41,5 +41,7 @@ namespace TrimFitAPI.Models
         public int? User_id { get; set; }
         public User User { get; set; }
 
+        public ICollection<VoucherCustomer> Vouchers { get; set; }
+
     }
 }

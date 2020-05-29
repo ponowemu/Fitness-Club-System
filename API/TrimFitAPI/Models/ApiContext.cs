@@ -35,6 +35,19 @@ namespace TrimFitAPI.Models
         public DbSet<UserDetail> UserDetail { get; set; }
         public DbSet<Product> Product { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<VoucherCustomer>()
+                .HasKey(bc => new { bc.Customer_Id, bc.Voucher_Id});
+            modelBuilder.Entity<VoucherCustomer>()
+                .HasOne(bc => bc.Customer)
+                .WithMany(b => b.Vouchers)
+                .HasForeignKey(bc => bc.Customer_Id);
+            modelBuilder.Entity<VoucherCustomer>()
+                .HasOne(bc => bc.Voucher)
+                .WithMany(c => c.Customers)
+                .HasForeignKey(bc => bc.Voucher_Id);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {   
             optionsBuilder.UseNpgsql(SecData.ConnectionString);
