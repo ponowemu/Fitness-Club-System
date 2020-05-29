@@ -42,7 +42,7 @@ namespace TrimFitAPI.Controllers
 
             var customer = await _context.Customer
                 .Include(a => a.Address)
-                .FirstOrDefaultAsync(x=>x.Customer_Id == id);
+                .FirstOrDefaultAsync(x => x.Customer_Id == id);
 
             if (customer == null)
             {
@@ -64,8 +64,8 @@ namespace TrimFitAPI.Controllers
                 predicate = predicate.And(x => x.TimetableActivity.Timetable_Activity_Starttime >= DateTime.Today);
 
             var Registration = await _context.Registration
-                .Include(t=>t.TimetableActivity)
-                .Include(p=>p.Payment)
+                .Include(t => t.TimetableActivity)
+                .Include(p => p.Payment)
                 .Where(predicate)
                 .FirstOrDefaultAsync(x => x.Customer_Id == id);
 
@@ -78,7 +78,7 @@ namespace TrimFitAPI.Controllers
         }
 
         [HttpGet("{id}/Reservations")]
-        public async Task<IActionResult> GerReservations([FromRoute] int id, [FromQuery] bool incoming = false)
+        public async Task<IActionResult> GetReservations([FromRoute] int id, [FromQuery] bool incoming = false)
         {
             if (!ModelState.IsValid)
             {
@@ -89,9 +89,9 @@ namespace TrimFitAPI.Controllers
                 predicate = predicate.And(x => x.Reservation_From >= DateTime.Today);
 
             var Registration = await _context.Reservation
-                .Include(s=>s.Service)
+                .Include(s => s.Service)
                 .Include(p => p.Payment)
-                .Include(c=>c.Club)
+                .Include(c => c.Club)
                 .Where(predicate)
                 .FirstOrDefaultAsync(x => x.Customer_Id == id);
 
@@ -101,6 +101,26 @@ namespace TrimFitAPI.Controllers
             }
 
             return Ok(Registration);
+        }
+        [HttpGet("{id}/Vouchers")]
+        public async Task<IActionResult> GetVouchers([FromRoute] int id, [FromQuery] bool incoming = false)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var vouchers = await _context.VoucherCustomer
+                .Include(v => v.Voucher)
+                .Include(p => p.Customer)
+                .FirstOrDefaultAsync(x => x.Customer_Id == id);
+
+            if (vouchers == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(vouchers);
         }
 
         // PUT: api/Customers/5
