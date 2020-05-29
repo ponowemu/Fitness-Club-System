@@ -33,7 +33,7 @@ namespace Trimfit.Models
         [JsonProperty(PropertyName = "customer_photo_url")]
         public string Customer_Photo_Url { get; set; }
         [JsonProperty(PropertyName = "user_id")]
-        public int User_Id { get; set; }
+        public int? User_Id { get; set; }
         [ForeignKey("Address_Id")]
         public virtual Address Address { get; set; }
 

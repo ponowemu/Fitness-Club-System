@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Trimfit.Models;
 using Trimfit.Data;
+using Newtonsoft.Json;
 
 namespace Trimfit.Controllers
 {
@@ -28,6 +29,21 @@ namespace Trimfit.Controllers
         {
             var res = await _apiContext.PostRequest("Customers/", customer);
             return res;
+        }
+        public async Task<JsonResult> GetCustomers()
+        {
+            var customers = await _apiContext.GetRequest("Customers/Details");
+            var list = JsonConvert.DeserializeObject(customers.Value.ToString());
+            
+            
+            return new JsonResult(new { data = list });
+        }
+        [HttpGet]
+        public async Task<string> GetVouchers(int customerId)
+        {
+            var customerVouchers = await _apiContext.GetRequest(String.Format("Customers/Details"));
+
+            return customerVouchers.Value.ToString();
         }
     }
 }
