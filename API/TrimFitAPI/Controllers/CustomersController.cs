@@ -10,7 +10,6 @@ using TrimFitAPI.Models;
 
 namespace TrimFitAPI.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -103,24 +102,21 @@ namespace TrimFitAPI.Controllers
             return Ok(Registration);
         }
         [HttpGet("Details")]
-        public async Task<IActionResult> GetDetails()
+        public async Task<IEnumerable<Customer>> GetDetails()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var customer = await _context.Customer
                 .Include(a => a.Address)
-                .Include(a => a.Vouchers)
-                    .ThenInclude(v => v.Voucher)
+                .Include(v => v.Vouchers)
+                    .ThenInclude(vr => vr.Voucher)
                 .ToListAsync();
 
             if (customer == null)
             {
-                return NotFound();
+                Response.StatusCode = 404;
+                return null;
             }
-            return Ok(customer);
+            Response.StatusCode = 200;
+            return customer;
         }
         [HttpGet("{id}/Vouchers")]
         public async Task<IActionResult> GetVouchers([FromRoute] int id)

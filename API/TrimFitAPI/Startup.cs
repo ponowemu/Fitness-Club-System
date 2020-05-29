@@ -37,7 +37,10 @@ namespace TrimFitAPI
                .AddDbContext<ApiContext>()
                .BuildServiceProvider();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                  .AddJsonOptions(
+            options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var key = Encoding.ASCII.GetBytes(SecData.ApiKey);
             services.AddAuthentication(x =>
             {
@@ -69,7 +72,7 @@ namespace TrimFitAPI
                         Name = "TrimFIT Company",
                         Email = string.Empty,
                     },
-                    
+
                     License = new License
                     {
                         Name = "Use under LICX",
@@ -101,7 +104,7 @@ namespace TrimFitAPI
             {
                 app.UseHsts();
             }
-                
+
             app.UseHttpsRedirection();
             app.UseSwagger();
 
