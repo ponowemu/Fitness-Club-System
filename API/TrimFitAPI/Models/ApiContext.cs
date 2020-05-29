@@ -34,6 +34,7 @@ namespace TrimFitAPI.Models
         public DbSet<VoucherCustomer> VoucherCustomer { get; set; }
         public DbSet<UserDetail> UserDetail { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Queue> Queues { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

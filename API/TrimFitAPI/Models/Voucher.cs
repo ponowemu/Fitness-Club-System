@@ -53,6 +53,9 @@ namespace TrimFitAPI.Models
         public List<DateTime> Voucher_Timelimit_Sun { get; set; }
 
         public IList<VoucherCustomer> Customers { get; set; }
+         
+        [ForeignKey("Voucher_Type_Id")]
+        public VoucherType VoucherType { get; set; }
 
     }
 }

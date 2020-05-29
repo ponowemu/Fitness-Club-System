@@ -26,7 +26,8 @@ namespace TrimFitAPI.Controllers
         [HttpGet]
         public IEnumerable<Voucher> GetVoucher()
         {
-            return _context.Voucher;
+            return _context.Voucher
+                .Include(v => v.VoucherType);
         }
 
         // GET: api/Vouchers/5
