@@ -31,7 +31,12 @@ namespace TrimFitAPI.Controllers
                 .Include(c=>c.Customer)
                 ;
         }
-
+        [HttpGet("{id}/Customers")]
+        public async Task<IEnumerable<VoucherCustomer>> GetVoucherCustomersByVoucherId(int id)
+        {
+            return await _context.VoucherCustomer
+                .Where(v => v.Voucher_Id == id).ToListAsync();
+        }
         // GET: api/VoucherCustomers/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVoucherCustomer([FromRoute] int id)
