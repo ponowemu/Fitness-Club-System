@@ -32,6 +32,7 @@ namespace TrimFitAPI.Models
         public string Activity_Color { get; set; }
         [Column("employee_id")]
         public List<int> Employee_Id { get; set; }
-        public List<Employee> Employee { get; set; }
+        [NotMapped]
+        public virtual List<Employee> Employee { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace TrimFitAPI.Controllers
                 .Include(e => e.Address)
                 ;
         }
-        [HttpGet("{id}/Activities")]
+        [HttpGet("{employeeId}/Activities")]
         public async Task<IActionResult> GetActivities(int employeeId)
         {
             if (!ModelState.IsValid)
