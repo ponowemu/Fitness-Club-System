@@ -39,7 +39,10 @@ namespace TrimFitAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var voucher = await _context.Voucher.FindAsync(id);
+            var voucher = await _context.Voucher
+                .Include(v => v.VoucherType)
+                .FirstOrDefaultAsync(v => v.Voucher_Id == id);
+               
 
             if (voucher == null)
             {
