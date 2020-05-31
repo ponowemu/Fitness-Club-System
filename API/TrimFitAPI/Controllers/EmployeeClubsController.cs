@@ -27,8 +27,8 @@ namespace TrimFitAPI.Controllers
         public IEnumerable<EmployeeClub> GetEmployee_club()
         {
             return _context.Employee_club
-                .Include(e=>e.Employee)
-                .Include(c=>c.Club)
+                .Include(e => e.Employee)
+                .Include(c => c.Club)
                 ;
         }
 
@@ -43,8 +43,9 @@ namespace TrimFitAPI.Controllers
 
             var employeeClub = await _context.Employee_club
                 .Include(e => e.Employee)
+                    .ThenInclude(a => a.Address)
                 .Include(c => c.Club)
-                .Where(x=>x.Club_Id == id).ToListAsync();
+                .Where(x => x.Club_Id == id).ToListAsync();
 
             if (employeeClub == null)
             {
