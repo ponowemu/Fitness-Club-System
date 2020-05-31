@@ -79,6 +79,8 @@ namespace TrimFitAPI
                         Url = "https://example.com/license"
                     }
                 });
+                c.OperationFilter<FormFileSwaggerFilter>();
+
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
                 {
                     Description = "JWT Authorization header {token}",

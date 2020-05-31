@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +18,12 @@ namespace TrimFitAPI.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly ApiContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public EmployeesController(ApiContext context)
+        public EmployeesController(ApiContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: api/Employees
@@ -30,7 +34,32 @@ namespace TrimFitAPI.Controllers
                 .Include(e => e.Address)
                 ;
         }
+        //POST: api/Upload
+        [HttpPost("/upload")]
+        public async Task<IActionResult> UploadPhoto([FromForm(Name = "formFile")]IFormFile formFile)
+        {
+            var filePaths = string.Empty;
 
+            if (formFile.Length > 0)
+            {
+                // full path to file in temp location
+                var ext = formFile.FileName.Split('.');
+                var filePath = Path.Combine(
+                    _env.WebRootPath, 
+                    "images", 
+                    String.Join('.', Guid.NewGuid(), ext[1])); 
+                filePaths = filePath;
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(stream);
+                }
+            }
+            else
+                return NotFound();
+
+            return Ok(filePaths);
+        }
         // GET: api/Employees/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEmployee([FromRoute] int id)
@@ -42,7 +71,7 @@ namespace TrimFitAPI.Controllers
 
             var employee = await _context.Employee
                 .Include(e => e.Address)
-                .FirstOrDefaultAsync(x=>x.Employee_Id == id);
+                .FirstOrDefaultAsync(x => x.Employee_Id == id);
 
             if (employee == null)
             {
