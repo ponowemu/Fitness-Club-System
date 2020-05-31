@@ -30,6 +30,7 @@ namespace TrimFitAPI.Models
 
         [Column("address_id")]
         public int? Address_Id { get; set; }
+        [ForeignKey("Address_Id")]
         public Address Address { get; set; }
 
         [Column("employee_display_name")]

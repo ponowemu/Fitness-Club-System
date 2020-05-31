@@ -68,7 +68,6 @@ namespace TrimFitAPI.Controllers
             var activity = await _context.Activity.FindAsync(id);
             foreach (var item in activity.Category_Id)
             {
-
                 activity.Category.Add(await _context.Category.FindAsync(item));
             }
 

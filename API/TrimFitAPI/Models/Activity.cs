@@ -10,6 +10,11 @@ namespace TrimFitAPI.Models
     [Table("activity")]
     public class Activity
     {
+        public Activity()
+        {
+            Category = new List<Category>();
+            Employee = new List<Employee>();
+        }
         [Key]
         [Column("activity_id")]
         public int Activity_Id { get; set; }
@@ -27,6 +32,6 @@ namespace TrimFitAPI.Models
         public string Activity_Color { get; set; }
         [Column("employee_id")]
         public List<int> Employee_Id { get; set; }
-       // public List<Employee> Employee { get; set; }
+        public List<Employee> Employee { get; set; }
     }
 }

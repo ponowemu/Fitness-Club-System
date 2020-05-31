@@ -34,6 +34,24 @@ namespace TrimFitAPI.Controllers
                 .Include(e => e.Address)
                 ;
         }
+        [HttpGet("{id}/Activities")]
+        public async Task<IActionResult> GetActivities(int employeeId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var ac = await _context.Activity
+                .Where(a => a.Employee_Id.Contains(employeeId))
+                .ToListAsync();
+
+            if (ac.Count > 0)
+            {
+                return Ok(ac);
+            }
+            else
+                return NotFound();
+        }
         //POST: api/Upload
         [HttpPost("/upload")]
         public async Task<IActionResult> UploadPhoto([FromForm(Name = "formFile")]IFormFile formFile)
@@ -45,9 +63,9 @@ namespace TrimFitAPI.Controllers
                 // full path to file in temp location
                 var ext = formFile.FileName.Split('.');
                 var filePath = Path.Combine(
-                    _env.WebRootPath, 
-                    "images", 
-                    String.Join('.', Guid.NewGuid(), ext[1])); 
+                    _env.WebRootPath,
+                    "images",
+                    String.Join('.', Guid.NewGuid(), ext[1]));
                 filePaths = filePath;
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
