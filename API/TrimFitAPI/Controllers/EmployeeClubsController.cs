@@ -44,8 +44,7 @@ namespace TrimFitAPI.Controllers
             var employeeClub = await _context.Employee_club
                 .Include(e => e.Employee)
                 .Include(c => c.Club)
-                .FirstOrDefaultAsync(x=>x.Club_Id == id)
-                ;
+                .Where(x=>x.Club_Id == id).ToListAsync();
 
             if (employeeClub == null)
             {
