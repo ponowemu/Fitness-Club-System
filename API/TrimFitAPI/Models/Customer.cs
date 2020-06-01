@@ -27,11 +27,10 @@ namespace TrimFitAPI.Models
         public int Customer_Status { get; set; }
         [Column("customer_isconfirmed")]
         public bool Customer_Isconfirmed { get; set; }
-
         [Column("address_id")]
         public int? Address_Id { get; set; }
+        [ForeignKey("Address_Id")]
         public Address Address { get; set; }
-
         [Column("customer_display_name")]
         public string Customer_Display_Name { get; set; }
         [Column("customer_photo_url")]
