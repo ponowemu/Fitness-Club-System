@@ -42,6 +42,8 @@ namespace TrimFitAPI.Controllers
             var customer = await _context.Customer
                 .Include(a => a.Address)
                 .Include(v => v.Vouchers)
+                    .ThenInclude(b => b.Voucher)
+                        .ThenInclude(c => c.VoucherType)
                 .FirstOrDefaultAsync(x => x.Customer_Id == id);
 
             if (customer == null)

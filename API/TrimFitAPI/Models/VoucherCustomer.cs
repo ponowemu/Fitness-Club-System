@@ -29,5 +29,7 @@ namespace TrimFitAPI.Models
         public int? FreeEntries { get; set; }
         [Column("is_active")]
         public bool? IsActive { get; set; }
+        [Column("added")]
+        public DateTime? Added { get; set; }
     }
 }
