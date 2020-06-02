@@ -14,9 +14,9 @@ namespace TrimFitAPI.Models
         [Column("voucher_id")]
         public int Voucher_Id { get; set; }
         [Column("voucher_startdate")]
-        public DateTime Voucher_Startdate { get; set; }
+        public DateTime? Voucher_Startdate { get; set; }
         [Column("voucher_enddate")]
-        public DateTime Voucher_Enddate { get; set; }
+        public DateTime? Voucher_Enddate { get; set; }
         [Column("voucher_type_id")]
         public int Voucher_Type_Id { get; set; }
         [Column("voucher_description")]
@@ -56,6 +56,8 @@ namespace TrimFitAPI.Models
          
         [ForeignKey("Voucher_Type_Id")]
         public VoucherType VoucherType { get; set; }
+        [Column("voucher_days_number")]
+        public int VoucherDaysNumber { get; set; }
 
     }
 }
