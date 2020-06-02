@@ -23,5 +23,11 @@ namespace TrimFitAPI.Models
         public List<string> Voucher_Customer_Suspend_Date { get; set; }
         [Column("voucher_customer_suspend_number")]
         public int Voucher_Customer_Suspend_Number { get; set; }
+        [Column("voucher_end_date")]
+        public DateTime? VoucherEndDate { get; set; }
+        [Column("voucher_free_entries")]
+        public int? FreeEntries { get; set; }
+        [Column("is_active")]
+        public bool? IsActive { get; set; }
     }
 }
