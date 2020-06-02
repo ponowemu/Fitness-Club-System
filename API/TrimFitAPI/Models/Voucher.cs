@@ -24,7 +24,7 @@ namespace TrimFitAPI.Models
         [Column("voucher_status")]
         public int Voucher_Status { get; set; }
         [Column("voucher_entries_number")]
-        public int Voucher_Entries_Number { get; set; }
+        public int? Voucher_Entries_Number { get; set; }
         [Column("voucher_infinity")]
         public bool Voucher_Infinity { get; set; }
         [Column("voucher_max_suspend_days")]
@@ -57,7 +57,7 @@ namespace TrimFitAPI.Models
         [ForeignKey("Voucher_Type_Id")]
         public VoucherType VoucherType { get; set; }
         [Column("voucher_days_number")]
-        public int VoucherDaysNumber { get; set; }
+        public int? VoucherDaysNumber { get; set; }
 
     }
 }
