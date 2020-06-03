@@ -39,7 +39,8 @@ namespace TrimFitAPI.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<VoucherCustomer>()
-                .HasKey(bc => new { bc.Customer_Id, bc.Voucher_Id});
+                .HasKey(v => v.Voucher_Customer_Id);
+    
             modelBuilder.Entity<VoucherCustomer>()
                 .HasOne(bc => bc.Customer)
                 .WithMany(b => b.Vouchers)
