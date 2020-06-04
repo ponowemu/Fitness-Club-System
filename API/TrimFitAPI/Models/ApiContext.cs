@@ -49,6 +49,26 @@ namespace TrimFitAPI.Models
                 .HasOne(bc => bc.Voucher)
                 .WithMany(c => c.Customers)
                 .HasForeignKey(bc => bc.Voucher_Id);
+
+            modelBuilder.Entity<CustomerClub>()
+                .HasOne(bc => bc.Customer)
+                .WithMany(b => b.Clubs)
+                .HasForeignKey(bc => bc.Customer_Id);
+            modelBuilder.Entity<CustomerClub>()
+                .HasOne(bc => bc.Club)
+                .WithMany(c => c.Customers)
+                .HasForeignKey(bc => bc.Club_Id);
+
+            modelBuilder.Entity<EmployeeClub>()
+                .HasOne(bc => bc.Employee)
+                .WithMany(b => b.Clubs)
+                .HasForeignKey(bc => bc.Employee_Id);
+            modelBuilder.Entity<EmployeeClub>()
+                .HasOne(bc => bc.Club)
+                .WithMany(c => c.Employees)
+                .HasForeignKey(bc => bc.Club_Id);
+
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {   

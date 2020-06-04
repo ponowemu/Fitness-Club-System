@@ -41,6 +41,7 @@ namespace TrimFitAPI.Models
         public User User { get; set; }
 
         public ICollection<VoucherCustomer> Vouchers { get; set; }
+        public ICollection<CustomerClub> Clubs { get; set; }
 
     }
 }

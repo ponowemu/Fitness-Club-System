@@ -20,5 +20,8 @@ namespace TrimFitAPI.Models
         [Column("address_id")]
         public int Address_Id { get; set; }
         public Address Address { get; set; }
+
+        public IList<EmployeeClub> Employees { get; set; }
+        public IList<CustomerClub> Customers { get; set; }
     }
 }

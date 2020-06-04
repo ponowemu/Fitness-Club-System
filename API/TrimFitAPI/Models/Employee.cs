@@ -41,5 +41,6 @@ namespace TrimFitAPI.Models
         [Column("user_id")]
         public int? User_id { get; set; }
         public User User { get; set; }
+        public ICollection<EmployeeClub> Clubs { get; set; }
     }
 }
