@@ -29,9 +29,9 @@ namespace TrimFitAPI.Models
         public int Employee_Status { get; set; }
 
         [Column("address_id")]
+        [ForeignKey("Address")]
         public int? Address_Id { get; set; }
-        [ForeignKey("Address_Id")]
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
 
         [Column("employee_display_name")]
         public string Employee_Display_Name { get; set; }

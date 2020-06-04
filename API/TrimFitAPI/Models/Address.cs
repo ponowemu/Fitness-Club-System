@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,5 +28,12 @@ namespace TrimFitAPI.Models
         public string Address_Postcode { get; set; }
         [Column("address_phone")]
         public string Address_Phone { get; set; }
+
+        [JsonIgnore]
+        [InverseProperty(nameof(Models.Employee.Address))]
+        public virtual Employee Employee { get; set; }
+        [JsonIgnore]
+        [InverseProperty(nameof(Models.Customer.Address))]
+        public virtual Customer Customer { get; set; }
     }
 }

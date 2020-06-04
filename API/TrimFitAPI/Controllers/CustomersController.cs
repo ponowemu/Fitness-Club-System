@@ -157,6 +157,7 @@ namespace TrimFitAPI.Controllers
             }
 
             _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(customer.Address).State = EntityState.Modified;
 
             try
             {

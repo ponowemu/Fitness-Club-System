@@ -68,6 +68,9 @@ namespace TrimFitAPI.Models
                 .WithMany(c => c.Employees)
                 .HasForeignKey(bc => bc.Club_Id);
 
+      
+                
+
 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
