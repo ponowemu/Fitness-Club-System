@@ -36,6 +36,8 @@ namespace Trimfit.Models
         public int? User_Id { get; set; }
         [ForeignKey("Address_Id")]
         public virtual Address Address { get; set; }
+        [JsonProperty(PropertyName = "vouchers")]
+        public ICollection<VoucherCustomer> Vouchers { get; set; }
 
     }
 }

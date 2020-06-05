@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-12 float-left">
+                                <div class="form-group col-md-8 float-left">
                                     <label>Obowiązuje w okresie</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -68,6 +68,14 @@
                                         </div>
                                         <input type="text" placeholder="" class="form-control daterange-cus">
                                     </div>
+                                </div>
+                                <div class="form-group col-md-4 ">
+                                    <label>Bez ograniczeń</label>
+                                    <label class="mt-2">
+                                        <input type="checkbox" id="voucher_limit" name="custom-switch-checkbox" class="custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                        <span class="custom-switch-description">Włączony/wyłączony</span>
+                                    </label>
                                 </div>
                             </div>
 
@@ -80,7 +88,7 @@
                                                 <i class="fas fa-clock"></i>
                                             </div>
                                         </div>
-                                        <input type="number" min="0" placeholder="Ilość dni" id="voucher_days" class="form-control">
+                                        <input type="number" min="0"  placeholder="Ilość dni" id="voucher_days" class="form-control">
                                         <div class="input-group-append">
                                             <div class="input-group-text">dni</div>
                                         </div>
@@ -154,7 +162,7 @@
                                                 <i class="fas fa-money-bill-alt"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control service-gross-price" id="service_gross_price" required="">
+                                        <input type="text" class="form-control service-gross-price gross_price" id="service_gross_price" required="">
                                         <div class="invalid-feedback">
                                             Wprowadź cenę brutto usługi.
                                         </div>
@@ -169,7 +177,7 @@
                                                 <i class="fas fa-money-bill-alt"></i>
                                             </div>
                                         </div>
-                                        <input type="text" readonly="readonly" class="form-control service-net-price" id="service_net_price">
+                                        <input type="text" readonly="readonly" class="form-control service-net-price net_price" id="service_net_price">
                                     </div>
 
                                 </div>

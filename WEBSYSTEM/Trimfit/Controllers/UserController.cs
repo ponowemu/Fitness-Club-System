@@ -50,7 +50,7 @@ namespace Trimfit.Controllers
                 var user_result = JsonConvert.DeserializeObject<User>(UserResponse.Value.ToString());
                 List<Claim> claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, "Sean Connery"),
+                    new Claim(ClaimTypes.Name, user.User_login),
                     new Claim(ClaimTypes.Email, user.User_login),
                 };
                 _context.setToken(user_result.User_Token);

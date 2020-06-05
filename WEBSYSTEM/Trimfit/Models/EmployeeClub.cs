@@ -16,5 +16,7 @@ namespace Trimfit.Models
         public int Employee_Id { get; set; }
         [JsonProperty(PropertyName ="club_id")]
         public int Club_Id { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Club Club { get; set; }
     }
 }

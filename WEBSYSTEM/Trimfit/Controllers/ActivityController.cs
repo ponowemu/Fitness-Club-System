@@ -11,6 +11,11 @@ namespace Trimfit.Controllers
 {
     public class ActivityController : Controller
     {
+        private readonly IApiContext _apiContext;
+        public ActivityController(IApiContext apiContext)
+        {
+            _apiContext = apiContext;
+        }
         public async Task<JsonResult> AddAsync(string activity_name, string activity_description, int activity_status, string activity_color, List<int> employee_id, List<int> category_id)
         {
             try
@@ -36,6 +41,19 @@ namespace Trimfit.Controllers
 
             Response.StatusCode = 200;
             return new JsonResult("Dodano nową aktywność pomyślnie");
+        }
+        public async Task<JsonResult> UpdateAsync(Activity activity)
+        {
+            JsonResult response = await _apiContext.PutRequest("Activities/" + activity.Activity_Id + "/", activity);
+            if(response.Value.ToString() == "400")
+            {
+                Response.StatusCode = 400;
+                return new JsonResult("Nie udało się wgrać danych aktywności. Zweryfikuj poprawność danych.");
+            }
+            else
+            {
+                return response;
+            }
         }
         public async Task<JsonResult> DeleteAsync(int id)
         {
@@ -66,6 +84,20 @@ namespace Trimfit.Controllers
             activities = activities_list.ToList();
 
             return activities;
+        }
+        public async Task<JsonResult> GetActivity(int acId)
+        {
+            var result = await _apiContext.GetRequest("Activities/" + acId);
+            var ac = JsonConvert.DeserializeObject<Activity>(result.Value.ToString());
+
+            var categories_response = await _apiContext.GetRequest("Categories/");
+            var categories_list = JsonConvert.DeserializeObject<List<Category>>(categories_response.Value.ToString());
+
+            int clubId = 1;
+            var employees = await _apiContext.GetRequest("EmployeeClubs/" + clubId + "");
+            var list = JsonConvert.DeserializeObject<IEnumerable<EmployeeClub>>(employees.Value.ToString());
+
+            return new JsonResult(new { activity = ac, categories = categories_list, employees = list });
         }
         public async Task<List<Category>> GetCategoriesAsync()
         {
@@ -101,7 +133,7 @@ namespace Trimfit.Controllers
             {
                 var activities_response = await _context.GetRequest("Activities/" + activity_id + "/");
                 var activities_list = JsonConvert.DeserializeObject<Activity>(activities_response.Value.ToString());
-        
+
                 foreach (var item in activities_list.Employee_Id)
                 {
                     var el = await this.GetEmployeeAsync(item);
@@ -109,11 +141,11 @@ namespace Trimfit.Controllers
                 }
                 return new JsonResult(elist);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new JsonResult(ex.Message);
             }
-           
+
         }
         public async Task<IActionResult> Index()
         {

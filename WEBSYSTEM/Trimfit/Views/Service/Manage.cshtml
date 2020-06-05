@@ -25,11 +25,11 @@
                                             #
                                         </th>
                                         <th>Nazwa usługi</th>
-                                        <th>Opis</th>
                                         <th>Cena brutto</th>
                                         <th>Przypisani pracownicy</th>
                                         <th>Przypisane tagi</th>
                                         <th>Klub</th>
+                                        <th>Czas trwania</th>
                                         <th>Ograniczenia czasowe</th>
                                         <th>Akcje</th>
                                     </tr>
@@ -44,34 +44,120 @@
                                             <td>
                                                 @item.Service_Name
                                             </td>
-                                            <td>@Html.Raw(item.Service_Description)</td>
-                                            <td>@item.Service_Gross_Price</td>
+
+                                            <td><strong>@item.Service_Gross_Price</strong></td>
                                             <td>
-                                                <ul>
+                                                @if (item.Employee != null && item.Employee.Count > 0)
+                                                {
                                                     @foreach (var employee in item.Employee)
                                                     {
-                                                        <li>@employee.Employee_Firstname @employee.Employee_Lastname</li>
+                                                        if (employee.Employee_Id != 0)
+                                                        {
+                                                            <a asp-controller="Employee" asp-action="Profile" class="page-link mt-1" asp-route-employeeId="@employee.Employee_Id">
+                                                                @if (!String.IsNullOrEmpty(employee.Employee_Photo_Url))
+                                                                {
+                                                                    <img alt="image" src="~/upload/@employee.Employee_Photo_Url" class="rounded-circle" width="55" data-toggle="title" title=""> <div class="d-inline-block ml-1">@employee.Employee_Display_Name</div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img alt="image" src="~/images/stisla/avatar/avatar-3.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1">@employee.Employee_Display_Name</div>
+                                                                }
+                                                            </a>
+                                                        }
+
                                                     }
-                                                </ul>
+                                                }
+                                                else
+                                                {
+                                                    <strong>Brak powiązanych pracowników</strong>
+                                                }
                                             </td>
                                             <td>
-                                                <ul>
-                                                    @foreach (var tag in item.Category)
-                                                    {
-                                                        <li><span class="badge badge-danger">@tag.Category_Name</span></li>
-                                                    }
-                                                </ul>
+                                                @foreach (var tag in item.Category)
+                                                {
+                                                    <span class="badge badge-danger">@tag.Category_Name</span>
+                                                }
                                             </td>
                                             <td>
+                                                @foreach (var club in item.Club)
+                                                {
+                                                    <strong>@club.Club_Name</strong>
+                                                }
+                                            </td>
+                                            <td>@item.Service_Duration min</td>
+                                            <td>
                                                 <ul>
-                                                    @foreach (var club in item.Club)
+                                                    @if (item.Service_Timelimit_Mon != null)
                                                     {
-                                                        <li>@club.Club_Name ( @club.Club_Id )</li>
+                                                        @if (item.Service_Timelimit_Mon.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Poniedziałek: </strong> @item.Service_Timelimit_Mon.ElementAtOrDefault(0) - @item.Service_Timelimit_Mon.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
+                                                    }
+                                                    @if (item.Service_Timelimit_Tue != null)
+                                                    {
+                                                        @if (item.Service_Timelimit_Tue.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Wtorek: </strong> @item.Service_Timelimit_Tue.ElementAtOrDefault(0) - @item.Service_Timelimit_Tue.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
+                                                    }
+                                                    @if (item.Service_Timelimit_Wed != null)
+                                                    {
+                                                        @if (item.Service_Timelimit_Wed.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Środa: </strong> @item.Service_Timelimit_Wed.ElementAtOrDefault(0) - @item.Service_Timelimit_Wed.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
+                                                    }
+                                                    @if (item.Service_Timelimit_Thu != null)
+                                                    {
+                                                        @if (item.Service_Timelimit_Thu.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Czwartek: </strong> @item.Service_Timelimit_Thu.ElementAtOrDefault(0) - @item.Service_Timelimit_Thu.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
+                                                    }
+                                                    @if (item.Service_Timelimit_Fri != null)
+                                                    {
+                                                        @if (item.Service_Timelimit_Fri.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Piątek: </strong> @item.Service_Timelimit_Fri.ElementAtOrDefault(0) - @item.Service_Timelimit_Fri.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
+                                                    }
+                                                    @if (item.Service_Timelimit_Sat != null)
+                                                    {
+                                                        @if (item.Service_Timelimit_Sat.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Sobota: </strong> @item.Service_Timelimit_Sat.ElementAtOrDefault(0) - @item.Service_Timelimit_Sat.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
+                                                    }
+                                                    @if (item.Service_Timelimit_Sun != null)
+                                                    {
+                                                        @if (item.Service_Timelimit_Sun.ElementAt(0).CompareTo(TimeSpan.Zero) != 0)
+                                                        {
+                                                            <li>
+                                                                <strong>Niedziela: </strong> @item.Service_Timelimit_Sun.ElementAtOrDefault(0) - @item.Service_Timelimit_Sun.ElementAtOrDefault(1)
+                                                            </li>
+                                                        }
                                                     }
                                                 </ul>
+
                                             </td>
-                                            <td>Ograniczenia czasowe</td>
-                                            <td>akcje</td>
+                                            <td>
+                                                <input type="hidden" value="@item.Service_Id" name="service_id" />
+                                                <a asp-controller="Service" asp-action="Edit" asp-route-serviceId="@item.Service_Id" class="btn btn-icon icon-left btn-primary mb-3 edit-service"><i class="fas fa-pencil-alt"></i> Edytuj</a>
+                                                <button class="btn btn-icon icon-left btn-danger mb-3 delete-service "><i class="fas fa-trash-alt"></i> Usuń</button>
+                                            </td>
                                         </tr>
                                         counter++;
                                     }

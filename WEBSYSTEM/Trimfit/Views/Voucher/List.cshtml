@@ -1,10 +1,85 @@
-﻿<section class="section">
+﻿@model IEnumerable<Voucher>
+
+<section class="section">
     <div class="section-header">
         <h1>@ViewData["Header"]</h1>
     </div>
     <div class="section-body">
+        <div class="row">
 
+            @foreach (var voucher in Model)
+            {
+
+                <div class="col-12 col-md-4 col-lg-4" data-toggle="tooltip" data-original-title="Typ karnetu: @voucher.VoucherType.Voucher_Type_Name">
+                    <div class="pricing">
+                        <div class="pricing-title">
+                            <i class="fas fa-ticket-alt"></i>
+                            @voucher.VoucherType.Voucher_Type_Name
+                        </div>
+                       
+                        <div class="pricing-padding">
+                            <div class="pricing-price">
+                                <div>@voucher.Voucher_Gross_Price zł</div>
+                            </div>
+                            <div class="pricing-details">
+                                <p>
+                                    @Html.Raw(voucher.Voucher_Description)
+                                </p>
+                                <div class="pricing-item">
+                                    <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
+                                    <div class="pricing-item-label">@voucher.Voucher_Entries_Number wejść</div>
+                                </div>
+                                <div class="pricing-item">
+                                    <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
+                                    <div class="pricing-item-label">Obowiązuje od @voucher.Voucher_Startdate?.ToString("dd-MM-yyyy") do @voucher.Voucher_Enddate?.ToString("dd-MM-yyyy")</div>
+                                </div>
+                                <div class="pricing-item">
+                                    @if (voucher.Voucher_Max_Suspend_Times > 0)
+                                    {
+                                        <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="pricing-item-icon bg-danger text-white"><i class="fas fa-times"></i></div>
+                                    }
+                                    <div class="pricing-item-label">Zamrażalny</div>
+                                </div>
+                                <div class="pricing-item">
+                                    <div class="pricing-item-icon"><i class="fas fa-check"></i></div>
+                                    <div class="pricing-item-label">@voucher.Voucher_Max_Suspend_Days dni do zamrożenia</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="mt-2">Obejmuje aktywności</h5>
+                                </div>
+                                <div class="col-md-12">
+                                    @if (voucher.Activities != null && voucher.Activities.Count > 0)
+                                    {
+                                        @foreach (var ac in voucher.Activities)
+                                        {
+                                            <div class="badge badge-warning mt-1">@ac.Activity_Name</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <strong>Wszystkie</strong>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-cta">
+                            <a class="addVoucherToCart" data-voucher-id="@voucher.Voucher_Id" style="cursor:pointer">Dodaj do koszyka <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
     </div>
+
 </section>
+
+
 
 

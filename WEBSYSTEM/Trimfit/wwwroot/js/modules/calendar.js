@@ -10,7 +10,7 @@ function getTimetableId() {
     return link[link.length - 1];
 }
 
-function createTimetableActivityModel(timetable_activity_id,activity_id, start_date, end_date, original_color) {
+function createTimetableActivityModel(timetable_activity_id, activity_id, start_date, end_date, original_color) {
 
     var color = $("#ta_activity_color").val();
     var repeat = $("#ta_repeatable").val();
@@ -36,7 +36,7 @@ function createTimetableActivityModel(timetable_activity_id,activity_id, start_d
         Activity_Id: activity_id,
         Timetable_Activity_Day: new Date(start_date.toISOString()).getDay(),
         Timetable_Activity_Starttime: new Date(start_date.getTime() - (start_date.getTimezoneOffset() * 60000)).toISOString(),
-        Timetable_Activity_Endtime: new Date(end.getTime() - (end.getTimezoneOffset()*60000)).toISOString(),
+        Timetable_Activity_Endtime: new Date(end.getTime() - (end.getTimezoneOffset() * 60000)).toISOString(),
         Timetable_Activity_Limit_Places: $("#ta_limit_places").val(),
         Timetable_Activity_Free_Places: $("#ta_limit_places").val(),
         Timetable_Activity_Repeatable: parseInt(repeat),
@@ -251,8 +251,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 show: true
             });
 
-
-
             // pobieramy podstawowe dane
             // ustawiamy wartości w modal oknie
             var timetable_activity_id = info.event.extendedProps.t_a_id;
@@ -355,15 +353,23 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
             }
         },
+
         eventRender: function (info) {
+
             $(info.el).popover({
                 title: "Szczegóły",
                 content: "Instruktor: " + info.event.extendedProps.employee_id + "<br /> Pokój: " + info.event.extendedProps.employee_id + "<br /> Limit miejsc: 99 <br />Wolne miejsca: 99",
-                trigger: 'hover',
                 placement: 'right',
+                trigger: 'hover',
                 container: 'body',
                 html: true
-            });
+            })
+                .on("show.bs.popover", function (e) {
+                    // hide all other popovers
+                    $("[rel=popover]").not(e.target).popover("destroy");
+                    $(".popover").remove();
+                });
+
         }
     });
     calendar.render();
@@ -406,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         daysOfWeek: [start_date.getDay()],
                         start: value.timetable_Activity_Starttime,
                         end: value.timetable_Activity_Endtime
-                        
+
                     });
                 }
                 else if (value.timetable_Activity_Repeatable === 2) {
@@ -445,8 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         edate = edate.addDays(14);
                     }
                 }
-                else
-                {
+                else {
                     calendar.addEvent({
                         extendedProps: {
                             t_a_id: value.timetable_Activity_Id,
@@ -473,7 +478,38 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     //
 
-    $('#dupa').on('click', function () {
-        console.log(calendar.getEvents());
+    $.ajax({
+        url: '/Timetable/GetTimetable',
+        method: 'GET',
+        data: {
+            timetableId: getTimetableId()
+        },
+        success: function (e) {
+            console.log(e);
+            $('#timetable_status option[value="' + e.timetable_status + '"]').prop('selected', true);
+            $('#timetable_name').val(e.timetable_name);
+        }
+    }).done(function (data) {
+
+        $('#save_timetable').on('click', function () {
+
+            data.timetable_name = $('#timetable_name').val();
+            data.timetable_status = $('#timetable_status').val();
+
+            console.log(data);
+            $.ajax({
+                url: '/Timetable/PutTimetable',
+                method: 'PUT',
+                data:
+                {
+                    timetable: data
+                },
+                success: function () {
+                    swal('Grafik został zapisany', 'Pomyślnie zapisano zmiany w grafiku!', 'success').then((value) => { location.reload(); });
+                }
+            });
+        });
+
     });
+
 }); 

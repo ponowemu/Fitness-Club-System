@@ -12,6 +12,11 @@ namespace Trimfit.Controllers
 {
     public class CategoryController : Controller
     {
+        private readonly IApiContext _apiContext;
+        public CategoryController(IApiContext apiContext)
+        {
+            _apiContext = apiContext;
+        }
         public async Task<List<Category>> GetAsync()
         {
             ApiContext _context = new ApiContext();
@@ -28,8 +33,35 @@ namespace Trimfit.Controllers
 
             return categories;
         }
+        public async Task<JsonResult> DeleteAsync(int id)
+        {
+            var res = await _apiContext.DeleteRequest("Categories/" + id);
+            if (res.Value.ToString() == "400")
+            {
+                Response.StatusCode = 400;
+                return new JsonResult("Wystąpił błąd podczas usuwania kategorii");
+            }
+            else
+                return res;
+        }
         
-
+        public async Task<Category> GetCategory(int catId)
+        {
+            var res = await _apiContext.GetRequest("Categories/" + catId);
+            return JsonConvert.DeserializeObject<Category>(res.Value.ToString());
+        }
+        [HttpPut]
+        public async Task<JsonResult> UpdateCategory(Category category)
+        {
+            var res = await _apiContext.PutRequest("Categories/" + category.Category_Id, category);
+            if (res.Value.ToString() == "400")
+            {
+                Response.StatusCode = 400;
+                return new JsonResult("Wystąpił błąd podczas zapisywania kategorii");
+            }
+            else
+                return res;
+        }
         public async Task<JsonResult> AddAsync(string category_name, string category_color)
         {
 

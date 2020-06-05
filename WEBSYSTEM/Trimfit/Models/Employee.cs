@@ -34,5 +34,13 @@ namespace Trimfit.Models
         public string Employee_Photo_Url { get; set; }
         [JsonProperty(PropertyName = "user_id")]
         public int? User_Id { get; set; }
+        [JsonProperty(PropertyName = "address")]
+        public Address Address { get; set; }
+        [JsonProperty(PropertyName = "clubs")]
+        public ICollection<EmployeeClub> Clubs { get; set; }
+        [NotMapped]
+        public IEnumerable<Activity> Activities { get; set; }
+        [NotMapped]
+        public IEnumerable<Service> Services { get; set; }
     }
 }

@@ -1,0 +1,155 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>Lista pracowników</h1>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn btn-icon icon-left btn-primary mb-3 float-right " id="add-new-employee"><i class="far fa-edit"></i> Dodaj pracownika</a>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Wszyscy klubowicze</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped dataTable no-footer" id="employee_list">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            Lp.
+                                        </th>
+                                        <th></th>
+                                        <th>Imię i nazwisko</th>
+                                        <th>Przyjazna nazwa</th>
+                                        <th>Status</th>
+                                        <th>Data urodzenia</th>
+                                        <th>Powiązane aktywności</th>
+                                        <th>Adres</th>
+                                        <th>Utworzony</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<form class="modal-part" id="modal-new-employee" enctype="multipart/form-data">
+    <p>Wypełnij wszystkie pola formularza i dodaj nowego pracownika!</p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <input type="file" name="photo" id="photo" accept="image/*" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_gender">Zwrot grzecznościowy</label>
+            <select class="form-control select2" name="employee_gender" id="employee_gender">
+                <option value="1">Pan</option>
+                <option value="2">Pani</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_gender">Status</label>
+            <select class="form-control select2" name="employee_status" id="employee_status">
+                <option value="1">Aktywny</option>
+                <option value="0">Nieaktywny</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_name">Imię</label>
+            <input type="text" class="form-control" id="employee_name" placeholder="Imię" required>
+            <div class="invalid-feedback">
+                Wpisz poprawnie Imię.
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_surname">Nazwisko</label>
+            <input type="text" class="form-control" id="employee_surname" required placeholder="Nazwisko">
+            <div class="invalid-feedback">
+                Uzupełnij nazwisko.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_displayname">Wyświetlana nazwa</label>
+            <input type="text" class="form-control" id="employee_displayname" placeholder="Przyjazna nazwa">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_birthdate">Data urodzenia</label>
+            <input type="text" class="form-control datepicker" id="employee_birthdate" required>
+            <div class="invalid-feedback">
+                Uzupełnij datę urodzenia.
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_name">Numer telefonu</label>
+            <input type="text" class="form-control" id="employee_phonenumber" placeholder="Numer telefonu" required>
+            <div class="invalid-feedback">
+                Wprowadź numer telefonu.
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_surname">Adres e-mail</label>
+            <input type="text" class="form-control" id="employee_email" required placeholder="Adres e-mail">
+            <div class="invalid-feedback">
+                Wprowadź poprawny adres email.
+            </div>
+        </div>
+    </div>
+    <p>Uzupełnij dane adresowe klienta</p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="customer_name">Ulica</label>
+            <input type="text" class="form-control" required id="employee_street" placeholder="Ulica">
+            <div class="invalid-feedback">
+                Uzupełnij ulicę.
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="customer_name">Numer domu</label>
+            <input type="text" class="form-control" required id="employee_homenumber" placeholder="Numer domu">
+            <div class="invalid-feedback">
+                Uzupełnij numer domu.
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="customer_street">Kod pocztowy</label>
+            <input type="text" class="form-control" id="employee_postcode" required placeholder="00-000">
+            <div class="invalid-feedback">
+                Wprowadź kod pocztowy.
+            </div>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="customer_name">Miasto</label>
+            <input type="text" class="form-control" required id="employee_city" placeholder="Miasto">
+            <div class="invalid-feedback">
+                Wprowadź poprawne miasto.
+            </div>
+        </div>
+    </div>
+
+</form>
+

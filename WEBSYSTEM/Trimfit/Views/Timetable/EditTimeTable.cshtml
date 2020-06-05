@@ -3,6 +3,21 @@
         <h1>@ViewData["Header"]</h1>
     </div>
     <div class="section-body">
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <select class="form-control" name="timetable_status" id="timetable_status">
+                    <option value="2">Szkic</option>
+                    <option value="1">Aktywny</option>
+                    <option value="0">Nieaktywny</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Nazwa" name="timetable_name" id="timetable_name">
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-icon icon-left btn-primary mb-3 float-right" id="save_timetable">Zapisz</button>
+            </div>
+        </div>
         <div class="row">
             <div class="card">
                 <div class="card-header">
@@ -22,7 +37,7 @@
                                     <div class="fc-event list-group-item" id="@item.Activity_Id" data-color="@item.Activity_Color" data-id="@item.Activity_Id" style="background-color:@item.Activity_Color; border-color:@item.Activity_Color">@item.Activity_Name</div>
                                 }
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -34,7 +49,6 @@
         </div>
     </div>
 </section>
-<a id="dupa" class="button">cos tam</a>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -58,7 +72,7 @@
                 <div class="form-group">
                     <label>Sala zajęć</label>
                     <select class="form-control select2 select2-hidden-accessible" id="ta_room_id">
-                        @foreach(var item in ViewData["rooms"] as IList<Room>)
+                        @foreach (var item in ViewData["rooms"] as IList<Room>)
                         {
                             <option value="@item.Room_Id">@item.Room_Name</option>
                         }
@@ -84,7 +98,7 @@
                     </div>
 
                 </div>
-                
+
                 <div class="form-group">
                     <label>Powtarzalność</label>
                     <select class="form-control" id="ta_repeatable">

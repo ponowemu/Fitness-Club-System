@@ -40,6 +40,7 @@ namespace Trimfit.Models
         public int Timetable_Id { get; set; }
         [NotMapped]
         public string Activity_Title { get; set; }
+        public Activity Activity { get; set; }
 
     }
 }

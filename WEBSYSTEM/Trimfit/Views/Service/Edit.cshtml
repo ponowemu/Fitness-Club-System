@@ -1,0 +1,308 @@
+﻿@model ServiceView;
+<section class="section">
+    <div class="section-header">
+        <h1>@ViewData["Header"]</h1>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">Nowa usługa</h2>
+        <p class="section-lead">Wypełnij wszystkie pola formularza i dodaj nową usługę. <br /> Dzięki <b>ograniczeniom czasowym</b> jesteś w stanie w łatwy sposób ustawić dostępność dodawanej usługi. </p>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Podstawowe informacje</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="modal-part-add service-needs-validation-edit" method="post" novalidate>
+                            <div class="row">
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Nazwa</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-ad"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nazwa" name="service-name" value="@Model.Service_Name" id="service_name" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź poprawną nazwę
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Przypisane kategorie</label>
+                                    <input type="hidden" id="selectedCategories" value="@String.Join(",",Model.Category.Select(e => e.Category_Id))" />
+                                    <select class="form-control select2" multiple="" id="categories_list" required>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Czas trwania (min)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control service-duration-time" id="service_duration" value="@Model.Service_Duration" required="">
+                                        <div class="invalid-feedback">
+                                            Uzupełnij czas trwania usługi.
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col-md-12">
+                                    <label>Opis</label>
+                                    <textarea id="summernote-new-service" name="summernote-new-service" required="">@Model.Service_Description</textarea>
+                                    <div class="invalid-feedback">
+                                        Uzupełnij opis usługi.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena brutto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-money-bill-alt"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control gross_price service-gross-price gross_price" id="service_gross_price" value="@Model.Service_Gross_Price.ToString().Replace(",",".")" required="">
+                                        <div class="invalid-feedback">
+                                            Wprowadź cenę brutto usługi.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Cena netto</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-money-bill-alt"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" readonly="readonly" class="net_price form-control service-net-price net_price" value="@Model.Service_Net_Price.ToString().Replace(",",".")" id="service_net_price">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Przypisani pracownicy</label>
+                                    <input type="hidden" id="selectedEmployees" value="@String.Join(",",Model.Employee.Select(e => e.Employee_Id))" />
+                                    <select class="form-control select2" required multiple="" id="employees_list">
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group col-md-6 float-left">
+                                    <label>Klub</label>
+                                    <input type="hidden" id="selectedClubs" value="@String.Join(",",Model.Club.Select(e => e.Club_Id))" />
+                                    <select class="form-group select2" required multiple="" id="clubs_list">
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="hidden" value="@Model.Service_Id" id="service_id" />
+                                <input class="btn btn-icon btn-primary" type="submit" value="Zapisz dane">
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ograniczenia czasowe</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group col-md-12 float-left">
+                            <div class="col-md-12">
+                                <label>Poniedziałek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Mon?.ElementAtOrDefault(0)" id="mon_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Mon?.ElementAtOrDefault(1)" id="mon_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Wtorek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Tue?.ElementAtOrDefault(0)" id="tue_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Tue?.ElementAtOrDefault(1)" id="tue_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Środa</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Wed?.ElementAtOrDefault(0)" id="wen_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Wed?.ElementAtOrDefault(1)" id="wen_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Czwartek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Thu?.ElementAtOrDefault(0)" id="thu_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Thu?.ElementAtOrDefault(1)" id="thu_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Piątek</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Fri?.ElementAtOrDefault(0)" id="fri_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Fri?.ElementAtOrDefault(1)" id="fri_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left" style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Sobota</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Sat?.ElementAtOrDefault(0)" id="sat_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Sat?.ElementAtOrDefault(1)" id="sat_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 float-left " style="margin-top:15px;">
+                            <div class="col-md-12">
+                                <label>Niedziela</label>
+                            </div>
+
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Sun?.ElementAtOrDefault(0)" id="sun_from" class="form-control timepicker">
+                            </div>
+                            <div class="input-group col-md-6 float-left">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <input type="text" value="@Model.Service_Timelimit_Sun?.ElementAtOrDefault(1)" id="sun_to" class="form-control timepicker">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</section>

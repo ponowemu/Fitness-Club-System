@@ -20,10 +20,30 @@
                                 <span class="badge badge-danger" style="margin-right:10px;">@tag.Category_Name</span>
                             }
                         </div>
+                        <div class="row">
 
-                        <b>Czas trwania:</b> @Model.Service_Duration min
-                        <br />
-                        <b>Cena brutto:</b> @Model.Service_Gross_Price PLN
+                            <div class="col-md-6">
+                                @if (!String.IsNullOrEmpty(Model.Service_Photo_Url))
+                                {
+                                    <img alt="image" src="~/upload/@Model.Service_Photo_Url" class="rounded-circle profile-widget-picture">
+                                }
+                                else
+                                {
+                                    <img src="~/images/stisla/news/img08.jpg" width="210" class="">
+                                }
+                            </div>
+                            <div class="col-md-6 pt-2">
+                                <p>
+                                    <b>Czas trwania:</b> @Model.Service_Duration min
+                                    <br />
+                                    <b>Cena brutto:</b> @Model.Service_Gross_Price PLN <br />
+                                    <b>Cena netto (bez VAT): </b> @Model.Service_Net_Price PLN<br />
+                                    <b>Klub: </b>@String.Join(", ", Model.Club.Select(c => c.Club_Name))
+                                </p>
+                            </div>
+                        </div>
+
+                       
 
 
                         <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20px;">
@@ -43,19 +63,19 @@
                                     @foreach (var item in Model.Employee)
                                     {
                                         <li class="media">
-                                            <img alt="image" class="mr-3 rounded-circle" width="50" src="@item.Employee_Photo_Url">
+                                            <img alt="image" class="mr-3 rounded-circle" width="100" src="~/upload/@item.Employee_Photo_Url">
                                             <div class="media-body">
                                                 <div class="media-title">@item.Employee_Firstname @item.Employee_Lastname</div>
                                                 <div class="text-job text-muted">@item.Employee_Display_Name</div>
                                             </div>
                                             <div class="media-progressbar">
-                                                <div class="progress-text">30%</div>
+                                                <div class="progress-text">100% zadowolenia</div>
                                                 <div class="progress" data-height="6" style="height: 6px;">
-                                                    <div class="progress-bar bg-primary" data-width="30%" style="width: 30%;"></div>
+                                                    <div class="progress-bar bg-primary" data-width="100%" style="width: 100%;"></div>
                                                 </div>
                                             </div>
                                             <div class="media-cta">
-                                                <a asp-controller="Employee" asp-action="Details" asp-route-id="@item.Employee_Id" class="btn btn-outline-primary">Szczegóły</a>
+                                                <a asp-controller="Employee" asp-action="Profile" asp-route-id="@item.Employee_Id" class="btn btn-outline-primary">Szczegóły</a>
                                             </div>
                                         </li>
                                     }
@@ -73,92 +93,106 @@
                         <h4>Dostępność</h4>
                     </div>
                     <div class="card-body">
+                        @if (Model.Service_Timelimit_Mon != null && Model.Service_Timelimit_Mon[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
+                            <div class="section-title mt-0">Poniedziałek</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Mon[0] </td>
+                                    <td>@Model.Service_Timelimit_Mon[1] </td>
+                                </tr>
+                            </table>
+                        }
 
-                        <div class="section-title mt-0">Poniedziałek</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Mon[0] </td>
-                                <td>@Model.Service_Timelimit_Mon[1] </td>
-                            </tr>
-                        </table>
+                        @if (Model.Service_Timelimit_Tue != null && Model.Service_Timelimit_Tue[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
+                            <div class="section-title mt-0">Wtorek</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Tue[0] </td>
+                                    <td>@Model.Service_Timelimit_Tue[1] </td>
+                                </tr>
+                            </table>
+                        }
+                        @if (Model.Service_Timelimit_Wed != null && Model.Service_Timelimit_Wed[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
+                            <div class="section-title mt-0">Środa</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Wed[0] </td>
+                                    <td>@Model.Service_Timelimit_Wed[1] </td>
+                                </tr>
+                            </table>
+                        }
+                        @if (Model.Service_Timelimit_Thu != null && Model.Service_Timelimit_Thu[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
+                            <div class="section-title mt-0">Czwartek</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Thu[0] </td>
+                                    <td>@Model.Service_Timelimit_Thu[1] </td>
+                                </tr>
+                            </table>
+                        }
+                        @if (Model.Service_Timelimit_Fri != null && Model.Service_Timelimit_Fri[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
+                            <div class="section-title mt-0">Piątek</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Fri[0] </td>
+                                    <td>@Model.Service_Timelimit_Fri[1] </td>
+                                </tr>
+                            </table>
+                        }
+                        @if (Model.Service_Timelimit_Sat != null && Model.Service_Timelimit_Sat[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
+                            <div class="section-title mt-0">Sobota</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Sat[0] </td>
+                                    <td>@Model.Service_Timelimit_Sat[1] </td>
+                                </tr>
+                            </table>
+                        }
+                        @if (Model.Service_Timelimit_Sun != null && Model.Service_Timelimit_Sun[0].CompareTo(TimeSpan.Zero) != 0)
+                        {
 
-                        <div class="section-title mt-0">Wtorek</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Tue[0] </td>
-                                <td>@Model.Service_Timelimit_Tue[1] </td>
-                            </tr>
-                        </table>
-
-                        <div class="section-title mt-0">Środa</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Wed[0] </td>
-                                <td>@Model.Service_Timelimit_Wed[1] </td>
-                            </tr>
-                        </table>
-
-                        <div class="section-title mt-0">Czwartek</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Thu[0] </td>
-                                <td>@Model.Service_Timelimit_Thu[1] </td>
-                            </tr>
-                        </table>
-
-                        <div class="section-title mt-0">Piątek</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Fri[0] </td>
-                                <td>@Model.Service_Timelimit_Fri[1] </td>
-                            </tr>
-                        </table>
-
-                        <div class="section-title mt-0">Sobota</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Sat[0] </td>
-                                <td>@Model.Service_Timelimit_Sat[1] </td>
-                            </tr>
-                        </table>
-
-                        <div class="section-title mt-0">Niedziela</div>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><b>Od</b> </td>
-                                <td><b>Do</b> </td>
-                            </tr>
-                            <tr>
-                                <td>@Model.Service_Timelimit_Sun[0] </td>
-                                <td>@Model.Service_Timelimit_Sun[1] </td>
-                            </tr>
-                        </table>
-
-
+                            <div class="section-title mt-0">Niedziela</div>
+                            <table class="table table-striped">
+                                <tr>
+                                    <td><b>Od</b> </td>
+                                    <td><b>Do</b> </td>
+                                </tr>
+                                <tr>
+                                    <td>@Model.Service_Timelimit_Sun[0] </td>
+                                    <td>@Model.Service_Timelimit_Sun[1] </td>
+                                </tr>
+                            </table>
+                        }
                     </div>
                 </div>
             </div>

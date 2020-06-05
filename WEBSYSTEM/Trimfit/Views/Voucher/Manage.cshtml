@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Trimfit.Models.ModelView.VoucherView>
+﻿@model IEnumerable<Trimfit.Models.Voucher>
 @{
     int counter = 1;
 }
@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="table-services">
+                            <table class="table table-striped" id="table-vouchers">
                                 <thead>
                                     <tr>
                                         <th class="text-center">
@@ -30,6 +30,8 @@
                                         <th>Zamrażalny</th>
                                         <th>Ilość zamrożeń (okres)</th>
                                         <th>Okres obowiązywania</th>
+                                        <th>Cena brutto</th>
+                                        <th>Cena netto</th>
                                         <th>Akcje</th>
                                     </tr>
                                 </thead>
@@ -45,15 +47,32 @@
                                             </td>
                                             <td>@Html.Raw(item.Voucher_Description)</td>
                                             <td>
-                                                @foreach (var ac in item.Activities)
+                                                @if (item.Activities != null && item.Activities.Count > 0)
                                                 {
-                                                    <div class="badge badge-warning" style="background-color:@ac.Activity_Color">@ac.Activity_Name</div>
+                                                    @foreach (var ac in item.Activities)
+                                                    {
+                                                        <div class="badge badge-warning mt-1 ml-1" data-toggle="tooltip" data-original-title="@ac.Activity_Description" style="background-color:@ac.Activity_Color">@ac.Activity_Name</div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <strong>Brak przypisanych aktywności</strong>
                                                 }
                                             </td>
                                             <td>@Html.Raw(item.Voucher_Max_Suspend_Times > 0 ? "<div class='badge badge-active'>Tak</div>" : "<div class='badge badge-inactive'>Nie</div>")</td>
                                             <td>@item.Voucher_Max_Suspend_Times (@item.Voucher_Max_Suspend_Days dni)</td>
                                             <td>@item.Voucher_Startdate - @item.Voucher_Enddate</td>
-                                            <td></td>
+                                            <td>
+                                                <strong>@item.Voucher_Gross_Price PLN</strong>
+                                            </td>
+                                            <td>
+                                                @item.Voucher_Net_Price PLN
+                                            </td>
+                                            <td>
+                                                <input type="hidden" value="@item.Voucher_Id" id="voucher_id" />
+                                                <button class="btn btn-icon icon-left btn-primary mt-1 edit-voucher"><i class="fas fa-pencil-alt"></i></button>
+                                                <button class="btn btn-icon icon-left btn-danger mt-1 delete-voucher"><i class="fas fa-trash-alt"></i></button>
+                                            </td>
                                         </tr>
                                         counter++;
                                     }
@@ -67,7 +86,151 @@
         </div>
     </div>
 </section>
+<form class="modal-part" id="modal-edit-voucher">
+    <p>Edytuj wprowadzony karnet!</p>
+    <input type="hidden" class="voucher_id"  />
+    <div class="row">
+        <div class="form-group col-md-12 float-left">
+            <label>Wybierz typ karnetu</label>
+            <select class="form-control select2 voucher_type_list">
+            </select>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="form-group col-md-12 float-left">
+            <label>Wybierz zajęcia</label>
+            <select class="form-control select2 activities_list" multiple="" >
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-8 float-left">
+            <label>Obowiązuje w okresie</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="" class="form-control voucherDateRange">
+            </div>
+        </div>
+        <div class="form-group col-md-4 ">
+            <label>Bez ograniczeń</label>
+            <label class="mt-2">
+                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input voucher_limit">
+                <span class="custom-switch-indicator"></span>
+                <span class="custom-switch-description">Włączony/wyłączony</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6 float-left">
+            <label>Ważny przez</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <input type="number" min="0" placeholder="Ilość dni" class="form-control voucher_days">
+                <div class="input-group-append">
+                    <div class="input-group-text">dni</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 float-left">
+            <label>Ważny przez</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <input type="number" min="0" placeholder="Ilość wejść" class="form-control voucher_entries">
+                <div class="input-group-append">
+                    <div class="input-group-text">razy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6 float-left">
+            <label>Ilość możliwych zamrożeń</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                </div>
+                <input type="number" min="0" placeholder="Ilość zamrożeń"  class="form-control voucher_freeze_numbers">
+            </div>
+        </div>
+        <div class="form-group col-md-6 float-left">
+            <label>Okres zamrożenia</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-sort-numeric-down"></i>
+                    </div>
+                </div>
+                <input type="number" min="0" placeholder="Ilość dni"  class="form-control voucher_freeze_days">
+                <div class="input-group-append">
+                    <div class="input-group-text">dni</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-12">
+            <label>Opis</label>
+            <textarea  class="summernote-edit-voucher" name="summernote-edit-voucher"></textarea>
+            <div class="invalid-feedback">
+                Uzupełnij opis karnetu.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="form-group col-md-6 float-left">
+            <label>Cena brutto</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-money-bill-alt"></i>
+                    </div>
+                </div>
+                <input type="text"  class="form-control gross_price voucher_gross_price"  required="">
+                <div class="invalid-feedback">
+                    Wprowadź cenę brutto usługi.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 float-left">
+            <label>Cena netto</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-money-bill-alt"></i>
+                    </div>
+                </div>
+                <input type="text" readonly="readonly" class="voucher_net_price form-control net_price" >
+            </div>
+
+        </div>
+    </div>
+</form>
 
 
 

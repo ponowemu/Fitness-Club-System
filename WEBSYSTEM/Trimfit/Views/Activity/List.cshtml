@@ -43,9 +43,20 @@
                                                 {
                                                     @foreach (var employee in item.Employee)
                                                     {
-                                                        <a href="#">
-                                                            <img alt="image" src="@employee.Employee_Photo_Url" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1">@employee.Employee_Display_Name</div>
-                                                        </a>
+                                                        if (employee.Employee_Id != 0)
+                                                        {
+                                                            <a asp-controller="Employee" asp-action="Profile" class="page-link" asp-route-employeeId="@employee.Employee_Id">
+                                                                @if (!String.IsNullOrEmpty(employee.Employee_Photo_Url))
+                                                                {
+                                                                    <img alt="image" src="~/upload/@employee.Employee_Photo_Url" class="rounded-circle" width="55" data-toggle="title" title=""> <div class="d-inline-block ml-1">@employee.Employee_Display_Name</div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img alt="image" src="~/images/stisla/avatar/avatar-3.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1">@employee.Employee_Display_Name</div>
+                                                                }
+                                                            </a>
+                                                        }
+
                                                     }
                                                 }
                                                 else
@@ -73,6 +84,57 @@
 </section>
 
 
+
+<form class="modal-part" id="edit-activity">
+    <p>Wypełnij wszystkie pola formularza i dodaj nową aktywność!</p>
+    <input type="hidden" class="activityId" />
+    <div class="form-group">
+        <div class="control-label">Status</div>
+        <label class="mt-2">
+            <input type="checkbox" name="custom-switch-checkbox" class="activity_status custom-switch-input">
+            <span class="custom-switch-indicator"></span>
+            <span class="custom-switch-description">Włączony/wyłączony</span>
+        </label>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-9">
+                <label>Nazwa</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control activity_name" required placeholder="Nazwa" name="activity_name" >
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label>Kolor</label>
+                    <div class="input-group">
+                        <input type="color" class="form-control activity_color">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Opis</label>
+        <textarea class="summernote-simple activity_description" required style="display: none;"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Powiązani pracownicy</label>
+        <select class="form-control select2 select2-hidden-accessible employee_id" multiple="" required>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Powiązane kategorie</label>
+        <select class="form-control select2 select2-hidden-accessible category_id" multiple="" required>
+        </select>
+    </div>
+</form>
+
 <form class="modal-part" id="new-activity">
     <p>Wypełnij wszystkie pola formularza i dodaj nową aktywność!</p>
 
@@ -94,14 +156,14 @@
                             <i class="fas fa-ad"></i>
                         </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="Nazwa" name="activity_name" id="activity_name">
+                    <input type="text" class="form-control" required placeholder="Nazwa" name="activity_name" id="activity_name">
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label>Kolor</label>
                     <div class="input-group">
-                        <input type="color" id="activity_color" class="form-control">
+                        <input type="color" id="activity_color" required class="form-control">
                     </div>
                 </div>
             </div>
@@ -109,11 +171,11 @@
     </div>
     <div class="form-group">
         <label>Opis</label>
-        <textarea id="activity_description" class="summernote-simple" style="display: none;"></textarea>
+        <textarea id="activity_description" class="summernote-simple" required style="display: none;"></textarea>
     </div>
     <div class="form-group">
         <label>Powiązani pracownicy</label>
-        <select class="form-control select2 select2-hidden-accessible" id="employee_id" multiple="">
+        <select class="form-control select2 select2-hidden-accessible" id="employee_id" multiple="" required>
             @foreach (var item in ViewData["employees"] as IList<Employee>)
             {
                 <option value="@item.Employee_Id">@item.Employee_Display_Name</option>
@@ -122,7 +184,7 @@
     </div>
     <div class="form-group">
         <label>Powiązane kategorie</label>
-        <select class="form-control select2 select2-hidden-accessible" id="category_id" multiple="">
+        <select class="form-control select2 select2-hidden-accessible" id="category_id" multiple="" required>
             @foreach (var item in ViewData["categories"] as IList<Category>)
             {
                 <option value="@item.Category_Id">@item.Category_Name</option>

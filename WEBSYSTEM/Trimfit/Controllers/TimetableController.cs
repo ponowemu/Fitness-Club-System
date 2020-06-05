@@ -14,6 +14,11 @@ namespace Trimfit.Controllers
     [Authorize]
     public class TimetableController : Controller
     {
+        private readonly IApiContext _apiContext;
+        public TimetableController(IApiContext apiContext)
+        {
+            _apiContext = apiContext;
+        }
         public IActionResult Index()
         {
             return View();
@@ -38,13 +43,34 @@ namespace Trimfit.Controllers
             ViewData["Header"] = "Zarządzaj grafikami";
             return View(timetables);
         }
+        public async Task<JsonResult> PutTimetable(Timetable timetable)
+        {
+            timetable.Timetable_Edited = DateTime.Now;
+            var response = await _apiContext.PutRequest("Timetables/" + timetable.Timetable_Id, timetable);
+            return response;
+        }
+        public async Task<Timetable> GetTimetable(int timetableId)
+        {
+            var response = await _apiContext.GetRequest("Timetables/" + timetableId);
+            var timetables_list = JsonConvert.DeserializeObject<Timetable>(response.Value.ToString());
+
+            return timetables_list;
+        }
         [HttpGet("[controller]/Edit/{id}")]
         public async Task<IActionResult> EditTimetable()
         {
             ViewData["Header"] = "Edytuj grafik";
 
-            var activities = new ActivityController();
-            ViewData["activities"] = await activities.GetAsync();
+            ApiContext _context = new ApiContext();
+            List<Activity> activities = new List<Activity>();
+
+            var activities_response = await _context.GetRequest("Activities/");
+            var activities_list = JsonConvert.DeserializeObject<List<Activity>>(activities_response.Value.ToString());
+
+            activities = activities_list.ToList();
+
+
+            ViewData["activities"] = activities;
 
             var rooms = new RoomController();
             ViewData["rooms"] = await rooms.GetAsync();
@@ -109,7 +135,7 @@ namespace Trimfit.Controllers
             ApiContext _context = new ApiContext();
             try
             {
-                var result = await _context.GetRequest("TimetableActivities/?timetable=20");
+                var result = await _context.GetRequest("TimetableActivities/?timetable="+timetable_id+"");
                 var list = JsonConvert.DeserializeObject<List<TimetableActivity>>(result.Value.ToString()).Where(l => l.Timetable_Id == timetable_id).Take(100);
                 
                 foreach(var el in list)
@@ -163,6 +189,7 @@ namespace Trimfit.Controllers
                 element.Timetable_Activity_Free_Places = ta.Timetable_Activity_Free_Places;
                 element.Timetable_Activity_Limit_Places = ta.Timetable_Activity_Limit_Places;
                 element.Timetable_Activity_Reservation_List = ta.Timetable_Activity_Reservation_List;
+                element.Timetable_Activity_Repeatable = ta.Timetable_Activity_Repeatable;
 
                 var result = await _context.PutRequest("TimetableActivities/" + ta.Timetable_Activity_Id + "", element);
 

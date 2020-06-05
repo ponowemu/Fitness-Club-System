@@ -76,12 +76,6 @@ $(document).ready(function () {
     });
 });
 
-$("#product_gross_price").on('input', function () {
-    var gross_price = $(this).val();
-    var net_price = gross_price / 1.23;
-
-    $('#product_net_price').val(net_price);
-});
 
 $(".product_icon").on('click', function () {
     console.log($(this));

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Trimfit.Models;
 using Trimfit.Data;
 using Newtonsoft.Json;
+using Trimfit.Models.ModelView;
 
 namespace Trimfit.Controllers
 {
@@ -25,17 +26,44 @@ namespace Trimfit.Controllers
             ViewData["Header"] = "Lista klientów";
             return View();
         }
+        [HttpDelete]
+        public async Task<JsonResult> DeleteAsync(int customerId)
+        {
+            var res = await _apiContext.DeleteRequest("Customers/" + customerId);
+            if(res.Value.ToString() != "200")
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return res;
+        }
+
+        [HttpGet("[controller]/[action]/{customerId}")]
+        public async Task<IActionResult> Edit(int customerId)
+        {
+            var res = await _apiContext.GetRequest("Customers/" + customerId);
+            var customer = JsonConvert.DeserializeObject<Customer>(res.Value.ToString());
+
+            var list = await _apiContext.GetRequest("Vouchers/");
+            var voucherList = JsonConvert.DeserializeObject<IEnumerable<Voucher>>(list.Value.ToString());
+
+            ViewData["vouchers"] = voucherList;
+
+            return View(customer);
+        }
         public async Task<JsonResult> AddAsync(Customer customer)
         {
             var res = await _apiContext.PostRequest("Customers/", customer);
+            // POWIĄZANIE Z KLUBEM - póki co tymczasowo ustawia
+
             return res;
         }
         public async Task<JsonResult> GetCustomers()
         {
             var customers = await _apiContext.GetRequest("Customers/Details");
             var list = JsonConvert.DeserializeObject(customers.Value.ToString());
-            
-            
+
+
             return new JsonResult(new { data = list });
         }
         [HttpGet]
@@ -44,6 +72,21 @@ namespace Trimfit.Controllers
             var customerVouchers = await _apiContext.GetRequest(String.Format("Customers/Details"));
 
             return customerVouchers.Value.ToString();
+        }
+        [HttpPut]
+        public async Task<JsonResult> Update(Customer customer)
+        {
+            var addedStatus = await _apiContext.PutRequest("Customers/" + customer.Customer_Id, customer);
+            if (addedStatus.Value == "400")
+            {
+                Response.StatusCode = 404;
+                return new JsonResult("ERR");
+            }
+            else
+            {
+                Response.StatusCode = 200;
+                return addedStatus;
+            }
         }
     }
 }

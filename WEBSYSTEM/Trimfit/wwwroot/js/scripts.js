@@ -577,14 +577,36 @@ $(function () {
 });
 
 
+var lab = [];
+var val = [];
+$(document).ready(function () {
+    $.ajax({
+        url: '/Dashboard/GetEntries',
+        type: 'GET',
+        success: function (data) {
+            data.forEach(function (el) {
+                myChart.data.labels.push(el.day);
+
+                myChart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(parseInt(el.summ));
+                });
+
+            });
+            myChart.update();
+        }
+    });
+});
+
+console.log(val);
+
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        labels: [],
         datasets: [{
-            label: 'Statistics',
-            data: [460, 458, 330, 502, 430, 610, 488],
+            label: 'Liczba',
+            data: [],
             borderWidth: 2,
             backgroundColor: 'rgba(63,82,227,.8)',
             borderWidth: 0,
@@ -593,17 +615,6 @@ var myChart = new Chart(ctx, {
             pointRadius: 3.5,
             pointBackgroundColor: 'transparent',
             pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
-        }, {
-            label: 'Statistics',
-            data: [390, 600, 390, 280, 600, 430, 638],
-            borderWidth: 2,
-            backgroundColor: 'rgba(254,86,83,.7)',
-            borderWidth: 0,
-            borderColor: 'transparent',
-            pointBorderWidth: 0,
-            pointRadius: 3.5,
-            pointBackgroundColor: 'transparent',
-            pointHoverBackgroundColor: 'rgba(254,86,83,.8)',
         }]
     },
     options: {
@@ -618,9 +629,9 @@ var myChart = new Chart(ctx, {
                 },
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 200,
+                    stepSize: 50,
                     callback: function (value, index, values) {
-                        return '$' + value;
+                        return value;
                     }
                 }
             }],
@@ -634,6 +645,7 @@ var myChart = new Chart(ctx, {
     }
 });
 
+/*
 var ctx = document.getElementById("myChart2").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -683,4 +695,4 @@ var myChart = new Chart(ctx, {
     }
 });
 
-
+*/

@@ -827,8 +827,8 @@ tr:first-child > td > .fc-day-grid-event {
     .profile-widget .profile-widget-picture {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
         float: left;
-        width: 100px;
-        margin: -35px -5px 0 30px;
+        width: 200px;
+        margin: -60px -5px 0 10px;
         position: relative;
         z-index: 1;
     }
@@ -2027,7 +2027,7 @@ tr:first-child > td > .fc-day-grid-event {
     }
 
     .pricing .pricing-price {
-        margin-bottom: 45px;
+        margin-bottom: 0px;
     }
 
         .pricing .pricing-price div:first-child {

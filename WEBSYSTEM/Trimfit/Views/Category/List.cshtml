@@ -38,8 +38,9 @@
                                             <td>@item.Category_Name</td>
                                             <td><span style="width:120px; border-radius:10px; height:25px; float:left; background-color:@item.Category_Color"></span></td>
                                             <td>
+                                                <input type="hidden" class="category_id" value="@item.Category_Id" />
                                                 <button class="btn btn-icon icon-left btn-primary mb-3 edit-category "><i class="fas fa-pencil-alt"></i> Edytuj</button>
-                                                <button class="btn btn-icon icon-left btn-danger mb-3 "><i class="fas fa-trash-alt"></i> Usuń</button>
+                                                <button class="btn btn-icon icon-left btn-danger mb-3 delete-category "><i class="fas fa-trash-alt"></i> Usuń</button>
                                             </td>
                                         </tr>
                                         counter++;
@@ -56,6 +57,7 @@
 
 
 <form class="modal-part" id="new-category">
+    <input type="hidden" class="category_id" />
     <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
     <div class="form-group">
         <label>Nazwa</label>
@@ -78,6 +80,7 @@
 </form>
 
 <form class="modal-part" id="edit-category">
+    <input type="hidden" class="category_id" />
     <p>Wypełnij wszystkie pola formularza i dodaj nowy grafik!</p>
     <div class="form-group">
         <label>Nazwa</label>
@@ -87,13 +90,13 @@
                     <i class="fas fa-ad"></i>
                 </div>
             </div>
-            <input type="text" class="form-control" placeholder="Nazwa" name="edit_category_name" id="edit_category_name">
+            <input type="text" class="form-control edit_category_name" placeholder="Nazwa" name="edit_category_name" >
         </div>
     </div>
     <div class="form-group">
         <label>Kolor kategorii</label>
         <div class="input-group">
-            <input type="color" id="edit_category_color" class="form-control">
+            <input type="color" class="form-control edit_category_color">
         </div>
     </div>
 

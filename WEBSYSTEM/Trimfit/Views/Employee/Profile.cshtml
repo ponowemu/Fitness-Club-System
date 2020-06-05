@@ -1,0 +1,187 @@
+﻿@model Employee;
+<section class="section">
+    <div class="section-header">
+        <h1>Profile</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">Profile</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <h2 class="section-title">@Model.Employee_Firstname @Model.Employee_Lastname</h2>
+        <p class="section-lead">
+            Karta pracownika.
+        </p>
+
+        <div class="row mt-sm-4">
+            <div class="col-12 col-md-12 col-lg-5">
+                <div class="card profile-widget">
+                    <div class="profile-widget-header">
+                        @if (!String.IsNullOrEmpty(Model.Employee_Photo_Url))
+                        {
+                            <img alt="image" src="~/upload/@Model.Employee_Photo_Url" class="rounded-circle profile-widget-picture">
+                        }
+                        else
+                        {
+                            <img src="~/images/stisla/avatar/avatar-3.png" width="105" class="rounded-circle profile-widget-picture">
+                        }
+                        <div class="profile-widget-items">
+                            <div class="profile-widget-item">
+                                <div class="profile-widget-item-label">Prowadzonych zajęć</div>
+                                <div class="profile-widget-item-value">187</div>
+                            </div>
+                            <div class="profile-widget-item">
+                                <div class="profile-widget-item-label">Oferowanych usług</div>
+                                <div class="profile-widget-item-value">6,8K</div>
+                            </div>
+                            <div class="profile-widget-item">
+                                <div class="profile-widget-item-label">Opinii</div>
+                                <div class="profile-widget-item-value">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-widget-description">
+                        <div class="profile-widget-name">@Model.Employee_Firstname @Model.Employee_Lastname </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <p><strong>Prowadzone zajęcia</strong></p>
+                        @if (Model.Activities != null)
+                        {
+                            foreach (var ac in Model.Activities)
+                            {
+                                <div class="badge" style="color:#fff; width:100%; background-color:@ac.Activity_Color">
+                                    @ac.Activity_Name
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>Brak przypisanych aktywności.</p>
+                        }
+                    </div>
+                    <div class="card-footer text-center">
+                        <p><strong>Oferowane usługi</strong></p>
+                        @if (Model.Services != null)
+                        {
+                            foreach (var ac in Model.Services)
+                            {
+                                <div class="badge badge-active" style="color:#fff; width:100%;">
+                                    @ac.Service_Name
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>Brak przypisanych usług.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-7">
+                <div class="card">
+                    <form method="post" class="needs-validation" id="employeeProfile" enctype="multipart/form-data" >
+                        <div class="card-header">
+                            <h4>Edytuj dane</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-12">
+                                    <input type="hidden" id="employee_id" value="@Model.Employee_Id" />
+                                    <input type="hidden" id="address_id" value="@Model.Address_Id"/>
+                                    <input type="hidden" id="employee_gender" value="@Model.Employee_Gender"/>
+                                    <input type="hidden" id="employee_photo" value="@Model.Employee_Photo_Url" />
+                                    <label>Nazwa wyświetlana</label>
+                                    <input type="text" class="form-control" id="employee_display" value="@Model.Employee_Display_Name" required="">
+                                    <div class="invalid-feedback">
+                                        Uzupełnij przyjazną nazwę
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Status</label>
+                                    <label class="mt-2 col-lg-12">
+                                        <input type="checkbox" id="employee_status" name="custom-switch-checkbox" class="form-control custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                        <span class="custom-switch-description">Włączony/wyłączony</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Imię</label>
+                                    <input type="text" class="form-control" id="employee_firstname" value="@Model.Employee_Firstname" required="">
+                                    <div class="invalid-feedback">
+                                        Uzupełnij imię
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Nazwisko</label>
+                                    <input type="text" class="form-control"  id="employee_lastname" value="@Model.Employee_Lastname" required="">
+                                    <div class="invalid-feedback">
+                                        Uzupełnij nazwisko
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" id="employee_email" value="@Model.Address.Address_Email" required="">
+                                    <div class="invalid-feedback">
+                                        Uzupełnij adres email
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Telefon kontaktowy</label>
+                                    <input type="tel" class="form-control" id="employee_phonenumber" value="@Model.Address.Address_Phone">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-7 col-12">
+                                    <label>Ulica</label>
+                                    <input type="text" class="form-control" id="employee_street" value="@Model.Address.Address_1" required="">
+                                    <div class="invalid-feedback">
+                                        Uzupełnij adres 1
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5 col-12">
+                                    <label>Numer domu</label>
+                                    <input type="text" class="form-control" id="employee_number" value="@Model.Address.Address_2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-7 col-12">
+                                    <label>Miasto</label>
+                                    <input type="text" class="form-control" id="employee_city" value="@Model.Address.Address_City" required="">
+                                    <div class="invalid-feedback">
+                                        Uzupełnij adres 1
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5 col-12">
+                                    <label>Kod pocztowy</label>
+                                    <input type="text" class="form-control" id="employee_postcode" value="@Model.Address.Address_Postcode">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-7 col-12">
+                                    <label for="customer_birthdate">Data urodzenia</label>
+                                    <input type="text" class="form-control datepicker" id="employee_birthdate" required>
+                                    <div class="invalid-feedback">
+                                        Uzupełnij datę urodzenia.
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5 col-12">
+                                    <label>Zdjęcie profilowe</label>
+                                    <input type="hidden" id="fakePhoto" value="@Model.Employee_Photo_Url"/>
+                                    <input type="file" name="photo" id="photo" value="@Model.Employee_Photo_Url" accept="image/*" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-right">
+                            <button class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

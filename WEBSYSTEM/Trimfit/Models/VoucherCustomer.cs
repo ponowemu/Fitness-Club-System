@@ -20,5 +20,15 @@ namespace Trimfit.Models
         public List<string> Voucher_Customer_Suspend_Date { get; set; }
         [JsonProperty(PropertyName ="voucher_customer_suspend_number")]
         public int Voucher_Customer_Suspend_Number { get; set; }
+        [JsonProperty(PropertyName = "voucherEndDate")]
+        public DateTime? VoucherEndDate { get; set; }
+        [JsonProperty(PropertyName = "freeEntries")]
+        public int? FreeEntries { get; set; }
+        [JsonProperty(PropertyName = "isActive")]
+        public bool? IsActive { get; set; }
+        [JsonProperty(PropertyName = "added")]
+        public DateTime? Added { get; set; }
+        public virtual Voucher Voucher { get; set; }
+
     }
 }

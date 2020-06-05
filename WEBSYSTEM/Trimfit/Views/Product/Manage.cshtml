@@ -41,15 +41,13 @@
                                             <td>
                                                 @item.Product_Name
                                             </td>
-                                            <td>@item.Product_Gross_Price</td>
+                                            <td>@item.Product_Gross_Price zł</td>
 
                                             <td>
-                                                <ul>
                                                     @foreach (var tag in item.Category)
                                                     {
-                                                        <li><span class="badge badge-danger">@tag.Category_Name</span></li>
-                                                    }
-                                                </ul>
+                                                        <span class="badge badge-danger">@tag.Category_Name</span>
+                                                    }                                             
                                             </td>
                                             <td>
                                                 <ul>
