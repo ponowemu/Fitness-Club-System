@@ -93,7 +93,37 @@ namespace TrimFitAPI.Controllers
 
             return NoContent();
         }
+        /// <summary>
+        /// Metoda powinna być wywoływana przy każdym wejściu osoby z karnetem na zajęcia. 
+        /// </summary>
+        /// <param name="voucherCustomerId"></param>
+        /// <returns></returns>
+        [HttpPost("Entrance/{voucherCustomerId}")]
+        public async Task<IActionResult> PostEntrance([FromRoute] int voucherCustomerId)
+        {
+            var voucher = await _context.VoucherCustomer
+                .Where(v => v.Voucher_Customer_Id == voucherCustomerId)
+                .SingleOrDefaultAsync();
 
+            if(voucher == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (voucher.FreeEntries.HasValue &&
+                    voucher.FreeEntries.Value > 0)
+                {
+                    int fe = voucher.FreeEntries.Value - 1;
+                    voucher.FreeEntries = fe;
+                    await _context.SaveChangesAsync();
+
+                    return Ok();
+                }
+                else
+                    return NotFound();
+            }
+        }
         // POST: api/VoucherCustomers
         [HttpPost]
         public async Task<IActionResult> PostVoucherCustomer([FromBody] VoucherCustomer voucherCustomer)
