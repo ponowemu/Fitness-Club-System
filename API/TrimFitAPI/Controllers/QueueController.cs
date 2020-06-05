@@ -21,9 +21,17 @@ namespace TrimFitAPI.Controllers
         {
             _context = context;
         }
+        [HttpGet]
+        public async Task<IEnumerable<Queue>> GetQueues()
+        {
+            return await _context.Queues
+                .OrderByDescending(q => q.Created)
+                .Include(c => c.Customer)
+                .Take(100).ToListAsync();
+        }
 
         // GET: api/GetLastRequest
-        [HttpGet]
+        [HttpGet("GetLastRequest")]
         public async Task<Queue> GetLastRequest()
         {
             var result = await _context.Queues
