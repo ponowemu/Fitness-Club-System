@@ -42,7 +42,7 @@
                            @foreach (var entry in ViewData["recentEntries"] as IList<dynamic>)
                            {
                                <a href="#" class="list-group-item list-group-item-action" style="border-bottom:0; border-left:0;border-right:0; padding:0">
-                                   <p><strong>@entry.customer.customer_Firstname @entry.customer.customer_Lastname</strong> <span class="float-right">@entry.created.ToString("hh:MM dd/MM/yyyy")</span></p>
+                                   <p><strong>@entry.customer.customer_Firstname @entry.customer.customer_Lastname</strong> <span class="float-right">@entry.created.ToString("HH:mm dd/MM/yyyy")</span></p>
                                </a>
                            }
                        }

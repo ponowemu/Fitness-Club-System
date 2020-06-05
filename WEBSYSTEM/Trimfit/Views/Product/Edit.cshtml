@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Product;
 <section class="section">
     <div class="section-header">
         <h1>@ViewData["Header"]</h1>
@@ -17,7 +13,8 @@
                         <h4>Podstawowe informacje</h4>
                     </div>
                     <div class="card-body">
-                        <form class="modal-part-add product-needs-validation" method="post" id="modal-add-new-product" novalidate>
+                        <form class="modal-part-add product-needs-validation-edit" method="post" id="modal-add-new-product" novalidate>
+                            <input type="hidden" id="product_id" value="@Model.Product_Id" />
                             <div class="row">
                                 <div class="form-group col-md-6 float-left">
                                     <label>Nazwa</label>
@@ -27,7 +24,7 @@
                                                 <i class="fas fa-ad"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Nazwa" name="product-name" id="product_name" required="">
+                                        <input type="text" class="form-control" value="@Model.Product_Name" placeholder="Nazwa" name="product-name" id="product_name" required="">
                                         <div class="invalid-feedback">
                                             Wprowadź nazwę produktu.
                                         </div>
@@ -35,23 +32,18 @@
                                 </div>
                                 <div class="form-group col-md-6 float-left">
                                     <label>Przypisane kategorie</label>
-                                    <input type="hidden" id="selectedCategories" value="" />
-                                    <select class="form-control select2" multiple="" id="categories_list">
-                                    </select>
+                                    <input type="hidden" id="selectedCategories" value="@String.Join(",",Model.Category_Id)" />
+                                    <select class="form-control select2" multiple="" id="categories_list"></select>
 
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-group col-md-12">
-
                                 </div>
                             </div>
 
-
-
                             <div class="row">
-
                                 <div class="form-group col-md-6 float-left">
                                     <label>Cena brutto</label>
                                     <div class="input-group">
@@ -60,7 +52,7 @@
                                                 <i class="fas fa-money-bill-alt"></i>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control product-gross-price gross_price" id="product_gross_price" required="">
+                                        <input type="text" class="form-control product-gross-price gross_price" value="@Model.Product_Gross_Price" id="product_gross_price" required="">
                                         <div class="invalid-feedback">
                                             Wprowadź cenę brutto usługi.
                                         </div>
@@ -75,17 +67,16 @@
                                                 <i class="fas fa-money-bill-alt"></i>
                                             </div>
                                         </div>
-                                        <input type="text" readonly="readonly" class="net_price form-control product-net-price" id="product_net_price">
+                                        <input type="text" readonly="readonly" class="net_price form-control product-net-price" value="@Model.Product_Net_Price" id="product_net_price">
                                     </div>
 
                                 </div>
                             </div>
                             <div class="row">
-
                                 <div class="form-group col-md-6 float-left">
                                     <label>Stan</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" min="1" max="100" id="product_quantity" />
+                                        <input type="number" class="form-control" min="1" max="100" id="product_quantity" value="@Model.Product_Quantity" />
                                         <div class="invalid-feedback">
                                             Maksymalnie możesz dodać 100 szt.
                                         </div>
@@ -94,26 +85,31 @@
                             </div>
 
                             <div class="row">
-
                                 <div class="form-group col-md-6 float-left">
                                     <label>Klub</label>
-                                    <input type="hidden" id="selectedClubs" value="" />
-                                    <select class="form-group select2" multiple="" id="clubs_list">
-                                    </select>
+                                    <input type="hidden" id="selectedClubs" value="@String.Join(",",Model.Club_Id)" />
+                                    <select class="form-group select2" multiple="" id="clubs_list"></select>
 
                                 </div>
                                 <div class="form-group col-md-6 float-left">
                                     <label>Widoczność</label>
                                     <select class="form-control" id="product_status">
-                                        <option value="1">Widoczny</option>
-                                        <option value="0">Niewidoczny</option>
+                                        @if (Model.Product_Status == 1)
+                                        {
+                                            <option value="1" selected>Widoczny</option>
+                                            <option value="0" >Niewidoczny</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="0" selected>Niewidoczny</option>
+                                            <option value="1">Widoczny</option>
+                                        }
                                     </select>
-
                                 </div>
                             </div>
 
                             <div class="col-md-12">
-                                <input class="btn btn-icon btn-primary" type="submit" value="Dodaj">
+                                <input class="btn btn-icon btn-primary" type="submit" value="Zapisz produkt">
                             </div>
 
                         </form>
@@ -132,7 +128,7 @@
 
                             <div class="selectgroup selectgroup-pills">
                                 <label class="selectgroup-item">
-                                    <input type="radio" name="product_icon" value="tshirt" class="selectgroup-input product_icon" >
+                                    <input type="radio" name="product_icon" value="tshirt" class="selectgroup-input product_icon">
                                     <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-tshirt"></i></span>
                                 </label>
                                 <label class="selectgroup-item">

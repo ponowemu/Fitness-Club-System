@@ -25,7 +25,9 @@
                                             Lp.
                                         </th>
                                         <th>Nazwa produktu</th>
+                                        <th>Cena netto</th>
                                         <th>Cena brutto</th>
+                                        <th>Ilość</th>
                                         <th>Przypisane tagi</th>
                                         <th>Klub</th>
                                         <th></th>
@@ -41,7 +43,9 @@
                                             <td>
                                                 @item.Product_Name
                                             </td>
+                                            <td>@item.Product_Net_Price zł</td>
                                             <td>@item.Product_Gross_Price zł</td>
+                                            <td>@item.Product_Quantity szt.</td>
 
                                             <td>
                                                     @foreach (var tag in item.Category)
@@ -58,7 +62,10 @@
                                                 </ul>
                                             </td>
                                             <td>
-                                                <a class="btn btn-icon icon-left btn-primary mb-3 float-right" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Product_Id" ><i class="fas fa-pencil-alt"></i> Edytuj</a>
+                                                <button class="btn btn-icon icon-left btn-danger mt-1 delete-product float-right" data-id="@item.Product_Id">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                                <a class="btn btn-icon btn-primary mr-1 icon-left mt-1 float-right" asp-controller="Product" asp-action="Edit" asp-route-id="@item.Product_Id"><i class="fas fa-pencil-alt"></i> Edytuj</a>
                                             </td>
                                         </tr>
                                         counter++;

@@ -1,6 +1,63 @@
 ﻿"use strict";
 
 
+// obsługa uzupełniania 
+// lista kategorii
+// lista klubów
+// lista pracowników
+
+$.ajax({
+    url: '/Service/GetEmployees',
+    method: 'GET',
+    data: { clubId: 1 },
+    success: function (data) {
+        var idsA = $('#selectedEmployees').val().toString().split(',');
+        let ids = idsA.map(function (item) {
+            return parseInt(item, 10);
+        });
+        data.forEach(function (d) {
+            if (ids.includes(d.employee_id))
+                $('#employees_list').append('<option selected value="' + d.employee_id + '">' + d.employee.employee_firstname + ' ' + d.employee.employee_lastname + '</option>');
+            else
+                $('#employees_list').append('<option value="' + d.employee_id + '">' + d.employee.employee_firstname + ' ' + d.employee.employee_lastname + '</option>');
+        });
+    }
+});
+
+$.ajax({
+    url: '/Service/GetCategories',
+    method: 'GET',
+    success: function (data) {
+        var idsA = $('#selectedCategories').val().toString().split(',');
+        let ids = idsA.map(function (item) {
+            return parseInt(item, 10);
+        });
+        data.forEach(function (d) {
+            if (ids.includes(d.category_id))
+                $('#categories_list').append('<option selected value="' + d.category_id + '">' + d.category_name + '</option>');
+            else
+                $('#categories_list').append('<option value="' + d.category_id + '">' + d.category_name + '</option>');
+        });
+    }
+});
+
+$.ajax({
+    url: '/Service/GetClubs',
+    method: 'GET',
+    success: function (data) {
+        var idsA = $('#selectedClubs').val().toString().split(',');
+        let ids = idsA.map(function (item) {
+            return parseInt(item, 10);
+        });
+        data.forEach(function (d) {
+            if (ids.includes(d.club_id))
+                $('#clubs_list').append('<option selected value="' + d.club_id + '">' + d.club_name + '</option>');
+            else
+                $('#clubs_list').append('<option value="' + d.club_id + '">' + d.club_name + '</option>');
+        });
+    }
+});
+
 $("#table-service").dataTable({
     "columnDefs": [
         { "sortable": true, "targets": [2, 3] }
@@ -198,63 +255,6 @@ if (jQuery().select2) {
     $(".select2").select2();
 }
 
-// obsługa uzupełniania 
-// lista kategorii
-// lista klubów
-// lista pracowników
-
-$.ajax({
-    url: '/Service/GetEmployees',
-    method: 'GET',
-    data: { clubId: 1 },
-    success: function (data) {
-        var idsA = $('#selectedEmployees').val().toString().split(',');
-        let ids = idsA.map(function (item) {
-            return parseInt(item, 10);
-        });
-        data.forEach(function (d) {
-            if (ids.includes(d.employee_id))
-                $('#employees_list').append('<option selected value="' + d.employee_id + '">' + d.employee.employee_firstname + ' ' + d.employee.employee_lastname + '</option>');
-            else
-                $('#employees_list').append('<option value="' + d.employee_id + '">' + d.employee.employee_firstname + ' ' + d.employee.employee_lastname + '</option>');
-        });        
-    }
-});
-
-$.ajax({
-    url: '/Service/GetCategories',
-    method: 'GET',
-    success: function (data) {
-        var idsA = $('#selectedCategories').val().toString().split(',');
-        let ids = idsA.map(function (item) {
-            return parseInt(item, 10);
-        });
-        data.forEach(function (d) {
-            if (ids.includes(d.category_id))
-                $('#categories_list').append('<option selected value="' + d.category_id + '">' + d.category_name + '</option>');
-            else
-                $('#categories_list').append('<option value="' + d.category_id + '">' + d.category_name + '</option>');
-        });
-    }
-});
-
-
-$.ajax({
-    url: '/Service/GetClubs',
-    method: 'GET',
-    success: function (data) {
-        var idsA = $('#selectedClubs').val().toString().split(',');
-        let ids = idsA.map(function (item) {
-            return parseInt(item, 10);
-        });
-        data.forEach(function (d) {
-            if (ids.includes(d.club_id))
-                $('#clubs_list').append('<option selected value="' + d.club_id + '">' + d.club_name + '</option>');
-            else
-                $('#clubs_list').append('<option value="' + d.club_id + '">' + d.club_name + '</option>');
-        });
-    }
-});
 
 
 /// 

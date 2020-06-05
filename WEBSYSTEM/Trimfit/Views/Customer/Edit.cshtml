@@ -1,7 +1,7 @@
 ﻿@model Customer;
 <section class="section">
     <div class="section-header">
-        <h1>Profile</h1>
+        <h1>Karta klienta - @Model.Customer_Firstname</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
             <div class="breadcrumb-item">Profile</div>
@@ -17,7 +17,7 @@
 
             </div>
             <div class="col-md-6">
-                <a class="btn btn-icon icon-left btn-primary mb-3 float-right " id="assign-voucher"><i class="far fa-edit"></i> Przypisz karnet</a>
+                <button class="btn btn-icon icon-left btn-primary mb-3 float-right " id="assign-voucher"><i class="far fa-edit"></i> Przypisz karnet</button>
             </div>
         </div>
 
@@ -36,15 +36,15 @@
                         <div class="profile-widget-items">
                             <div class="profile-widget-item">
                                 <div class="profile-widget-item-label">Zapisów na aktywności</div>
-                                <div class="profile-widget-item-value">187</div>
+                                <div class="profile-widget-item-value">@ViewData["zapisyKlienta"]</div>
                             </div>
                             <div class="profile-widget-item">
                                 <div class="profile-widget-item-label">Zakupionych usług</div>
-                                <div class="profile-widget-item-value">6,8K</div>
+                                <div class="profile-widget-item-value">@ViewData["zakupioneUslugi"]</div>
                             </div>
                             <div class="profile-widget-item">
                                 <div class="profile-widget-item-label">Zakupionych produktów</div>
-                                <div class="profile-widget-item-value">0</div>
+                                <div class="profile-widget-item-value">@ViewData["zakupioneProdukty"]</div>
                             </div>
                         </div>
                     </div>
@@ -71,8 +71,8 @@
                                     {
                                         <tr>
                                             <td data-toggle="tooltip" data-title="ID karnetu: @vc.Voucher.Voucher_Id">@vc.Voucher.VoucherType.Voucher_Type_Name</td>
-                                            <td>@vc?.Added</td>
-                                            <td>@vc?.VoucherEndDate</td>
+                                            <td>@vc?.Added?.ToString("dd/MM/yyyy")</td>
+                                            <td>@vc?.VoucherEndDate?.ToString("dd/MM/yyyy")</td>
                                             <td>@vc?.FreeEntries</td>
                                             <td>
                                                 @if ((vc.VoucherEndDate != null && vc.VoucherEndDate < DateTime.Now))

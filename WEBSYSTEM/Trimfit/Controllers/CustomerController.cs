@@ -48,6 +48,9 @@ namespace Trimfit.Controllers
             var voucherList = JsonConvert.DeserializeObject<IEnumerable<Voucher>>(list.Value.ToString());
 
             ViewData["vouchers"] = voucherList;
+            ViewData["zapisyKlienta"] = 0;
+            ViewData["zakupioneUslugi"] = 0;
+            ViewData["zakupioneProdukty"] = 0;
 
             return View(customer);
         }

@@ -262,8 +262,8 @@
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
-        background-color: #e4e4e4;
-        border: 1px solid #aaa;
+        background-color: #4496c7;
+        border: 1px solid #4496c7;
         border-radius: 4px;
         cursor: default;
         float: left;
@@ -273,7 +273,7 @@
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-        color: #999;
+        color: #fff;
         cursor: pointer;
         display: inline-block;
         font-weight: bold;

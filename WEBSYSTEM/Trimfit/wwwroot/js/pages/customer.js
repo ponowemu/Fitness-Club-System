@@ -171,7 +171,7 @@ $("#assign-voucher").fireModal({
                     console.log(e);
                     modal.find('.modal-body').prepend('<div class="alert alert-success">Użytkownik został przypisany do karnetu</div>');
                     form.stopProgress();
-                    //  location.reload();
+                    location.reload();
                 },
                 error: function (e) {
 
