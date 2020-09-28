@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrimFitAPI", "TrimFitAPI\TrimFitAPI.csproj", "{E33B0AC5-A410-4D1A-A101-26A104AE6EF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrimFitAPI", "TrimFitAPI\TrimFitAPI.csproj", "{E33B0AC5-A410-4D1A-A101-26A104AE6EF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trimfit.WebApi", "Trimfit.Api\Trimfit.WebApi.csproj", "{57A808EF-64A2-443A-8F29-51B6B59811B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trimfit.Domain", "Trimfit.Domain\Trimfit.Domain.csproj", "{CF7D5D12-E351-4F71-B3DF-753A1FA3EF6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trimfit.DataAccess", "Trimfit.DataAccess\Trimfit.DataAccess.csproj", "{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trimfit.Utils", "Trimfit.Utils\Trimfit.Utils.csproj", "{68B4BB18-9FFB-48F2-891C-BED4039B8640}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{E33B0AC5-A410-4D1A-A101-26A104AE6EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E33B0AC5-A410-4D1A-A101-26A104AE6EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E33B0AC5-A410-4D1A-A101-26A104AE6EF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A808EF-64A2-443A-8F29-51B6B59811B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A808EF-64A2-443A-8F29-51B6B59811B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A808EF-64A2-443A-8F29-51B6B59811B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A808EF-64A2-443A-8F29-51B6B59811B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF7D5D12-E351-4F71-B3DF-753A1FA3EF6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF7D5D12-E351-4F71-B3DF-753A1FA3EF6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF7D5D12-E351-4F71-B3DF-753A1FA3EF6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF7D5D12-E351-4F71-B3DF-753A1FA3EF6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B4BB18-9FFB-48F2-891C-BED4039B8640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B4BB18-9FFB-48F2-891C-BED4039B8640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B4BB18-9FFB-48F2-891C-BED4039B8640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B4BB18-9FFB-48F2-891C-BED4039B8640}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
