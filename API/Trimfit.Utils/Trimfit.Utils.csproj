@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Trimfit.Domain\Trimfit.Domain.csproj" />
-    <ProjectReference Include="..\Trimfit.Logic\Trimfit.Logic.csproj" />
-    <ProjectReference Include="..\Trimfit.Utils\Trimfit.Utils.csproj" />
   </ItemGroup>
 
 </Project>

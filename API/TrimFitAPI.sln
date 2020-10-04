@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trimfit.Domain", "Trimfit.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trimfit.DataAccess", "Trimfit.DataAccess\Trimfit.DataAccess.csproj", "{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trimfit.Utils", "Trimfit.Utils\Trimfit.Utils.csproj", "{7121BCFC-4FBE-4DE0-B9E1-E15A009DB99A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trimfit.Logic", "Trimfit.Logic\Trimfit.Logic.csproj", "{C5DA4674-83B5-4A6D-B103-14F93B59AA98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E3DD2CA-6B49-46C9-8FB3-89A83D6F74BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7121BCFC-4FBE-4DE0-B9E1-E15A009DB99A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7121BCFC-4FBE-4DE0-B9E1-E15A009DB99A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7121BCFC-4FBE-4DE0-B9E1-E15A009DB99A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7121BCFC-4FBE-4DE0-B9E1-E15A009DB99A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DA4674-83B5-4A6D-B103-14F93B59AA98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DA4674-83B5-4A6D-B103-14F93B59AA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DA4674-83B5-4A6D-B103-14F93B59AA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DA4674-83B5-4A6D-B103-14F93B59AA98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
