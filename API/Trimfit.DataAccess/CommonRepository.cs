@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Trimfit.Domain;
@@ -14,11 +14,13 @@ namespace Trimfit.DataAccess
     {
         public IEnumerable<TEntity> GetAll();
 
-        public TEntity GetById(int id);
+        public Task<TEntity> GetById(int id);
 
-        public bool Update(TEntity entity);
+        public Task<bool> Create(TEntity entity);
 
-        public bool Remove(TEntity entity);
+        public Task<bool> Update(TEntity entity);
+
+        public Task<bool> Remove(TEntity entity);
     }
 
     public class CommonRepository<TEntity> : ICommonRepository<TEntity> 
@@ -40,26 +42,19 @@ namespace Trimfit.DataAccess
             return _context.SetQuery<TEntity>();
         }
 
-        public TEntity GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            return _context.SetQuery<TEntity>()
-                .FirstOrDefault(x => x.Id == id);
+            return await _context.SetQuery<TEntity>()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public bool Update(TEntity entity)
+        public async Task<bool> Create(TEntity entity)
         {
-            var dbEntity = GetById(entity.Id);
-
-            if (dbEntity == null)
-            {
-                return false;
-            }
-
-            _context.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Added;
 
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return true;
             }
@@ -71,9 +66,34 @@ namespace Trimfit.DataAccess
             }
         }
 
-        public bool Remove(TEntity entity)
+        public async Task<bool> Update(TEntity entity)
         {
-            var dbEntity = GetById(entity.Id);
+            var dbEntity = await GetById(entity.Id);
+
+            if (dbEntity == null)
+            {
+                return false;
+            }
+
+            _context.Entry(entity).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                _logger.Log(LogLevel.Error, TextLogs.Concurrency_in_database_occured);
+
+                return false;
+            }
+        }
+
+        public async Task<bool> Remove(TEntity entity)
+        {
+            var dbEntity = await GetById(entity.Id);
 
             if (dbEntity == null)
             {
@@ -82,7 +102,7 @@ namespace Trimfit.DataAccess
 
             _context.Entry(dbEntity).State = EntityState.Deleted;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return false;
         }
